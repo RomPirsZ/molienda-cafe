@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+.env
+.env.*
+!.env.example
+test-results/
+playwright-report/
+.taste-skill/
+COTZ.md
+
+# Impeccable: bocetos, imágenes del catálogo y capturas de revisión (no se publican)
+.impeccable/mocks/
+.impeccable/review/
