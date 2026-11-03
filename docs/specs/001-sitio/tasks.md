@@ -19,7 +19,7 @@
 
 - [x] M04 Recursos: sello SVG con sus variantes y bordes rasgados; fotos con créditos — *fotos de Wikimedia Commons (plan §9); bordes generados con `scripts/generar-bordes.mjs`*
 - [x] M05 Página: cabecera, primer viewport, origen, carta, galería, horario y pie, con los textos en `es.json` y los datos en `carta.ts`/`horario.ts` — *carta antes que origen (spec §4); `tokens.test.ts` lee el CSS con `?raw` (sin tipos de Node)*
-- [ ] M06 Tests e2e 1, 2, 4 y 5 + axe
+- [x] M06 Tests e2e 1, 2, 4 y 5 + axe — *la acción cabe sin scroll a 1280×720, 1366×768 y 1440×900 (el hero escala también con la altura); axe solo con JS (es un script inyectado)*
 
 ## Fase 3 — Movimiento
 

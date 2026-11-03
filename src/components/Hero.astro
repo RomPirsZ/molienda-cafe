@@ -59,7 +59,7 @@ const destacados = CARTA[0]!.platos.slice(0, 3);
 
 <style>
   .hero {
-    padding-block: clamp(1.5rem, 4vh, 3rem) clamp(2.5rem, 6vh, 4.5rem);
+    padding-block: clamp(1rem, 2.5vh, 3rem) clamp(2.5rem, 6vh, 4.5rem);
     text-align: center;
   }
   .hero-cabeza {
@@ -68,12 +68,13 @@ const destacados = CARTA[0]!.platos.slice(0, 3);
     gap: clamp(0.75rem, 2vh, 1.25rem);
   }
   .hero :global(.hero-sello) {
-    width: clamp(6rem, 4rem + 6vw, 8.5rem);
+    /* También según la altura: en portátiles de 720–768 px la acción debe caber */
+    width: clamp(5.5rem, min(4rem + 6vw, 15vh), 8.5rem);
   }
   .hero-titulo {
     margin: 0;
     font-size: var(--text-marca);
-    line-height: 0.95;
+    line-height: 0.9;
     letter-spacing: var(--tracking-marca);
     text-transform: uppercase;
     /* El espaciado deja aire tras la última letra: se compensa para centrar de verdad */
@@ -81,7 +82,7 @@ const destacados = CARTA[0]!.platos.slice(0, 3);
   }
   .hero-tira {
     width: min(100% - 2rem, 60rem);
-    margin: clamp(1rem, 2.5vh, 1.75rem) auto 0;
+    margin: clamp(0.75rem, 2vh, 1.75rem) auto 0;
   }
   .hero-lema {
     margin: 0;
@@ -96,8 +97,8 @@ const destacados = CARTA[0]!.platos.slice(0, 3);
   .hero-cuerpo {
     display: grid;
     justify-items: center;
-    gap: 1rem;
-    margin-top: clamp(1.25rem, 3vh, 2rem);
+    gap: clamp(0.6rem, 1.6vh, 1rem);
+    margin-top: clamp(0.9rem, 2vh, 2rem);
   }
   .hero-texto {
     max-width: 38rem;
@@ -113,7 +114,7 @@ const destacados = CARTA[0]!.platos.slice(0, 3);
     font-style: italic;
   }
   .hero-hoy {
-    margin: clamp(0.75rem, 2vh, 1.5rem) 0 0;
+    margin: clamp(0.25rem, 1vh, 1.5rem) 0 0;
     color: var(--tinta-suave);
   }
   .hero-cafes {
@@ -137,7 +138,7 @@ const destacados = CARTA[0]!.platos.slice(0, 3);
   }
   @media (min-width: 48rem) {
     .hero-cafe {
-      padding: 1rem 1.5rem;
+      padding: clamp(0.6rem, 1.4vh, 1rem) 1.5rem;
       border-bottom: 0;
     }
     .hero-cafe + .hero-cafe {
@@ -162,7 +163,7 @@ const destacados = CARTA[0]!.platos.slice(0, 3);
     letter-spacing: 0.14em;
   }
   .hero-cta {
-    margin-top: 0.5rem;
+    margin-top: clamp(0rem, 0.8vh, 0.5rem);
   }
   /* En escritorio el estado vive en la cabecera */
   @media (min-width: 64rem) {
