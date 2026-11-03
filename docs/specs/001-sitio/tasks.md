@@ -11,7 +11,7 @@
 
 ## Fase 1 — Base
 
-- [ ] M01 Proyecto Astro + Tailwind + TypeScript estricto con las dependencias del plan §2; Vitest y Playwright; `npm test`
+- [x] M01 Proyecto Astro + Tailwind + TypeScript estricto con las dependencias del plan §2; Vitest y Playwright; `npm test` — *e2e en el puerto 4339; Astro 7.4.4 con excepción puntual a `min-release-age` (plan §2)*
 - [ ] M02 Tokens en `global.css` + test de contraste; fuentes; `Base.astro`
 - [ ] M03 `opening-hours.ts` + tests unitarios (primero los tests)
 

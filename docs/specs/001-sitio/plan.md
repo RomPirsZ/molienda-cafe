@@ -31,6 +31,8 @@ Mismas versiones fijadas que el portafolio:
 - **Sin** React, three, ShaderGradient, adaptador de Vercel ni Supabase.
 - `.npmrc` igual que el portafolio: sin scripts de instalación, `min-release-age=7` y solo el registro de npm.
 
+**Excepción 2026-11-03 (M01), aprobada por el usuario:** `astro@7.4.4` tenía 6 días publicada. Es la versión que el portafolio usa en producción desde el 30 de octubre. Se instaló con `--min-release-age=0 --before=2026-10-28T20:30:00Z`, para que la excepción no se extendiera a las dependencias transitivas. Verificado paquete a paquete: solo `astro` 7.4.4 y tres subpaquetes de su misma publicación (`@astrojs/markdown-satteri` 0.4.6, `@astrojs/prism` 4.1.2 y `@astrojs/telemetry` 3.4.2), los mismos que el portafolio, tienen menos de 7 días. Todo lo demás cumple la política. `npm audit`: 0.
+
 ## 3. Estructura
 
 ```
@@ -84,7 +86,7 @@ Los colores se definen como variables en `global.css` y Tailwind los expone con 
 | E2E | 1) la página carga y el aviso de concepto se ve sin scroll · 2) sin JS se lee todo, horario incluido · 3) con reduced-motion no hay transformaciones en curso · 4) solo teclado · 5) ninguna petición fuera del propio origen |
 | Accesibilidad | axe (WCAG 2.2 AA) en móvil y escritorio; falla con violaciones serias o críticas |
 
-`npm test` = `vitest run && playwright test`, con el servidor en el puerto 4329 (como el portafolio: evita la extensión Console Ninja en el 4321).
+`npm test` = `vitest run && playwright test`, con el servidor en el puerto **4339**: ni el 4321 de `astro dev` (donde además inyecta scripts la extensión Console Ninja) ni el 4329 de los e2e del portafolio, porque con `reuseExistingServer` compartir puerto haría probar el sitio equivocado.
 
 ## 9. Fotos
 
