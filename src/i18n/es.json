@@ -17,7 +17,7 @@
   "foto.tazaEnMano": "Mano que sostiene una taza blanca de café sobre una mesa de madera",
   "foto.tostador": "Granos recién tostados cayendo del tostador a la bandeja de enfriado",
   "foto.preparacion": "Manos que preparan café en tazas de cobre sobre una mesa de madera",
-  "creditos.titulo": "Fotos de ambientación",
+  "creditos.titulo": "Créditos de las fotos",
   "creditos.cambios": "redimensionada",
   "sello.alt": "Sello de Molienda: un sol saliendo sobre las montañas",
   "sello.arriba": "MOLIENDA",
@@ -100,5 +100,6 @@
   "foto.pisca": "Cuenco de caldo con huevo escalfado y cilantro, junto a una arepa",
   "foto.arepaTrigo": "Arepa de trigo abierta con una lonja de queso",
   "foto.pastelitos": "Pastelitos de trigo dorados en una cesta",
-  "foto.perico": "Arepa rellena de huevos perico"
+  "foto.perico": "Arepa rellena de huevos perico",
+  "creditos.cambiosRecorte": "recortada y redimensionada"
 }

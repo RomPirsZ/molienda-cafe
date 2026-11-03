@@ -12,6 +12,12 @@
   --linea: #8c7a5e; /* filetes decorativos */
 
   color-scheme: only light;
+
+  /* Fibra del papel (revisión final de impeccable): tesela raster estática de 180 px
+     (src/assets/marcas/fibra.webp, ~13 KB), ruido en tinta con alfa muy bajo. Antes era
+     un SVG con feTurbulence: Chrome lo dibujaba en el hilo principal y Lighthouse bajó
+     de 100 a 91 en rendimiento. */
+  --fibra: url('../assets/marcas/fibra.webp');
 }
 
 @theme inline {
@@ -41,7 +47,7 @@
 
 @layer base {
   html {
-    background: var(--papel);
+    background: var(--fibra), var(--papel);
     color: var(--tinta);
     font-family: var(--font-sans);
     font-size: 100%;
@@ -106,14 +112,36 @@
     line-height: 1.5;
   }
 
-  /* Acción principal: relleno terracota, esquinas rectas, sin sombra */
+  /* Cuatro cantos de papel rasgado como máscara (revisión final de impeccable): tiras de
+     src/assets/marcas/canto-*.svg en los bordes y un rectángulo opaco en el centro.
+     Estático; nunca clip-path poligonal. --canto es el grosor de la franja rasgada. */
+  .cantos-rasgados {
+    --canto: 0.6rem;
+    mask-image:
+      url('../assets/marcas/canto-arriba.svg'), url('../assets/marcas/canto-abajo.svg'),
+      url('../assets/marcas/canto-izquierda.svg'), url('../assets/marcas/canto-derecha.svg'),
+      linear-gradient(black, black);
+    /* Los lados se paran antes de las esquinas: si llegan a ellas asoman «postes» sobre
+       el canto rasgado de arriba y de abajo */
+    mask-position: left top, left bottom, left center, right center, center;
+    mask-size:
+      18rem var(--canto), 18rem var(--canto),
+      var(--canto) calc(100% - 2 * var(--canto)), var(--canto) calc(100% - 2 * var(--canto)),
+      calc(100% - 2 * var(--canto) + 2px) calc(100% - 2 * var(--canto) + 2px);
+    /* round: la tira entra un número entero de veces, así las dos esquinas acaban rasgadas */
+    mask-repeat: round no-repeat, round no-repeat, no-repeat, no-repeat, no-repeat;
+  }
+
+  /* Acción principal: terracota con canto rasgado. El relleno va en un pseudo-elemento
+     enmascarado; el botón no, para que el anillo de foco no quede recortado. */
   .boton-accion {
+    position: relative;
+    isolation: isolate;
     display: inline-flex;
     align-items: center;
     gap: 0.9rem;
     min-height: 3rem;
     padding: 0.85rem 1.6rem;
-    background: var(--accion);
     color: var(--papel-claro);
     font-size: 0.875rem;
     font-weight: 500;
@@ -121,7 +149,22 @@
     text-transform: uppercase;
     text-decoration: none;
   }
-  .boton-accion:hover {
+  .boton-accion::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--accion);
+    /* Rasgado arriba y abajo, laterales rectos: como la tira terracota del lema */
+    --canto: 0.45rem;
+    mask-image:
+      url('../assets/marcas/canto-arriba.svg'), url('../assets/marcas/canto-abajo.svg'),
+      linear-gradient(black, black);
+    mask-position: left top, left bottom, center;
+    mask-size: 18rem var(--canto), 18rem var(--canto), 100% calc(100% - 2 * var(--canto) + 2px);
+    mask-repeat: round no-repeat, round no-repeat, no-repeat;
+  }
+  .boton-accion:hover::before {
     background: var(--tinta);
   }
   .boton-accion svg {
@@ -136,6 +179,8 @@
   .tarjeta {
     position: relative;
     isolation: isolate;
+    /* Sin fibra: con imagen de fondo, la tarjeta del primer viewport pasaba a ser el LCP
+       y no contaba como pintada hasta acabar su entrada animada (LCP 1,1 → 2,7 s) */
     background: var(--papel-claro);
     border: 1px solid color-mix(in srgb, var(--linea) 55%, transparent);
     border-radius: 0.75rem;

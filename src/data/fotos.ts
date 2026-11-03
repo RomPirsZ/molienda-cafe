@@ -32,6 +32,8 @@ export interface Foto {
   licencia: 'CC0' | 'CC BY 2.0' | 'CC BY 4.0' | 'CC BY-SA 2.0' | 'CC BY-SA 3.0' | 'CC BY-SA 4.0';
   licenciaUrl: string;
   fuente: string;
+  /** Recortada (además de redimensionada): se declara en el crédito, como piden CC BY y BY-SA */
+  recortada?: boolean;
 }
 
 const commons = (archivo: string) => `https://commons.wikimedia.org/wiki/File:${archivo}`;
@@ -96,6 +98,7 @@ export const FOTOS = {
   espresso: {
     src: espresso,
     alt: 'foto.espresso',
+    recortada: true,
     autor: 'Osman Bas',
     licencia: 'CC BY 2.0',
     licenciaUrl: 'https://creativecommons.org/licenses/by/2.0/',
@@ -104,6 +107,7 @@ export const FOTOS = {
   guayoyo: {
     src: guayoyo,
     alt: 'foto.guayoyo',
+    recortada: true,
     autor: 'Nenad Stojkovic',
     licencia: 'CC BY 2.0',
     licenciaUrl: 'https://creativecommons.org/licenses/by/2.0/',
@@ -112,6 +116,7 @@ export const FOTOS = {
   marron: {
     src: marron,
     alt: 'foto.marron',
+    recortada: true,
     autor: 'Alfonso Salgueiro Lora',
     licencia: 'CC BY 2.0',
     licenciaUrl: 'https://creativecommons.org/licenses/by/2.0/',
@@ -120,6 +125,7 @@ export const FOTOS = {
   filtrado: {
     src: filtrado,
     alt: 'foto.filtrado',
+    recortada: true,
     autor: 'Indigo.udm',
     licencia: 'CC BY 4.0',
     licenciaUrl: 'https://creativecommons.org/licenses/by/4.0/',
@@ -128,6 +134,7 @@ export const FOTOS = {
   conLeche: {
     src: conLeche,
     alt: 'foto.conLeche',
+    recortada: true,
     autor: 'Lisa Stevens',
     licencia: 'CC BY-SA 2.0',
     licenciaUrl: 'https://creativecommons.org/licenses/by-sa/2.0/',
@@ -136,6 +143,7 @@ export const FOTOS = {
   mantecada: {
     src: mantecada,
     alt: 'foto.mantecada',
+    recortada: true,
     autor: 'Rodelar',
     licencia: 'CC BY-SA 4.0',
     licenciaUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
@@ -144,6 +152,7 @@ export const FOTOS = {
   golfeado: {
     src: golfeado,
     alt: 'foto.golfeado',
+    recortada: true,
     autor: 'Muago',
     licencia: 'CC0',
     licenciaUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
@@ -152,6 +161,7 @@ export const FOTOS = {
   cachito: {
     src: cachito,
     alt: 'foto.cachito',
+    recortada: true,
     autor: 'Wladimir Labeikovsky',
     licencia: 'CC BY-SA 2.0',
     licenciaUrl: 'https://creativecommons.org/licenses/by-sa/2.0/',
@@ -160,6 +170,7 @@ export const FOTOS = {
   pisca: {
     src: pisca,
     alt: 'foto.pisca',
+    recortada: true,
     autor: 'Marcelo Träsel',
     licencia: 'CC BY-SA 2.0',
     licenciaUrl: 'https://creativecommons.org/licenses/by-sa/2.0/',
@@ -168,6 +179,7 @@ export const FOTOS = {
   arepaTrigo: {
     src: arepaTrigo,
     alt: 'foto.arepaTrigo',
+    recortada: true,
     autor: 'Raymvc97',
     licencia: 'CC BY-SA 4.0',
     licenciaUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
@@ -176,6 +188,7 @@ export const FOTOS = {
   pastelitos: {
     src: pastelitos,
     alt: 'foto.pastelitos',
+    recortada: true,
     autor: 'Julio Sifontes',
     licencia: 'CC BY-SA 3.0',
     licenciaUrl: 'https://creativecommons.org/licenses/by-sa/3.0/',
@@ -184,6 +197,7 @@ export const FOTOS = {
   perico: {
     src: perico,
     alt: 'foto.perico',
+    recortada: true,
     autor: 'Pequeño mar',
     licencia: 'CC BY-SA 4.0',
     licenciaUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',

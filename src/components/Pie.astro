@@ -22,7 +22,8 @@ const anio = String(new Date().getFullYear());
           Object.values(FOTOS).map((f) => (
             <li>
               <a href={f.fuente} rel="noopener">{t(f.alt)}</a>: {f.autor},{' '}
-              <a href={f.licenciaUrl} rel="license noopener">{f.licencia}</a>, {t('creditos.cambios')}.
+              <a href={f.licenciaUrl} rel="license noopener">{f.licencia}</a>,{' '}
+              {'recortada' in f && f.recortada ? t('creditos.cambiosRecorte') : t('creditos.cambios')}.
             </li>
           ))
         }
@@ -34,7 +35,6 @@ const anio = String(new Date().getFullYear());
 <style>
   .pie {
     padding-block: clamp(2.5rem, 6vw, 4rem);
-    border-top: 1px solid var(--linea);
     color: var(--tinta-suave);
     font-size: 0.9375rem;
   }
@@ -63,12 +63,23 @@ const anio = String(new Date().getFullYear());
     margin: 0 0 0.75rem;
     color: var(--tinta);
   }
+  /* Más de veinte créditos (CC BY y BY-SA piden citarlos): en columnas desde 768 px */
   .pie-creditos {
-    display: grid;
-    gap: 0.4rem;
     margin: 0;
     padding: 0;
     list-style: none;
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+  .pie-creditos li {
+    margin-bottom: 0.45rem;
+    break-inside: avoid;
+  }
+  @media (min-width: 48rem) {
+    .pie-creditos {
+      columns: 2;
+      column-gap: 2.5rem;
+    }
   }
   .pie a {
     color: inherit;

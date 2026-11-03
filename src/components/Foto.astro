@@ -22,7 +22,7 @@ const { foto, sizes, proporcion = '4 / 3', prioritaria = false, class: clase } =
 const datos = FOTOS[foto];
 ---
 
-<figure class:list={['foto', clase]} data-foto>
+<figure class:list={['foto cantos-rasgados', clase]} data-foto>
   <div class="foto-ventana" style={`aspect-ratio: ${proporcion}`}>
     <Picture
       src={datos.src}
@@ -40,13 +40,14 @@ const datos = FOTOS[foto];
 </figure>
 
 <style>
+  /* Passe-partout de pergamino con los cuatro cantos rasgados (.cantos-rasgados) */
   .foto {
-    background: var(--papel-claro);
-    padding: 0.5rem;
+    background: var(--fibra), var(--papel-claro);
+    padding: 0.6rem;
   }
   @media (min-width: 48rem) {
     .foto {
-      padding: 0.75rem;
+      padding: 0.85rem;
     }
   }
   .foto-ventana {

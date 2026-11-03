@@ -13,3 +13,6 @@ COTZ.md
 # Impeccable: bocetos, imágenes del catálogo y capturas de revisión (no se publican)
 .impeccable/mocks/
 .impeccable/review/
+
+# Informes de Lighthouse (M10): se regeneran; las notas quedan en tasks.md
+.lighthouse/
