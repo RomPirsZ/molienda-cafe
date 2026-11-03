@@ -32,7 +32,7 @@ function titular(raiz: ParentNode) {
     mask: 'chars',
     charsClass: 'letra',
     aria: 'auto',
-    onSplit: (self) => gsap.from(self.chars, { yPercent: 105, duration: 1, ease: SALIDA, stagger: 0.045, delay: 0.15 }),
+    onSplit: (self) => gsap.from(self.chars, { yPercent: 105, duration: 0.5, ease: SALIDA, stagger: 0.04, delay: 0.15 }),
   });
 }
 
@@ -49,7 +49,7 @@ function titulos(raiz: ParentNode) {
           yPercent: 100,
           duration: 0.9,
           ease: SALIDA,
-          stagger: 0.1,
+          stagger: 0.08,
           scrollTrigger: { trigger: h2, start: AL_ENTRAR, once: true },
         }),
     });
@@ -60,7 +60,7 @@ function titulos(raiz: ParentNode) {
 function tira(raiz: ParentNode) {
   const el = raiz.querySelector<HTMLElement>('[data-revelar="tira"]');
   if (!el || yaVisible(el)) return;
-  gsap.from(el, { y: 24, opacity: 0, duration: 0.9, ease: SALIDA, delay: 0.45 });
+  gsap.from(el, { y: 24, opacity: 0, duration: 0.9, ease: SALIDA, delay: 0.35 });
 }
 
 /**
@@ -77,7 +77,8 @@ function platos(raiz: ParentNode) {
       opacity: 0,
       duration: 0.9,
       ease: SALIDA,
-      stagger: 0.08,
+      // 40 ms: una lista de 5 platos escalona en 200 ms (por debajo de ~300 ms, M08)
+      stagger: 0.04,
       onStart: () => gsap.set(items, { transition: 'none' }),
       clearProps: 'transform,opacity,transition',
       scrollTrigger: { trigger: lista, start: AL_ENTRAR, once: true },
@@ -130,9 +131,10 @@ function selloCabecera(raiz: ParentNode) {
     actual = variante;
     for (const s of sellos) {
       if (s.dataset['variante'] === variante) {
-        gsap.fromTo(s, { autoAlpha: 0, scale: 1.15 }, { autoAlpha: 1, scale: 1, duration: 0.35, ease: 'power2.out', overwrite: true });
+        // Cambio de icono: simétrico, 250 ms y ease-in-out en los dos sentidos (M08)
+        gsap.fromTo(s, { autoAlpha: 0, scale: 1.15 }, { autoAlpha: 1, scale: 1, duration: 0.25, ease: 'power1.inOut', overwrite: true });
       } else {
-        gsap.to(s, { autoAlpha: 0, duration: 0.2, ease: 'power2.out', overwrite: true });
+        gsap.to(s, { autoAlpha: 0, duration: 0.25, ease: 'power1.inOut', overwrite: true });
       }
     }
   };
@@ -162,7 +164,8 @@ function cabeceraOculta(raiz: ParentNode) {
   const mostrar = (si: boolean) => {
     if (si === !oculta) return;
     oculta = !si;
-    gsap.to(cabecera, { yPercent: si ? 0 : -100, duration: 0.35, ease: 'power2.out', overwrite: true });
+    // Vuelve en 250 ms; al apartarse, más rápido (150 ms): lo que se quita no estorba (M08)
+    gsap.to(cabecera, { yPercent: si ? 0 : -100, duration: si ? 0.25 : 0.15, ease: SALIDA, overwrite: true });
   };
   ScrollTrigger.create({
     start: 0,

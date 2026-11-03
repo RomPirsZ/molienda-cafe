@@ -152,15 +152,17 @@
     opacity: 0;
     pointer-events: none;
   }
+  /* Entrar: directo, 250 ms. Salir: más blando, 350 ms, sin rebote ni retardo (M08) */
   @media (hover: hover) and (pointer: fine) {
     .tarjeta {
-      transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+      transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
     }
     .tarjeta::after {
-      transition: opacity 240ms cubic-bezier(0.22, 1, 0.36, 1);
+      transition: opacity 250ms cubic-bezier(0.22, 1, 0.36, 1);
     }
     .tarjeta:hover {
       transform: translateY(-0.25rem);
+      transition-duration: 250ms;
     }
     .tarjeta:hover::after {
       opacity: 1;
@@ -169,7 +171,9 @@
   /* Movimiento reducido: sin elevación ni transición; la sombra sigue señalando el hover */
   @media (prefers-reduced-motion: reduce) {
     .tarjeta,
-    .tarjeta::after {
+    .tarjeta:hover,
+    .tarjeta::after,
+    .tarjeta:hover::after {
       transition: none;
     }
     .tarjeta:hover {

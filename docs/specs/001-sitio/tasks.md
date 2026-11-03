@@ -24,7 +24,7 @@
 ## Fase 3 — Movimiento
 
 - [x] M07 `animations.ts`: revelado de fotos, platos, titulares, sello y cabecera; test e2e 3 (reduced-motion) — *Lenis solo con puntero fino: en táctil desviaba los enlaces a secciones (plan §6)*
-- [ ] M08 Afinado con transitions-polish
+- [x] M08 Afinado con transitions-polish — *8 valores (escalonados, sello, cabecera, hover de la tarjeta); revelado de fotos intacto (plan §6)*
 
 ## Fase 4 — Cierre
 

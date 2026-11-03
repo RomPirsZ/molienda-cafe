@@ -68,15 +68,20 @@ Los colores se definen como variables en `global.css` y Tailwind los expone con 
 `animations.ts` sigue el patrón de `sdd-portafolio/src/lib/animations.ts`: `initAnimations()` en `DOMContentLoaded`; si `matchMedia('(prefers-reduced-motion: reduce)')` coincide, no hace nada; Lenis se sincroniza con ScrollTrigger mediante `gsap.ticker`.
 
 - **Revelado de fotos** (medido en noovolife): el marco sube 50 px → 0 mientras la foto pasa de escala 1,12 a 1, en 1,2 s con `cubic-bezier(.22, 1, .36, 1)`, al entrar en pantalla. Después, zoom lento ligado al scroll (`scrub`) hasta 1,08.
-- **Platos:** opacidad 0→1 y 30 px→0, escalonados 0,08 s.
+- **Platos:** opacidad 0→1 y 30 px→0, escalonados 0,04 s.
 - **Titulares y etiquetas:** suben dentro de una máscara de línea (`overflow: hidden` + `translateY`).
-- **Sello de la cabecera:** al entrar en una sección cambia la variante con escala 1,15→1 y opacidad, en 0,35 s.
+- **Sello de la cabecera:** al entrar en una sección cambia la variante con escala 1,15→1 y opacidad, en 0,25 s y `ease-in-out` en los dos sentidos.
 - **Cabecera:** se oculta al bajar y vuelve al subir (`translateY`). Nunca mientras tiene el foco del teclado.
 
 **Cambios 2026-11-03 (M07):**
 - **Lenis solo con puntero fino.** En táctil no suaviza nada (el scroll es nativo) y, como no sigue el desplazamiento del dedo, calculaba mal el destino de los enlaces a secciones: en el móvil «Ver la carta» se quedaba a medio camino. En táctil manda el scroll nativo con `scroll-behavior: smooth` (sin él, con reduced-motion). Lenis respeta el `scroll-padding-top` de la cabecera, así que no lleva `offset` propio.
 - **Una línea de tiempo por foto**, con un solo disparador: GSAP modifica el objeto de `scrollTrigger` al crearlo, y compartirlo entre tres tweens dejaba sin revelar las fotos a las que se llegaba saltando.
 - **Tarjetas:** durante la entrada se apaga su transición CSS y al acabar se limpian `transform`, `opacity` y `transition`, para que el hover vuelva a mandar.
+- **Afinado (M08, transitions-polish):** con los valores literales de los tokens de transitions.dev (sin copiar `_root.css`).
+  - Titular: 0,5 s con escalonado de 40 ms. Títulos de sección: escalonado de 80 ms. Platos: escalonado de 40 ms (≤ 300 ms en total).
+  - Sello: 250 ms simétrico. Cabecera: vuelve en 250 ms y se aparta en 150 ms.
+  - Tarjeta: entra en 250 ms y sale en 350 ms, sin rebote.
+  - El revelado de fotos y las distancias de la referencia (noovolife) se mantienen: ningún token cubre ese uso.
 - **Antes de que llegue el módulo,** lo que se va a revelar nace oculto con la clase `motion`, puesta por un script mínimo en `<head>`. Si el módulo no llega en 2,5 s, el CSS lo muestra igual.
 
 ## 7. Estado de apertura
