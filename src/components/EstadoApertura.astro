@@ -1,0 +1,64 @@
+---
+// «Abierto ahora · cierra a las 7 p. m.» (spec §6, plan §7). Se calcula en el navegador
+// con la hora de Mérida: en el build no se sabe cuándo se va a leer. Sin JS queda oculto
+// y el horario completo de «Visítanos» dice lo mismo.
+interface Props {
+  class?: string;
+}
+
+const { class: clase } = Astro.props;
+---
+
+<p class:list={['estado etiqueta', clase]} data-estado hidden>
+  <span class="estado-punto" aria-hidden="true"></span>
+  <span data-estado-texto></span>
+</p>
+
+<script>
+  import { HORARIO } from '../data/horario';
+  import { describirEstado, estadoApertura, horaLocal } from '../lib/opening-hours';
+
+  function pintar() {
+    const ahora = new Date();
+    const estado = estadoApertura(ahora, HORARIO);
+    const texto = describirEstado(estado);
+    for (const el of document.querySelectorAll<HTMLElement>('[data-estado]')) {
+      el.dataset['abierto'] = String(estado.abierto);
+      const destino = el.querySelector('[data-estado-texto]');
+      if (destino) destino.textContent = texto;
+      el.hidden = false;
+    }
+    // El día de hoy en la tabla de horario
+    const { dia } = horaLocal(ahora);
+    for (const fila of document.querySelectorAll<HTMLElement>('[data-dia]')) {
+      if (fila.dataset['dia'] === String(dia)) fila.setAttribute('aria-current', 'date');
+      else fila.removeAttribute('aria-current');
+    }
+  }
+
+  pintar();
+  setInterval(pintar, 60_000);
+</script>
+
+<style>
+  .estado {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  /* Sin JS no hay estado que mostrar: el atributo hidden manda sobre el display */
+  .estado[hidden] {
+    display: none;
+  }
+  .estado-punto {
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.45;
+  }
+  .estado[data-abierto='true'] .estado-punto {
+    background: var(--accion);
+    opacity: 1;
+  }
+</style>

@@ -1,0 +1,61 @@
+---
+// Foto de ambientación en un marco de papel (plan §5 y §6): un passe-partout claro y,
+// dentro, una ventana con overflow oculto donde la foto se podrá revelar (M07) sin
+// salirse del marco. Sin JS y con reduced-motion, la foto está en su sitio desde el
+// principio. Profundidad solo por superposición: sin sombras.
+import { Picture } from 'astro:assets';
+import { t } from '../i18n';
+import { FOTOS } from '../data/fotos';
+
+interface Props {
+  foto: keyof typeof FOTOS;
+  /** `sizes` del <picture>: cuánto ocupa la foto en pantalla */
+  sizes: string;
+  /** Proporción de la ventana, p. ej. "4 / 3" */
+  proporcion?: string;
+  /** La primera foto que se ve sin scroll se carga sin esperar */
+  prioritaria?: boolean;
+  class?: string;
+}
+
+const { foto, sizes, proporcion = '4 / 3', prioritaria = false, class: clase } = Astro.props;
+const datos = FOTOS[foto];
+---
+
+<figure class:list={['foto', clase]} data-foto>
+  <div class="foto-ventana" style={`aspect-ratio: ${proporcion}`}>
+    <Picture
+      src={datos.src}
+      alt={t(datos.alt)}
+      formats={['avif', 'webp']}
+      widths={[480, 800, 1200, 1600, 2000]}
+      sizes={sizes}
+      loading={prioritaria ? 'eager' : 'lazy'}
+      fetchpriority={prioritaria ? 'high' : 'auto'}
+      decoding="async"
+      class="foto-img"
+      data-foto-img
+    />
+  </div>
+</figure>
+
+<style>
+  .foto {
+    background: var(--papel-claro);
+    padding: 0.5rem;
+  }
+  @media (min-width: 48rem) {
+    .foto {
+      padding: 0.75rem;
+    }
+  }
+  .foto-ventana {
+    overflow: hidden;
+  }
+  .foto :global(.foto-img) {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+</style>

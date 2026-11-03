@@ -35,11 +35,13 @@ Todo el movimiento medido en noovolife usa solo `transform` y `opacity`: cabe en
 
 1. **Cabecera:** logotipo «Molienda» y enlaces a Carta, Origen y Visítanos. Se oculta al bajar y vuelve al subir. En el móvil, menú accesible.
 2. **Hero:** titular, una frase sobre el origen andino, foto principal y acceso directo a la carta. Incluye un aviso discreto de concepto.
-3. **Origen:** de la finca a la taza. Las regiones (Mérida, Táchira, Trujillo) son reales; las fincas nombradas son ficticias y lo dicen.
-4. **Carta:** café (espresso y métodos), panadería y brunch. Cada plato lleva nombre, una línea de descripción y precio. Los precios son ficticios y se rotulan como tales.
+3. **Carta:** café (espresso y métodos), panadería y brunch. Cada plato lleva nombre, una línea de descripción y precio. Los precios son ficticios y se rotulan como tales.
+4. **Origen:** de la finca a la taza. Las regiones (Mérida, Táchira, Trujillo) son reales; las fincas nombradas son ficticias y lo dicen.
 5. **Ambiente:** galería de fotos con el revelado de imágenes.
 6. **Visítanos:** horario y zona ficticios, solo en texto, sin mapa embebido, teléfono ni WhatsApp.
 7. **Pie:** «Concepto de [A]nkordev — Molienda no existe», con los créditos de las fotos y el año.
+
+*Cambio 2026-11-03 (M05): la carta va justo después del hero y antes del origen. El primer viewport ya la empieza con tres cafés y «Ver la carta» lleva a ella; así, lo que se necesita (PRODUCT.md, principio 1) llega antes que la historia.*
 
 ## 5. Identidad visual
 

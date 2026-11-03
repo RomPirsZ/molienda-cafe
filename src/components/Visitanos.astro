@@ -1,0 +1,122 @@
+---
+// Visítanos (spec §4 y §6): la zona, sin dirección ni mapa (ficticia), y el horario
+// completo. El lunes cerrado no se omite: va como franja apagada, rayada. Con JS, el día
+// de hoy se marca (aria-current) y el estado de apertura aparece encima.
+import { t } from '../i18n';
+import { HORARIO } from '../data/horario';
+import { formatearHora, nombreDia, type Dia } from '../lib/opening-hours';
+import PapelRasgado from './PapelRasgado.astro';
+import EstadoApertura from './EstadoApertura.astro';
+
+// La semana empieza el lunes
+const dias: Dia[] = [1, 2, 3, 4, 5, 6, 0];
+const mayuscula = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+---
+
+<section id="visitanos" class="visitanos" aria-labelledby="visitanos-titulo" style="--rasgado-color: var(--tinta)" data-seccion="puerta">
+  <PapelRasgado corte={2} />
+  <div class="visitanos-franja">
+    <div class="contenedor visitanos-rejilla">
+      <div>
+        <h2 id="visitanos-titulo" class="visitanos-titulo" data-revelar="titulo">{t('visitanos.titulo')}</h2>
+        <p class="visitanos-zona">{t('visitanos.zona')}</p>
+        <p class="visitanos-nota">{t('visitanos.zonaNota')}</p>
+        <EstadoApertura class="visitanos-estado" />
+      </div>
+      <div>
+        <h3 class="horario-titulo etiqueta">{t('horario.titulo')}</h3>
+        <dl class="horario">
+          {
+            dias.map((d) => {
+              const tramo = HORARIO[d];
+              return (
+                <div class:list={['horario-fila', { 'horario-fila--cerrado': !tramo }]} data-dia={d}>
+                  <dt>{mayuscula(nombreDia(d))}</dt>
+                  <dd class="cifras">
+                    {tramo
+                      ? t('horario.tramo', { abre: formatearHora(tramo.abre), cierra: formatearHora(tramo.cierra) })
+                      : t('horario.cerrado')}
+                  </dd>
+                </div>
+              );
+            })
+          }
+        </dl>
+      </div>
+    </div>
+  </div>
+  <PapelRasgado lado="abajo" />
+</section>
+
+<style>
+  .visitanos-franja {
+    background: var(--tinta);
+    color: var(--papel-claro);
+    padding-block: clamp(3rem, 7vw, 5.5rem);
+  }
+  .visitanos-rejilla {
+    display: grid;
+    gap: 3rem;
+  }
+  @media (min-width: 64rem) {
+    .visitanos-rejilla {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+  }
+  .visitanos-titulo {
+    margin: 0;
+    font-size: var(--text-titulo);
+    letter-spacing: var(--tracking-marca);
+    text-transform: uppercase;
+  }
+  .visitanos-zona {
+    margin: 1rem 0 0;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+  }
+  .visitanos-nota {
+    margin: 0.25rem 0 0;
+  }
+  .visitanos :global(.visitanos-estado) {
+    margin-top: 1.5rem;
+    color: var(--acento);
+  }
+  .horario-titulo {
+    margin: 0 0 0.75rem;
+    color: var(--acento);
+  }
+  .horario {
+    margin: 0;
+    border-top: 1px solid var(--papel-claro);
+  }
+  .horario-fila {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.7rem 0.5rem;
+    border-bottom: 1px solid var(--linea);
+  }
+  .horario-fila dt,
+  .horario-fila dd {
+    margin: 0;
+  }
+  /* Día cerrado: franja apagada (rayada), pero legible */
+  .horario-fila--cerrado {
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent 0 6px,
+      color-mix(in srgb, var(--papel-claro) 10%, transparent) 6px 7px
+    );
+  }
+  .horario-fila--cerrado dd {
+    color: var(--acento);
+  }
+  /* Hoy (lo marca el script del estado de apertura) */
+  .horario-fila[aria-current='date'] dt {
+    text-decoration: underline;
+    text-decoration-color: var(--acento);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.35em;
+  }
+</style>

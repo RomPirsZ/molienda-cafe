@@ -80,3 +80,55 @@
     text-wrap: balance;
   }
 }
+
+@layer components {
+  .contenedor {
+    width: 100%;
+    max-width: 75rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 48rem) {
+    .contenedor {
+      padding-inline: 2.5rem;
+    }
+  }
+
+  /* Mayúsculas espaciadas en sans: navegación, etiquetas de procedencia, tiras */
+  .etiqueta {
+    font-family: var(--font-sans);
+    font-size: var(--text-etiqueta);
+    font-weight: 500;
+    letter-spacing: var(--tracking-etiqueta);
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+
+  /* Acción principal: relleno terracota, esquinas rectas, sin sombra */
+  .boton-accion {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.9rem;
+    min-height: 3rem;
+    padding: 0.85rem 1.6rem;
+    background: var(--accion);
+    color: var(--papel-claro);
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: var(--tracking-etiqueta);
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .boton-accion:hover {
+    background: var(--tinta);
+  }
+  .boton-accion svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  /* Precios y altitudes: cifras tabulares, alineadas en columna */
+  .cifras {
+    font-variant-numeric: tabular-nums lining-nums;
+  }
+}

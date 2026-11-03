@@ -1,0 +1,153 @@
+---
+// Origen (spec §4): la franja oliva con bordes rasgados. Las cuatro estaciones del
+// recorrido (finca → tueste → molino → taza) van en una lista ordenada, unidas por una
+// línea: el orden es la información, así que no llevan números. Las fotos se superponen
+// como papeles pegados, con un leve giro; nada de sombras.
+import { t } from '../i18n';
+import PapelRasgado from './PapelRasgado.astro';
+import Foto from './Foto.astro';
+
+const estaciones = [
+  { titulo: t('estacion.finca'), texto: t('estacion.finca.texto') },
+  { titulo: t('estacion.tueste'), texto: t('estacion.tueste.texto') },
+  { titulo: t('estacion.molino'), texto: t('estacion.molino.texto') },
+  { titulo: t('estacion.taza'), texto: t('estacion.taza.texto') },
+];
+---
+
+<section id="origen" class="origen" aria-labelledby="origen-titulo" data-seccion="grano">
+  <PapelRasgado />
+  <div class="origen-franja">
+    <div class="contenedor origen-rejilla">
+      <div class="origen-texto">
+        <h2 id="origen-titulo" class="origen-titulo" data-revelar="titulo">{t('origen.titulo')}</h2>
+        <p>{t('origen.texto')}</p>
+        <ol class="estaciones">
+          {
+            estaciones.map((e) => (
+              <li class="estacion">
+                <h3 class="estacion-titulo">{e.titulo}</h3>
+                <p class="estacion-texto">{e.texto}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+      <div class="origen-fotos">
+        <Foto foto="vistaFinca" proporcion="4 / 3" sizes="(min-width: 64rem) 36rem, 92vw" class="origen-foto-principal" />
+        <Foto foto="hacienda" proporcion="3 / 2" sizes="(min-width: 64rem) 20rem, 60vw" class="origen-foto-hacienda" />
+        <Foto foto="cafeto" proporcion="1 / 1" sizes="(min-width: 64rem) 14rem, 44vw" class="origen-foto-cafeto" />
+      </div>
+    </div>
+  </div>
+  <PapelRasgado lado="abajo" corte={2} />
+</section>
+
+<style>
+  .origen {
+    margin-top: clamp(1rem, 3vw, 2rem);
+  }
+  .origen-franja {
+    background: var(--franja);
+    color: var(--papel-claro);
+    padding-block: clamp(2.5rem, 6vw, 5rem);
+  }
+  .origen-rejilla {
+    display: grid;
+    gap: clamp(2.5rem, 5vw, 4rem);
+  }
+  @media (min-width: 64rem) {
+    .origen-rejilla {
+      grid-template-columns: 5fr 7fr;
+      align-items: center;
+    }
+  }
+  .origen-titulo {
+    margin: 0 0 1.25rem;
+    font-size: var(--text-titulo);
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .origen-texto > p {
+    max-width: 34rem;
+    margin: 0;
+    text-wrap: pretty;
+  }
+  .estaciones {
+    position: relative;
+    display: grid;
+    gap: 1.25rem;
+    margin: 2rem 0 0;
+    padding: 0 0 0 1.75rem;
+    list-style: none;
+  }
+  /* La línea del recorrido y un punto por estación */
+  .estaciones::before {
+    content: '';
+    position: absolute;
+    top: 0.6rem;
+    bottom: 0.6rem;
+    left: 0.3rem;
+    border-left: 1px dashed var(--papel-claro);
+  }
+  .estacion {
+    position: relative;
+  }
+  .estacion::before {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    left: -1.75rem;
+    width: 0.65rem;
+    height: 0.65rem;
+    border-radius: 50%;
+    background: var(--franja);
+    border: 1.5px solid var(--papel-claro);
+  }
+  .estacion-titulo {
+    margin: 0;
+    font-size: 1.25rem;
+    letter-spacing: 0.06em;
+  }
+  .estacion-texto {
+    margin: 0.15rem 0 0;
+  }
+
+  .origen-fotos {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto auto;
+  }
+  .origen-fotos :global(.origen-foto-principal) {
+    grid-column: 1 / -1;
+    grid-row: 1;
+  }
+  .origen-fotos :global(.origen-foto-hacienda) {
+    grid-column: 1 / 8;
+    grid-row: 2;
+    margin-top: -12%;
+    margin-left: -0.5rem;
+    rotate: -2deg;
+  }
+  .origen-fotos :global(.origen-foto-cafeto) {
+    grid-column: 8 / 13;
+    grid-row: 2;
+    margin-top: -4%;
+    margin-right: -0.5rem;
+    rotate: 2.5deg;
+  }
+  @media (min-width: 64rem) {
+    .origen-fotos :global(.origen-foto-principal) {
+      grid-column: 2 / -1;
+    }
+    .origen-fotos :global(.origen-foto-hacienda) {
+      grid-column: 1 / 7;
+      margin-top: -18%;
+    }
+    .origen-fotos :global(.origen-foto-cafeto) {
+      grid-column: 8 / 12;
+      margin-top: -8%;
+    }
+  }
+</style>

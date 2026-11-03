@@ -18,7 +18,7 @@
 ## Fase 2 — Contenido y estética (impeccable)
 
 - [x] M04 Recursos: sello SVG con sus variantes y bordes rasgados; fotos con créditos — *fotos de Wikimedia Commons (plan §9); bordes generados con `scripts/generar-bordes.mjs`*
-- [ ] M05 Página: cabecera, primer viewport, origen, carta, galería, horario y pie, con los textos en `es.json` y los datos en `carta.ts`/`horario.ts`
+- [x] M05 Página: cabecera, primer viewport, origen, carta, galería, horario y pie, con los textos en `es.json` y los datos en `carta.ts`/`horario.ts` — *carta antes que origen (spec §4); `tokens.test.ts` lee el CSS con `?raw` (sin tipos de Node)*
 - [ ] M06 Tests e2e 1, 2, 4 y 5 + axe
 
 ## Fase 3 — Movimiento

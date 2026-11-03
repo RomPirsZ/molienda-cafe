@@ -1,0 +1,95 @@
+---
+// Cabecera (spec §4): el sello compacto a la izquierda (vuelve al inicio), la navegación
+// centrada en mayúsculas espaciadas y el estado de apertura a la derecha. Tres enlaces
+// cortos caben también en el móvil: sin menú desplegable ni JS.
+// El sello cambia de variante al entrar en cada sección (M07, data-sello-cabecera).
+import { t } from '../i18n';
+import Sello from './Sello.astro';
+import EstadoApertura from './EstadoApertura.astro';
+
+const enlaces = [
+  { href: '#carta', texto: t('nav.carta') },
+  { href: '#origen', texto: t('nav.origen') },
+  { href: '#visitanos', texto: t('nav.visitanos') },
+];
+---
+
+<header class="cabecera" data-cabecera>
+  <div class="contenedor cabecera-fila">
+    <a href="#inicio" class="cabecera-sello" aria-label={t('nav.inicio')} data-sello-cabecera>
+      <Sello decorativo compacto class="h-10 w-10 md:h-12 md:w-12" />
+    </a>
+    <nav aria-label={t('nav.etiqueta')}>
+      <ul class="cabecera-enlaces etiqueta">
+        {
+          enlaces.map((e) => (
+            <li>
+              <a href={e.href}>{e.texto}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <EstadoApertura class="cabecera-estado" />
+  </div>
+</header>
+
+<style>
+  .cabecera {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--papel);
+    border-bottom: 1px solid var(--linea);
+  }
+  .cabecera-fila {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 1rem;
+    min-height: 4rem;
+  }
+  @media (min-width: 64rem) {
+    .cabecera-fila {
+      grid-template-columns: 1fr auto 1fr;
+      min-height: 4.5rem;
+    }
+  }
+  .cabecera-sello {
+    display: block;
+    width: fit-content;
+  }
+  .cabecera-enlaces {
+    display: flex;
+    justify-content: flex-end;
+    gap: clamp(1rem, 3vw, 2.75rem);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  @media (min-width: 64rem) {
+    .cabecera-enlaces {
+      justify-content: center;
+    }
+  }
+  .cabecera-enlaces a {
+    display: inline-block;
+    padding-block: 0.75rem;
+    color: var(--tinta);
+    text-decoration: none;
+  }
+  .cabecera-enlaces a:hover {
+    color: var(--accion);
+    text-decoration: underline;
+  }
+  /* En pantallas estrechas el estado va en el hero; aquí solo desde escritorio */
+  .cabecera :global(.estado) {
+    display: none;
+  }
+  @media (min-width: 64rem) {
+    .cabecera :global(.estado:not([hidden])) {
+      display: inline-flex;
+      justify-self: end;
+    }
+  }
+</style>

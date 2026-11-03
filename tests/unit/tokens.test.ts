@@ -1,10 +1,9 @@
 // Contraste de los tokens de color (constitución III, plan §4). Cada par que el sitio
 // usa como texto sobre fondo tiene que llegar a AA (4,5:1); los textos grandes y los
 // elementos gráficos, a 3:1.
-import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
-
-const css = readFileSync(new URL('../../src/styles/global.css', import.meta.url), 'utf8');
+// ?raw (Vite): el CSS como texto, sin depender de los tipos de Node
+import css from '../../src/styles/global.css?raw';
 const root = css.match(/:root\s*\{([^}]*)\}/)?.[1] ?? '';
 const t: Record<string, string> = Object.fromEntries(
   [...root.matchAll(/--([\w-]+):\s*(#[0-9a-f]{6})/gi)].map((m) => [m[1], m[2]]),

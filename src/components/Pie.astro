@@ -1,0 +1,79 @@
+---
+// Pie (spec §4): el aviso de concepto, los créditos de cada foto (autor, licencia y el
+// cambio hecho, como piden CC BY y CC BY-SA) y el año.
+import { t } from '../i18n';
+import { FOTOS } from '../data/fotos';
+import Sello from './Sello.astro';
+
+const anio = String(new Date().getFullYear());
+---
+
+<footer class="pie">
+  <div class="contenedor pie-rejilla">
+    <div class="pie-marca">
+      <Sello decorativo class="w-20" />
+      <p class="pie-concepto">{t('pie.concepto')}</p>
+      <p class="etiqueta">{t('pie.anio', { anio })}</p>
+    </div>
+    <div>
+      <h2 class="pie-titulo etiqueta">{t('creditos.titulo')}</h2>
+      <ul class="pie-creditos">
+        {
+          Object.values(FOTOS).map((f) => (
+            <li>
+              <a href={f.fuente} rel="noopener">{t(f.alt)}</a>: {f.autor},{' '}
+              <a href={f.licenciaUrl} rel="license noopener">{f.licencia}</a>, {t('creditos.cambios')}.
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pie {
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+    border-top: 1px solid var(--linea);
+    color: var(--tinta-suave);
+    font-size: 0.9375rem;
+  }
+  .pie-rejilla {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 64rem) {
+    .pie-rejilla {
+      grid-template-columns: 1fr 2fr;
+    }
+  }
+  .pie-marca {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+  }
+  .pie-marca p {
+    margin: 0;
+  }
+  .pie-concepto {
+    max-width: 22rem;
+    color: var(--tinta);
+  }
+  .pie-titulo {
+    margin: 0 0 0.75rem;
+    color: var(--tinta);
+  }
+  .pie-creditos {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pie a {
+    color: inherit;
+  }
+  .pie a:hover {
+    color: var(--accion);
+  }
+</style>
