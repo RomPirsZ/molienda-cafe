@@ -12,7 +12,19 @@ async function sinViolacionesSerias(page: Page) {
   expect(serias.map((v) => `${v.id}: ${v.help} → ${v.nodes.map((n) => n.target.join(' ')).join(', ')}`)).toEqual([]);
 }
 
-test('inicio: sin violaciones serias de axe', async ({ page }) => {
+test('inicio con movimiento: sin violaciones serias de axe, tras las entradas', async ({ page }) => {
   await page.goto('/');
+  // axe mide el contraste: se espera a que las entradas del primer viewport terminen
+  await expect(page.locator('html')).toHaveClass(/\bmotion-ready\b/);
+  await expect.poll(() => page.locator('.hero-cafe').last().evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
+  await expect.poll(() => page.locator('[data-revelar="tira"]').evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
   await sinViolacionesSerias(page);
+});
+
+test.describe('con movimiento reducido', () => {
+  test.use({ reducedMotion: 'reduce' });
+  test('inicio estático: sin violaciones serias de axe', async ({ page }) => {
+    await page.goto('/');
+    await sinViolacionesSerias(page);
+  });
 });

@@ -71,7 +71,13 @@ Los colores se definen como variables en `global.css` y Tailwind los expone con 
 - **Platos:** opacidad 0→1 y 30 px→0, escalonados 0,08 s.
 - **Titulares y etiquetas:** suben dentro de una máscara de línea (`overflow: hidden` + `translateY`).
 - **Sello de la cabecera:** al entrar en una sección cambia la variante con escala 1,15→1 y opacidad, en 0,35 s.
-- **Cabecera:** se oculta al bajar y vuelve al subir (`translateY`).
+- **Cabecera:** se oculta al bajar y vuelve al subir (`translateY`). Nunca mientras tiene el foco del teclado.
+
+**Cambios 2026-11-03 (M07):**
+- **Lenis solo con puntero fino.** En táctil no suaviza nada (el scroll es nativo) y, como no sigue el desplazamiento del dedo, calculaba mal el destino de los enlaces a secciones: en el móvil «Ver la carta» se quedaba a medio camino. En táctil manda el scroll nativo con `scroll-behavior: smooth` (sin él, con reduced-motion). Lenis respeta el `scroll-padding-top` de la cabecera, así que no lleva `offset` propio.
+- **Una línea de tiempo por foto**, con un solo disparador: GSAP modifica el objeto de `scrollTrigger` al crearlo, y compartirlo entre tres tweens dejaba sin revelar las fotos a las que se llegaba saltando.
+- **Tarjetas:** durante la entrada se apaga su transición CSS y al acabar se limpian `transform`, `opacity` y `transition`, para que el hover vuelva a mandar.
+- **Antes de que llegue el módulo,** lo que se va a revelar nace oculto con la clase `motion`, puesta por un script mínimo en `<head>`. Si el módulo no llega en 2,5 s, el CSS lo muestra igual.
 
 ## 7. Estado de apertura
 

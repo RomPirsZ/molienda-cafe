@@ -11,7 +11,7 @@ import EstadoApertura from './EstadoApertura.astro';
 const destacados = CARTA[0]!.platos.slice(0, 3);
 ---
 
-<section id="inicio" class="hero" aria-labelledby="titulo">
+<section id="inicio" class="hero" aria-labelledby="titulo" data-seccion="sol">
   <div class="contenedor hero-cabeza">
     <Sello class="hero-sello" />
     <h1 id="titulo" class="hero-titulo" data-revelar="titulo">{t('marca.nombre')}</h1>

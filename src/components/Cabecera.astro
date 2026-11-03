@@ -18,6 +18,11 @@ const enlaces = [
   <div class="contenedor cabecera-fila">
     <a href="#inicio" class="cabecera-sello" aria-label={t('nav.inicio')} data-sello-cabecera>
       <Sello decorativo compacto class="h-10 w-10 md:h-12 md:w-12" />
+      {
+        (['taza', 'grano', 'puerta'] as const).map((v) => (
+          <Sello decorativo compacto variante={v} class="sello-alterno h-10 w-10 md:h-12 md:w-12" />
+        ))
+      }
     </a>
     <nav aria-label={t('nav.etiqueta')}>
       <ul class="cabecera-enlaces etiqueta">
@@ -56,8 +61,18 @@ const enlaces = [
     }
   }
   .cabecera-sello {
+    position: relative;
     display: block;
     width: fit-content;
+  }
+  /* Las variantes del sello se apilan; sin movimiento solo se ve el sol (M07 las estampa) */
+  .cabecera-sello :global(.sello-alterno) {
+    position: absolute;
+    inset: 0;
+    visibility: hidden;
+  }
+  .cabecera-enlaces a[aria-current='true'] {
+    color: var(--accion);
   }
   .cabecera-enlaces {
     display: flex;

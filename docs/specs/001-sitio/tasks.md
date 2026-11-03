@@ -23,7 +23,7 @@
 
 ## Fase 3 — Movimiento
 
-- [ ] M07 `animations.ts`: revelado de fotos, platos, titulares, sello y cabecera; test e2e 3 (reduced-motion)
+- [x] M07 `animations.ts`: revelado de fotos, platos, titulares, sello y cabecera; test e2e 3 (reduced-motion) — *Lenis solo con puntero fino: en táctil desviaba los enlaces a secciones (plan §6)*
 - [ ] M08 Afinado con transitions-polish
 
 ## Fase 4 — Cierre

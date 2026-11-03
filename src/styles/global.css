@@ -182,3 +182,33 @@
     font-variant-numeric: tabular-nums lining-nums;
   }
 }
+
+/*
+  Entradas animadas (plan §6). Solo con JS y movimiento (clase `motion`, puesta en
+  <head>) nacen ocultas hasta que GSAP las toma (`motion-ready`). Si el módulo no
+  llega en 2,5 s, se muestran igual: el contenido nunca depende de JS.
+*/
+@media (prefers-reduced-motion: no-preference) {
+  .motion:not(.motion-ready) :is([data-revelar], [data-foto]) {
+    opacity: 0;
+    animation: aparecer-sin-modulo 0s 2.5s forwards;
+  }
+}
+
+/* Enlaces a secciones con desplazamiento suave nativo (en escritorio lo sustituye Lenis,
+   que pone scroll-behavior: auto); con reduced-motion, salto directo */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+  /* Con Lenis activo, el desplazamiento suave es suyo: dos a la vez se pelean */
+  html.lenis {
+    scroll-behavior: auto;
+  }
+}
+
+@keyframes aparecer-sin-modulo {
+  to {
+    opacity: 1;
+  }
+}

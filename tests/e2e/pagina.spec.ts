@@ -24,10 +24,13 @@ for (const [ancho, alto] of [[1280, 720], [1366, 768], [1440, 900]] as const) {
   });
 }
 
-test('«Ver la carta» lleva a la carta', async ({ page }) => {
+test('«Ver la carta» lleva a la carta: la sección queda arriba, bajo la cabecera', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('link', { name: es['hero.cta'] }).click();
   await expect(page).toHaveURL(/#carta$/);
+  // No basta con que el título asome: la carta tiene que haber llegado arriba
+  // (en el móvil se quedaba a medio camino con Lenis)
+  await expect.poll(() => page.locator('#carta').evaluate((el) => Math.round(el.getBoundingClientRect().top))).toBeLessThan(100);
   await expect(page.getByRole('heading', { name: es['carta.titulo'], level: 2 })).toBeInViewport();
 });
 

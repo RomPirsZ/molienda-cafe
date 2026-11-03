@@ -25,6 +25,17 @@ const { title = t('sitio.titulo'), description = t('sitio.descripcion') } = Astr
     <!-- Mismo color que --papel: la barra del navegador móvil continúa la página -->
     <meta name="theme-color" content="rgb(232 220 194)" />
     <meta name="color-scheme" content="only light" />
+    <!--
+      Con JS y sin reduced-motion, marca la página para que lo que se va a revelar nazca
+      oculto (global.css) hasta que GSAP lo tome. Si el módulo no llega, el CSS lo muestra
+      igual a los 2,5 s: el contenido nunca depende de JS (constitución I).
+      Al desplegar con CSP, este script necesita su hash.
+    -->
+    <script is:inline>
+      if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+        document.documentElement.classList.add('motion');
+      }
+    </script>
   </head>
   <body>
     <a
@@ -33,5 +44,9 @@ const { title = t('sitio.titulo'), description = t('sitio.descripcion') } = Astr
       >{t('nav.saltar')}</a
     >
     <slot />
+    <script>
+      import { startMotion } from '../lib/motion';
+      startMotion();
+    </script>
   </body>
 </html>
