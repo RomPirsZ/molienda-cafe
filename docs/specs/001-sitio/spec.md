@@ -52,6 +52,8 @@ Todo el movimiento medido en noovolife usa solo `transform` y `opacity`: cabe en
 - Tinta espresso, terracota solo para la acción principal, oliva en las franjas de sección y mostaza de frailejón como acento mínimo.
 - Esquinas rectas, sin sombras: la profundidad sale del papel superpuesto.
 
+**Cambio 2026-11-03, pedido por el usuario:** cada producto (los platos de la carta y los tres cafés del primer viewport) va en una **tarjeta semirredondeada** de pergamino. Con ratón, la tarjeta se eleva un poco y aparece una sombra debajo. Es la única excepción a «esquinas rectas, sin sombras»: botones, franjas y fotos siguen igual. Solo se animan `transform` (la elevación) y `opacity` (la sombra, en una capa aparte). Con movimiento reducido no hay elevación, pero la sombra sigue señalando el hover.
+
 De la referencia de Dribbble (§2) se mantienen la tinta espresso, la serif, la fotografía cálida y la carta en lista.
 
 El contrato completo está en `.impeccable/surfaces/src-pages-index-astro.md`, y el sistema queda registrado en `DESIGN.md` al terminar la construcción.

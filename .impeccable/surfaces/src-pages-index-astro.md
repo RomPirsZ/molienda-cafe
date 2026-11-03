@@ -17,7 +17,7 @@ related_targets: []
 
 THESIS: Molienda como identidad de cafetería andina de los noventa: un sol grabado sobre el páramo, papel kraft rasgado y mayúsculas muy espaciadas. Rechaza el hero partido «titular serif + foto de taza» de todo café de especialidad.
 
-OWN-WORLD: fondo kraft/pergamino; tinta espresso (fijada por el usuario); terracota solo para la acción principal y el estado activo; oliva para las franjas de sección; mostaza de frailejón como acento mínimo. Bordes de papel rasgado como recurso SVG estático (nunca polígonos de `clip-path`). Sello grabado circular. Mayúsculas romanas serif muy espaciadas para los titulares y sans humanista para el texto. Esquinas rectas, sin sombras: la profundidad sale solo del papel superpuesto.
+OWN-WORLD: fondo kraft/pergamino; tinta espresso (fijada por el usuario); terracota solo para la acción principal y el estado activo; oliva para las franjas de sección; mostaza de frailejón como acento mínimo. Bordes de papel rasgado como recurso SVG estático (nunca polígonos de `clip-path`). Sello grabado circular. Mayúsculas romanas serif muy espaciadas para los titulares y sans humanista para el texto. Esquinas rectas, sin sombras: la profundidad sale solo del papel superpuesto. Excepción pedida por el usuario el 2026-11-03: los productos van en tarjetas semirredondeadas de pergamino que, con ratón, se elevan con una sombra debajo (la sombra solo cambia de opacidad).
 
 STORY: el visitante entiende que es un café de Mérida que sirve grano de fincas cercanas, ve precios y horario sin buscar, cree que el sitio está hecho con oficio, y baja a la carta.
 

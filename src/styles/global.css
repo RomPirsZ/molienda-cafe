@@ -48,6 +48,8 @@
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
     scrollbar-color: var(--tinta-suave) var(--papel);
+    /* Los enlaces a secciones no quedan tapados por la cabecera fija */
+    scroll-padding-top: 4.5rem;
   }
 
   body {
@@ -125,6 +127,54 @@
   .boton-accion svg {
     width: 1.25rem;
     height: 1.25rem;
+  }
+
+  /* Tarjeta de producto (cambio pedido por el usuario el 2026-11-03): esquinas
+     semirredondeadas y, con ratón, se eleva un poco con una sombra debajo. La sombra
+     vive en un pseudo-elemento y solo cambia su opacidad: la constitución II solo deja
+     animar transform y opacity, nunca box-shadow. */
+  .tarjeta {
+    position: relative;
+    isolation: isolate;
+    background: var(--papel-claro);
+    border: 1px solid color-mix(in srgb, var(--linea) 55%, transparent);
+    border-radius: 0.75rem;
+  }
+  .tarjeta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    box-shadow:
+      0 1.1rem 1.6rem -1rem color-mix(in srgb, var(--tinta) 55%, transparent),
+      0 0.3rem 0.6rem -0.35rem color-mix(in srgb, var(--tinta) 30%, transparent);
+    opacity: 0;
+    pointer-events: none;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .tarjeta {
+      transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .tarjeta::after {
+      transition: opacity 240ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .tarjeta:hover {
+      transform: translateY(-0.25rem);
+    }
+    .tarjeta:hover::after {
+      opacity: 1;
+    }
+  }
+  /* Movimiento reducido: sin elevación ni transición; la sombra sigue señalando el hover */
+  @media (prefers-reduced-motion: reduce) {
+    .tarjeta,
+    .tarjeta::after {
+      transition: none;
+    }
+    .tarjeta:hover {
+      transform: none;
+    }
   }
 
   /* Precios y altitudes: cifras tabulares, alineadas en columna */

@@ -32,7 +32,7 @@ const destacados = CARTA[0]!.platos.slice(0, 3);
     <ul class="hero-cafes" data-revelar="platos">
       {
         destacados.map((p) => (
-          <li class="hero-cafe">
+          <li class="hero-cafe tarjeta">
             <p class="hero-cafe-fila">
               <span class="hero-cafe-nombre">{t(p.nombre)}</span>
               <span class="cifras">{precio(p.precio)}</span>
@@ -119,30 +119,26 @@ const destacados = CARTA[0]!.platos.slice(0, 3);
   }
   .hero-cafes {
     display: grid;
+    gap: 0.6rem;
     width: 100%;
     max-width: 62rem;
     margin: 0;
     padding: 0;
     list-style: none;
-    border-top: 2px solid var(--tinta);
   }
   @media (min-width: 48rem) {
     .hero-cafes {
       grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
     }
   }
   .hero-cafe {
-    padding: 0.85rem 0.25rem;
-    border-bottom: 1px solid var(--linea);
+    padding: 0.75rem 1rem;
     text-align: left;
   }
   @media (min-width: 48rem) {
     .hero-cafe {
-      padding: clamp(0.6rem, 1.4vh, 1rem) 1.5rem;
-      border-bottom: 0;
-    }
-    .hero-cafe + .hero-cafe {
-      border-left: 1px solid var(--linea);
+      padding: clamp(0.6rem, 1.4vh, 1rem) 1.25rem;
     }
   }
   .hero-cafe-fila {
