@@ -32,7 +32,7 @@
   --text-titulo: clamp(1.75rem, 1.2rem + 2.2vw, 3.25rem);
   --text-plato: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
   --text-cuerpo: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
-  --text-etiqueta: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+  --text-etiqueta: clamp(0.8125rem, 0.78rem + 0.1vw, 0.875rem);
 
   /* Mayúsculas espaciadas del mundo «Cafetería de pueblo» */
   --tracking-marca: 0.18em;

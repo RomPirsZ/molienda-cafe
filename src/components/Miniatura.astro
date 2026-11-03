@@ -1,0 +1,45 @@
+---
+// Foto ilustrativa de un plato, en miniatura cuadrada dentro de su tarjeta (pedido del
+// usuario el 2026-11-03: que se vea qué se pide). Astro genera AVIF/WebP a la medida.
+import { Picture } from 'astro:assets';
+import { t } from '../i18n';
+import { FOTOS } from '../data/fotos';
+
+interface Props {
+  foto: keyof typeof FOTOS;
+  /** Lado en píxeles CSS con que se muestra (para srcset y sizes) */
+  lado: number;
+  /** Las del primer viewport se cargan sin esperar */
+  prioritaria?: boolean;
+  class?: string;
+}
+
+const { foto, lado, prioritaria = false, class: clase } = Astro.props;
+const datos = FOTOS[foto];
+---
+
+<Picture
+  src={datos.src}
+  alt={t(datos.alt)}
+  formats={['avif', 'webp']}
+  widths={[lado, lado * 2, lado * 3]}
+  sizes={`${lado}px`}
+  width={lado}
+  height={lado}
+  loading={prioritaria ? 'eager' : 'lazy'}
+  decoding="async"
+  class:list={['miniatura', clase]}
+  data-miniatura
+/>
+
+<style>
+  .miniatura {
+    display: block;
+    aspect-ratio: 1;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    background: var(--papel);
+  }
+</style>

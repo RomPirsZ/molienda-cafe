@@ -36,3 +36,15 @@ test.describe('con movimiento reducido', () => {
     expect(await elevacion(plato)).toBe(0);
   });
 });
+
+test('cada producto muestra su foto, cargada y con texto alternativo', async ({ page }) => {
+  await page.goto('/');
+  const tarjetas = page.locator('.plato, .hero-cafe');
+  expect(await tarjetas.count()).toBe(16); // 13 de la carta + 3 del primer viewport
+  for (const t of await tarjetas.all()) {
+    const img = t.locator('img[data-miniatura]');
+    await img.scrollIntoViewIfNeeded();
+    await expect(img).toHaveAttribute('alt', /\S{4,}/);
+    await expect.poll(() => img.evaluate((el: HTMLImageElement) => el.complete && el.naturalWidth > 0)).toBe(true);
+  }
+});

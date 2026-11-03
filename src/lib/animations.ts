@@ -12,7 +12,9 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
 
 /** cubic-bezier(.22, 1, .36, 1) de noovolife es una quíntica de salida: power4.out en GSAP. */
 const SALIDA = 'power4.out';
-const AL_ENTRAR = 'top 85%';
+// 92 %: lo que asoma al pie de la pantalla ya se revela (con 85 % un título podía
+// quedar oculto justo en el borde del primer viewport, visto en la revisión a 768 px)
+const AL_ENTRAR = 'top 92%';
 
 let lenis: Lenis | undefined;
 let contexto: gsap.Context | undefined;

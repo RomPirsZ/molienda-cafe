@@ -5,7 +5,7 @@
 // va arriba, a la vista, no en letra pequeña al final.
 import { t } from '../i18n';
 import { CARTA, precio } from '../data/carta';
-import Foto from './Foto.astro';
+import Miniatura from './Miniatura.astro';
 ---
 
 <section id="carta" class="carta" aria-labelledby="carta-titulo" data-seccion="taza">
@@ -22,22 +22,22 @@ import Foto from './Foto.astro';
             <h3 id={`cat-${categoria.id}`} class="categoria-titulo">
               {t(categoria.titulo)}
             </h3>
-            {categoria.id === 'panaderia' && (
-              <Foto foto="panAndino" proporcion="3 / 2" sizes="(min-width: 64rem) 22rem, 92vw" class="categoria-foto" />
-            )}
             <ul class="platos" data-revelar="platos">
               {categoria.platos.map((p) => (
                 <li class="plato tarjeta">
-                  <p class="plato-fila">
-                    <span class="plato-nombre">{t(p.nombre)}</span>
-                    <span class="plato-precio cifras">{precio(p.precio)}</span>
-                  </p>
-                  <p class="plato-desc">{t(p.descripcion)}</p>
-                  {p.origen && (
-                    <p class="plato-origen etiqueta cifras">
-                      {t(p.origen.finca)} · {p.origen.region} · {t('carta.altitud', { metros: p.origen.altitud.toLocaleString('es-VE') })}
+                  <Miniatura foto={p.foto} lado={72} class="plato-foto" />
+                  <div class="plato-texto">
+                    <p class="plato-fila">
+                      <span class="plato-nombre">{t(p.nombre)}</span>
+                      <span class="plato-precio cifras">{precio(p.precio)}</span>
                     </p>
-                  )}
+                    <p class="plato-desc">{t(p.descripcion)}</p>
+                    {p.origen && (
+                      <p class="plato-origen cifras">
+                        {t(p.origen.finca)} · {p.origen.region} · {t('carta.altitud', { metros: p.origen.altitud.toLocaleString('es-VE') })}
+                      </p>
+                    )}
+                  </div>
                 </li>
               ))}
             </ul>
@@ -75,9 +75,11 @@ import Foto from './Foto.astro';
     display: grid;
     gap: clamp(2.5rem, 5vw, 3rem);
   }
-  @media (min-width: 64rem) {
+  /* Tres columnas solo desde 1280 px: por debajo, con foto, los nombres se partían.
+     Entre 896 y 1280 px cada categoría ocupa el ancho y sus platos van en dos columnas. */
+  @media (min-width: 80rem) {
     .carta-columnas {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 3rem;
     }
   }
@@ -89,10 +91,6 @@ import Foto from './Foto.astro';
     letter-spacing: 0.12em;
     text-transform: uppercase;
   }
-  .categoria :global(.categoria-foto) {
-    margin-top: 1.25rem;
-    rotate: -1.5deg;
-  }
   .platos {
     display: grid;
     gap: 0.75rem;
@@ -100,8 +98,16 @@ import Foto from './Foto.astro';
     padding: 0;
     list-style: none;
   }
+  /* Miniatura a la izquierda, como en la carta de la referencia */
   .plato {
-    padding: 0.95rem 1.1rem 1rem;
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    align-items: start;
+    gap: 1rem;
+    padding: 0.75rem 1rem 0.85rem 0.75rem;
+  }
+  .plato-texto {
+    min-width: 0;
   }
   .plato-fila {
     display: flex;
@@ -109,6 +115,21 @@ import Foto from './Foto.astro';
     gap: 0.75rem;
     margin: 0;
     font-size: var(--text-plato);
+  }
+  @media (min-width: 56rem) and (max-width: 79.99rem) {
+    .platos {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  /* En tres columnas el nombre baja un punto para caber en una línea junto al precio */
+  @media (min-width: 80rem) {
+    .plato {
+      grid-template-columns: 4rem 1fr;
+      gap: 0.85rem;
+    }
+    .plato-fila {
+      font-size: 1.25rem;
+    }
   }
   .plato-nombre {
     font-family: var(--font-display);
@@ -127,12 +148,12 @@ import Foto from './Foto.astro';
   }
   .plato-desc {
     margin: 0.25rem 0 0;
-    color: var(--tinta-suave);
   }
   .plato-origen {
-    margin: 0.35rem 0 0;
-    font-size: 0.6875rem;
-    letter-spacing: 0.14em;
+    margin: 0.3rem 0 0;
+    color: var(--tinta-suave);
+    font-size: 0.875rem;
+    line-height: 1.35;
   }
   .carta-nota {
     margin: 2rem 0 0;

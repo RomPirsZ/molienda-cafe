@@ -13,6 +13,12 @@ test('el aviso de concepto y la carta empiezan en el primer viewport', async ({ 
   await expect(primero).toContainText('$2,00');
 });
 
+test('en el móvil, «Ver la carta» se ve en el primer viewport', async ({ page, isMobile }) => {
+  test.skip(!isMobile, 'Comprobación del primer viewport del móvil');
+  await page.goto('/');
+  await expect(page.getByRole('link', { name: es['hero.cta'] })).toBeInViewport({ ratio: 1 });
+});
+
 for (const [ancho, alto] of [[1280, 720], [1366, 768], [1440, 900]] as const) {
   test(`en escritorio ${ancho}×${alto}, los tres cafés y «Ver la carta» caben sin scroll`, async ({ page, isMobile }) => {
     test.skip(isMobile, 'En el móvil la acción queda justo debajo del primer viewport');

@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 import es from '../../src/i18n/es.json';
 import { CARTA, PRECIOS_FICTICIOS, REGIONES } from '../../src/data/carta';
 import { HORARIO } from '../../src/data/horario';
+import { FOTOS } from '../../src/data/fotos';
 
 const platos = CARTA.flatMap((c) => c.platos);
 
@@ -33,6 +34,12 @@ describe('carta', () => {
       expect(c.origen!.altitud).toBeGreaterThanOrEqual(1000);
       expect(c.origen!.altitud).toBeLessThanOrEqual(2000);
     }
+  });
+
+  it('cada plato tiene su foto ilustrativa, con créditos, y ninguna se repite', () => {
+    for (const p of platos) expect(FOTOS[p.foto], p.nombre).toBeDefined();
+    expect(new Set(platos.map((p) => p.foto)).size).toBe(platos.length);
+    expect(es['carta.aviso']).toMatch(/fotos ilustrativas/i);
   });
 
   it('los tres primeros cafés (los del primer viewport) existen', () => {
