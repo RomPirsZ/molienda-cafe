@@ -2,5 +2,12 @@
   "sitio.titulo": "Molienda — café de especialidad en Mérida (concepto)",
   "sitio.descripcion": "Concepto de [A]nkordev: la web de un café ficticio en Mérida, Venezuela, con grano de las fincas andinas.",
   "marca.nombre": "Molienda",
-  "nav.saltar": "Saltar al contenido"
+  "nav.saltar": "Saltar al contenido",
+  "horario.abierto": "Abierto ahora · cierra a {hora}",
+  "horario.cerrado": "Cerrado",
+  "horario.abreHoy": "Cerrado · abre hoy a {hora}",
+  "horario.abreManana": "Cerrado · abre mañana a {hora}",
+  "horario.abreOtroDia": "Cerrado · abre el {dia} a {hora}",
+  "horario.articuloUna": "la",
+  "horario.articuloVarias": "las"
 }
