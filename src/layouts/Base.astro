@@ -1,0 +1,36 @@
+---
+import '@fontsource/marcellus/latin-400.css';
+import '@fontsource/alegreya-sans/latin-400.css';
+import '@fontsource/alegreya-sans/latin-500.css';
+import '@fontsource/alegreya-sans/latin-700.css';
+import '../styles/global.css';
+import { t } from '../i18n';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = t('sitio.titulo'), description = t('sitio.descripcion') } = Astro.props;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <!-- Mismo color que --papel: la barra del navegador móvil continúa la página -->
+    <meta name="theme-color" content="rgb(232 220 194)" />
+    <meta name="color-scheme" content="only light" />
+  </head>
+  <body>
+    <a
+      href="#contenido"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-papel-claro focus:px-4 focus:py-2"
+      >{t('nav.saltar')}</a
+    >
+    <slot />
+  </body>
+</html>

@@ -1,18 +1,10 @@
 ---
+import Base from '../layouts/Base.astro';
 import { t } from '../i18n';
 ---
 
-<!doctype html>
-<html lang="es">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{t('sitio.titulo')}</title>
-    <meta name="description" content={t('sitio.descripcion')} />
-  </head>
-  <body>
-    <main>
-      <h1>{t('marca.nombre')}</h1>
-    </main>
-  </body>
-</html>
+<Base>
+  <main id="contenido">
+    <h1>{t('marca.nombre')}</h1>
+  </main>
+</Base>

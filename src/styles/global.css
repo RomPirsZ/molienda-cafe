@@ -1,0 +1,82 @@
+@import 'tailwindcss';
+
+/* Tokens (plan §4). Solo aquí hay colores: los componentes usan los roles. */
+:root {
+  --papel: #e8dcc2; /* kraft: el suelo de la página */
+  --papel-claro: #f3ebdc; /* pergamino: tiras y superficies superpuestas */
+  --tinta: #2b1c14; /* espresso: texto y trazos (fijado por el usuario) */
+  --tinta-suave: #5c4636; /* texto secundario */
+  --accion: #9c4124; /* terracota: solo la acción principal y lo activo */
+  --franja: #55542b; /* oliva: franjas de sección */
+  --acento: #c99a2e; /* mostaza de frailejón: acento mínimo, nunca texto sobre papel */
+  --linea: #8c7a5e; /* filetes decorativos */
+
+  color-scheme: only light;
+}
+
+@theme inline {
+  --color-papel: var(--papel);
+  --color-papel-claro: var(--papel-claro);
+  --color-tinta: var(--tinta);
+  --color-tinta-suave: var(--tinta-suave);
+  --color-accion: var(--accion);
+  --color-franja: var(--franja);
+  --color-acento: var(--acento);
+  --color-linea: var(--linea);
+
+  --font-display: 'Marcellus', 'Iowan Old Style', Georgia, serif;
+  --font-sans: 'Alegreya Sans', ui-sans-serif, system-ui, sans-serif;
+
+  /* Escala fluida: de 390 px a 1440 px */
+  --text-marca: clamp(2.5rem, 0.9rem + 6.6vw, 7rem);
+  --text-titulo: clamp(1.75rem, 1.2rem + 2.2vw, 3.25rem);
+  --text-plato: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  --text-cuerpo: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --text-etiqueta: clamp(0.75rem, 0.72rem + 0.12vw, 0.8125rem);
+
+  /* Mayúsculas espaciadas del mundo «Cafetería de pueblo» */
+  --tracking-marca: 0.18em;
+  --tracking-etiqueta: 0.24em;
+}
+
+@layer base {
+  html {
+    background: var(--papel);
+    color: var(--tinta);
+    font-family: var(--font-sans);
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scrollbar-color: var(--tinta-suave) var(--papel);
+  }
+
+  body {
+    font-size: var(--text-cuerpo);
+    line-height: 1.55;
+    caret-color: var(--accion);
+  }
+
+  /* Superficies del navegador (impeccable, craft floor): también son del diseño */
+  ::selection {
+    background: var(--tinta);
+    color: var(--papel-claro);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--tinta);
+    outline-offset: 3px;
+  }
+
+  a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-wrap: balance;
+  }
+}

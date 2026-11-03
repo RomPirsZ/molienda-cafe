@@ -12,7 +12,7 @@
 ## Fase 1 — Base
 
 - [x] M01 Proyecto Astro + Tailwind + TypeScript estricto con las dependencias del plan §2; Vitest y Playwright; `npm test` — *e2e en el puerto 4339; Astro 7.4.4 con excepción puntual a `min-release-age` (plan §2)*
-- [ ] M02 Tokens en `global.css` + test de contraste; fuentes; `Base.astro`
+- [x] M02 Tokens en `global.css` + test de contraste; fuentes; `Base.astro` — *terracota `#9c4124` y oliva `#55542b` elegidas por contraste; superficies del navegador (selección, foco, caret, scrollbar) en la paleta*
 - [ ] M03 `opening-hours.ts` + tests unitarios (primero los tests)
 
 ## Fase 2 — Contenido y estética (impeccable)
