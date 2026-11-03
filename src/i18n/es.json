@@ -9,5 +9,17 @@
   "horario.abreManana": "Cerrado · abre mañana a {hora}",
   "horario.abreOtroDia": "Cerrado · abre el {dia} a {hora}",
   "horario.articuloUna": "la",
-  "horario.articuloVarias": "las"
+  "horario.articuloVarias": "las",
+  "foto.vistaFinca": "Ladera de cafetal con montañas boscosas bajo nubes bajas",
+  "foto.hacienda": "Casa de hacienda cafetalera con tejas y patio de secado, entre montañas",
+  "foto.cafeto": "Rama de cafeto con frutos rojos y verdes",
+  "foto.panAndino": "Rebanada de pan andino sobre una tabla de madera",
+  "foto.tazaEnMano": "Mano que sostiene una taza blanca de café sobre una mesa de madera",
+  "foto.tostador": "Granos recién tostados cayendo del tostador a la bandeja de enfriado",
+  "foto.preparacion": "Manos que preparan café en tazas de cobre sobre una mesa de madera",
+  "creditos.titulo": "Fotos de ambientación",
+  "creditos.cambios": "redimensionada",
+  "sello.alt": "Sello de Molienda: un sol saliendo sobre las montañas",
+  "sello.arriba": "MOLIENDA",
+  "sello.abajo": "CAFÉ DE MÉRIDA"
 }

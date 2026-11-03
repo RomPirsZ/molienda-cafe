@@ -1,0 +1,8 @@
+{
+  // Console Ninja inyecta scripts en los servidores de Astro/Vite y parchea node_modules
+  // (rompe la CSP y los e2e). En este repo no se engancha a ninguno de los dos.
+  "console-ninja.toolsToEnableSupportAutomaticallyFor": {
+    "vite": false,
+    "astro": false
+  }
+}

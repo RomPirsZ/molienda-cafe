@@ -1,0 +1,136 @@
+---
+// Sello grabado de Molienda (plan §5): un anillo con texto y un motivo central dibujado
+// a trazo, como un grabado en madera. Todas las variantes comparten la retícula circular
+// (viewBox 200 × 200, motivo dentro del círculo de radio 68) para que el cambio de una a
+// otra en la cabecera (M07) no mueva nada más que el dibujo.
+// Colores: trazo en currentColor; el sol en --acento; el relleno que tapa lo que queda
+// detrás de las montañas, en --sello-fondo (por defecto, el papel).
+import { t } from '../i18n';
+import { nuevoId } from '../lib/ids';
+
+export type Variante = 'sol' | 'taza' | 'grano' | 'puerta';
+
+interface Props {
+  variante?: Variante;
+  /** Sin texto alternativo: el sello acompaña a un nombre que ya se lee al lado */
+  decorativo?: boolean;
+  /** Sin el anillo de texto: para tamaños pequeños (cabecera), donde sería ruido */
+  compacto?: boolean;
+  class?: string;
+}
+
+const { variante = 'sol', decorativo = false, compacto = false, class: clase } = Astro.props;
+const id = nuevoId('sello');
+
+// Macizo andino de tres cumbres; la más alta, con nieve (Sierra Nevada de Mérida)
+const MACIZO = 'M40 140L58 118L67 123L86 97L94 103L117 70L126 83L133 78L149 107L156 113L160 140Z';
+// Caras en sombra (a la derecha de cada cumbre), donde va el rayado del grabado
+const SOMBRA = 'M117 70L126 83L133 78L149 107L156 113L160 140L121 140L111 96ZM86 97L94 103L99 140L84 140L90 110Z';
+const rayado = Array.from({ length: 12 }, (_, i) => `M80 ${82 + i * 5}H164`).join('');
+const rayos = Array.from({ length: 16 }, (_, i) => {
+  const a = (i / 16) * Math.PI * 2;
+  const largo = i % 2 === 0 ? 25 : 20.5;
+  const p = (r: number) => `${(80 + Math.cos(a) * r).toFixed(1)} ${(80 + Math.sin(a) * r).toFixed(1)}`;
+  return `M${p(16)}L${p(largo)}`;
+}).join('');
+---
+
+<svg
+  class:list={['sello', clase]}
+  viewBox="0 0 200 200"
+  role={decorativo ? undefined : 'img'}
+  aria-label={decorativo ? undefined : t('sello.alt')}
+  aria-hidden={decorativo ? 'true' : undefined}
+  data-variante={variante}
+>
+  <defs>
+    <!-- Arriba, en sentido horario; abajo, en sentido antihorario: los dos textos quedan derechos -->
+    <path id={`${id}-arriba`} d="M20 100A80 80 0 0 1 180 100" />
+    <path id={`${id}-abajo`} d="M12 100A88 88 0 0 0 188 100" />
+    <clipPath id={`${id}-sombra`}><path d={SOMBRA} /></clipPath>
+  </defs>
+
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="100" cy="100" r="96" stroke-width="3" />
+    <circle cx="100" cy="100" r="68" stroke-width={compacto ? 3 : 1.4} />
+  </g>
+
+  {
+    !compacto && (
+      <g class="sello-texto" fill="currentColor" font-size="14" text-anchor="middle" aria-hidden="true">
+        <text>
+          <textPath href={`#${id}-arriba`} startOffset="50%">
+            {t('sello.arriba')}
+          </textPath>
+        </text>
+        <text>
+          <textPath href={`#${id}-abajo`} startOffset="50%">
+            {t('sello.abajo')}
+          </textPath>
+        </text>
+        <circle cx="16" cy="100" r="2.4" />
+        <circle cx="184" cy="100" r="2.4" />
+      </g>
+    )
+  }
+
+  <g fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    {
+      variante === 'sol' && (
+        <>
+          <g stroke="var(--acento)">
+            <circle cx="80" cy="80" r="12" fill="var(--acento)" />
+            <path d={rayos} />
+          </g>
+          <path d={MACIZO} fill="var(--sello-fondo, var(--papel))" />
+          <path d={rayado} stroke-width="1.3" clip-path={`url(#${id}-sombra)`} />
+          <path d="M108 81L112 86L116 82L120 87L124 81" stroke-width="1.6" />
+          <path d="M38 140H162" />
+          <path d="M54 148H78M88 148H112M122 148H146M62 155H94M106 155H138" stroke-width="1.6" />
+        </>
+      )
+    }
+    {
+      variante === 'taza' && (
+        <>
+          <path d="M72 102H128V118C128 134 116 144 100 144C84 144 72 134 72 118Z" />
+          <path d="M128 108C140 108 142 128 126 130" />
+          <path d="M60 150H140" />
+          <path d="M86 92C80 84 92 80 86 70M100 92C94 84 106 80 100 70M114 92C108 84 120 80 114 70" stroke-width="1.8" />
+          <path d="M80 112H120M78 120H122M80 128H120" stroke-width="1.2" />
+        </>
+      )
+    }
+    {
+      variante === 'grano' && (
+        <g transform="rotate(-28 100 100)">
+          <ellipse cx="100" cy="100" rx="27" ry="38" />
+          <path d="M100 62C88 84 112 116 100 138" />
+          <path d="M84 86C82 96 82 106 86 116M116 84C119 94 119 104 116 114" stroke-width="1.2" />
+        </g>
+      )
+    }
+    {
+      variante === 'puerta' && (
+        <>
+          <path d="M76 146V104A24 24 0 0 1 124 104V146Z" />
+          <path d="M100 82V146" stroke-width="1.6" />
+          <path d="M84 110H94V136H84ZM106 110H116V136H106Z" stroke-width="1.4" />
+          <circle cx="96" cy="124" r="1.6" fill="currentColor" />
+          <path d="M68 146H132M62 153H138" />
+        </>
+      )
+    }
+  </g>
+</svg>
+
+<style>
+  .sello {
+    display: block;
+    color: var(--tinta);
+  }
+  .sello-texto {
+    font-family: var(--font-display);
+    letter-spacing: 0.32em;
+  }
+</style>

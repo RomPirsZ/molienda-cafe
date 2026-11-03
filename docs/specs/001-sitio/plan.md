@@ -90,4 +90,10 @@ Los colores se definen como variables en `global.css` y Tailwind los expone con 
 
 ## 9. Fotos
 
-Stock con licencia libre (Unsplash): taza de cerámica, barra, panadería, cafetal andino y grano. Se descargan, se optimizan con `astro:assets` y se citan en el pie. Ninguna se presenta como un local o un cliente real. Si falta una foto decisiva, una ilustración con canvas-design en la paleta del sitio.
+**Cambio 2026-11-03 (M04):** de **Wikimedia Commons** en lugar de Unsplash. La API de búsqueda de Unsplash exige una clave; la de Commons es pública, y sus licencias se verifican foto a foto. Además tiene material andino real, como el pan andino.
+
+Siete fotos en `src/assets/fotos/`: vista de la finca, hacienda, cafeto, pan andino, taza en la mano, tostador y preparación. Cada una tiene licencia CC0, CC BY o CC BY-SA, y su autor, licencia, enlace y texto alternativo están en `src/data/fotos.ts` y `es.json`; un test lo vigila. Se citan en el pie con «redimensionada» (2000 px de ancho, sin EXIF), y `astro:assets` genera las versiones para pantalla.
+
+Se descartó la foto de un interior porque era un local real reconocible (Kitsuné Café, Montreal): presentarlo como el café ficticio sería engañoso. Ninguna foto se presenta como un local o un cliente real.
+
+**Sello y bordes (plan §5):** `src/components/Sello.astro` (variantes `sol`, `taza`, `grano` y `puerta`, y `compacto` sin anillo de texto para tamaños pequeños) y `src/components/PapelRasgado.astro`. Los bordes salen de `scripts/generar-bordes.mjs` (semilla fija, tileables a 1200 px) y se usan como máscara: el canto claro y el color.
