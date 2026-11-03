@@ -28,7 +28,13 @@
 
 ## Fase 4 — Cierre
 
-- [ ] M09 Revisión visual a 375, 768 y 1440 px (design-taste-frontend), revisión final de impeccable y `DESIGN.md`
-- [ ] M10 Lighthouse móvil en local con los umbrales de la constitución
+- [x] M09 Revisión visual a 375, 768 y 1440 px (design-taste-frontend), revisión final de impeccable y `DESIGN.md`
+  - Revisión visual (2 rondas): foto ilustrativa por producto (pedido del usuario), procedencia legible, «Ver la carta» en el primer viewport del móvil, sin desbordamiento a 768 px y carta en tres columnas solo desde 1280 px.
+  - Revisión final de impeccable: «fix» y después «ship», con las 7 correcciones resueltas (marcos y botón rasgados, sello grabado, fibra de papel, La casa, pie).
+  - `DESIGN.md` escrito por el documentador.
+- [x] M10 Lighthouse móvil en local con los umbrales de la constitución
+  - Lighthouse 13.5.0 por npx, con el permiso del usuario y sin añadirlo al proyecto.
+  - Resultado: rendimiento 99–100, accesibilidad 100, buenas prácticas 100 y SEO 100; LCP 1,4–1,8 s y CLS 0,009.
+  - La fibra se quitó de las tarjetas porque convertía una de ellas en el LCP.
 
 **Al terminar cada fase:** parar y esperar revisión.

@@ -1,0 +1,363 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-03T00:00:00Z",
+  "title": "Design System: Molienda",
+  "extensions": {
+    "colorMeta": {
+      "papel": {
+        "role": "neutral",
+        "displayName": "Kraft",
+        "canonical": "oklch(89.7% 0.037 86)",
+        "tonalRamp": [
+          "oklch(15% 0.018 86)",
+          "oklch(26% 0.022 86)",
+          "oklch(37% 0.027 86)",
+          "oklch(48% 0.032 86)",
+          "oklch(59% 0.037 86)",
+          "oklch(70% 0.033 86)",
+          "oklch(82% 0.028 86)",
+          "oklch(95% 0.022 86)"
+        ]
+      },
+      "papel-claro": {
+        "role": "neutral",
+        "displayName": "Pergamino",
+        "canonical": "oklch(94.2% 0.022 83)",
+        "tonalRamp": [
+          "oklch(15% 0.010 83)",
+          "oklch(26% 0.013 83)",
+          "oklch(37% 0.016 83)",
+          "oklch(48% 0.019 83)",
+          "oklch(59% 0.022 83)",
+          "oklch(70% 0.019 83)",
+          "oklch(82% 0.016 83)",
+          "oklch(95% 0.013 83)"
+        ]
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Espresso",
+        "canonical": "oklch(24.3% 0.028 49)",
+        "tonalRamp": [
+          "oklch(15% 0.013 49)",
+          "oklch(26% 0.017 49)",
+          "oklch(37% 0.020 49)",
+          "oklch(48% 0.024 49)",
+          "oklch(59% 0.028 49)",
+          "oklch(70% 0.025 49)",
+          "oklch(82% 0.021 49)",
+          "oklch(95% 0.017 49)"
+        ]
+      },
+      "tinta-suave": {
+        "role": "neutral",
+        "displayName": "Tinta Suave",
+        "canonical": "oklch(41.3% 0.040 57)",
+        "tonalRamp": [
+          "oklch(15% 0.019 57)",
+          "oklch(26% 0.024 57)",
+          "oklch(37% 0.029 57)",
+          "oklch(48% 0.034 57)",
+          "oklch(59% 0.040 57)",
+          "oklch(70% 0.035 57)",
+          "oklch(82% 0.030 57)",
+          "oklch(95% 0.024 57)"
+        ]
+      },
+      "accion": {
+        "role": "primary",
+        "displayName": "Terracota de Acción",
+        "canonical": "oklch(49.2% 0.129 38)",
+        "tonalRamp": [
+          "oklch(15% 0.061 38)",
+          "oklch(26% 0.078 38)",
+          "oklch(37% 0.094 38)",
+          "oklch(48% 0.111 38)",
+          "oklch(59% 0.127 38)",
+          "oklch(70% 0.114 38)",
+          "oklch(82% 0.096 38)",
+          "oklch(95% 0.076 38)"
+        ]
+      },
+      "franja": {
+        "role": "secondary",
+        "displayName": "Oliva de Franja",
+        "canonical": "oklch(43.7% 0.060 107)",
+        "tonalRamp": [
+          "oklch(15% 0.029 107)",
+          "oklch(26% 0.036 107)",
+          "oklch(37% 0.044 107)",
+          "oklch(48% 0.052 107)",
+          "oklch(59% 0.059 107)",
+          "oklch(70% 0.053 107)",
+          "oklch(82% 0.045 107)",
+          "oklch(95% 0.035 107)"
+        ]
+      },
+      "acento": {
+        "role": "tertiary",
+        "displayName": "Mostaza de Frailejón",
+        "canonical": "oklch(71.2% 0.131 84)",
+        "tonalRamp": [
+          "oklch(15% 0.062 84)",
+          "oklch(26% 0.079 84)",
+          "oklch(37% 0.096 84)",
+          "oklch(48% 0.113 84)",
+          "oklch(59% 0.129 84)",
+          "oklch(70% 0.116 84)",
+          "oklch(82% 0.097 84)",
+          "oklch(95% 0.078 84)"
+        ]
+      },
+      "linea": {
+        "role": "neutral",
+        "displayName": "Filete",
+        "canonical": "oklch(58.9% 0.046 79)",
+        "tonalRamp": [
+          "oklch(15% 0.022 79)",
+          "oklch(26% 0.028 79)",
+          "oklch(37% 0.034 79)",
+          "oklch(48% 0.040 79)",
+          "oklch(59% 0.045 79)",
+          "oklch(70% 0.041 79)",
+          "oklch(82% 0.034 79)",
+          "oklch(95% 0.027 79)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "marca": {
+        "displayName": "Marca",
+        "purpose": "Solo «MOLIENDA» en el hero, mayúsculas espaciadas."
+      },
+      "titulo": {
+        "displayName": "Título de sección",
+        "purpose": "Títulos de sección en mayúsculas espaciadas."
+      },
+      "plato": {
+        "displayName": "Plato",
+        "purpose": "Nombres de platos y de la zona, en caja mixta."
+      },
+      "cuerpo": {
+        "displayName": "Cuerpo",
+        "purpose": "Texto corrido."
+      },
+      "etiqueta": {
+        "displayName": "Etiqueta",
+        "purpose": "Navegación, lema, avisos, estado de apertura y botón."
+      },
+      "cifras": {
+        "displayName": "Cifras",
+        "purpose": "Precios, altitudes y horas en columna."
+      }
+    },
+    "shadows": [
+      {
+        "name": "elevacion-tarjeta",
+        "value": "0 1.1rem 1.6rem -1rem color-mix(in srgb, var(--tinta) 55%, transparent), 0 0.3rem 0.6rem -0.35rem color-mix(in srgb, var(--tinta) 30%, transparent)",
+        "purpose": "Única sombra del sistema: hover con ratón de la tarjeta de producto, en un pseudo-elemento que solo anima su opacidad."
+      }
+    ],
+    "motion": [
+      {
+        "name": "salida",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1) / GSAP power4.out",
+        "purpose": "Curva común de entradas y del hover de tarjeta (medida en noovolife)."
+      },
+      {
+        "name": "revelado-foto",
+        "value": "marco y: 50px→0 1.2s; opacidad 0.6s power2.out; imagen scale 1.12→1 1.2s",
+        "purpose": "Fotos que suben dentro de su passe-partout al entrar (top 92%, una vez)."
+      },
+      {
+        "name": "zoom-scroll",
+        "value": "picture scale 1→1.08, scrub, top bottom → bottom top",
+        "purpose": "Zoom lento ligado al scroll en las fotos."
+      },
+      {
+        "name": "titular-letras",
+        "value": "chars yPercent 105→0, 0.5s, stagger 40ms, delay 150ms",
+        "purpose": "«MOLIENDA» por letras enmascaradas al cargar."
+      },
+      {
+        "name": "titulo-lineas",
+        "value": "lines yPercent 100→0, 0.9s, stagger 80ms",
+        "purpose": "Títulos de sección por líneas enmascaradas."
+      },
+      {
+        "name": "platos",
+        "value": "y 30px→0 + opacidad, 0.9s, stagger 40ms",
+        "purpose": "Entrada escalonada de las tarjetas."
+      },
+      {
+        "name": "re-estampado-sello",
+        "value": "scale 1.15→1 + autoAlpha, 250ms, power1.inOut",
+        "purpose": "El sello de la cabecera cambia de variante al entrar en cada sección."
+      },
+      {
+        "name": "cabecera",
+        "value": "yPercent -100 en 150ms al ocultar, 0 en 250ms al mostrar",
+        "purpose": "La cabecera se aparta al bajar y vuelve al subir; nunca con el foco dentro."
+      },
+      {
+        "name": "hover-tarjeta",
+        "value": "entrada 250ms, salida 350ms; translateY(-0.25rem) + opacidad de la sombra",
+        "purpose": "Elevación de la tarjeta de producto solo con puntero fino."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "el módulo de animaciones no se descarga",
+        "purpose": "Nada se mueve; Lenis solo con puntero fino; sin JS todo visible (respaldo CSS a 2.5s)."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "md",
+        "value": "48rem"
+      },
+      {
+        "name": "tarjetas-2col",
+        "value": "56rem"
+      },
+      {
+        "name": "lg",
+        "value": "64rem"
+      },
+      {
+        "name": "carta-3col",
+        "value": "80rem"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón de acción",
+      "kind": "button",
+      "refersTo": "boton-accion",
+      "description": "La única acción principal: papel terracota con cantos superior e inferior rasgados (en producción, máscara SVG de src/assets/marcas/canto-*.svg en un ::before).",
+      "html": "<a href=\"#carta\" class=\"ds-boton-accion\">Ver la carta <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.6\" stroke-linecap=\"round\" aria-hidden=\"true\"><path d=\"M12 4v16M5 13l7 7 7-7\"/></svg></a>",
+      "css": ".ds-boton-accion { display: inline-flex; align-items: center; gap: 0.9rem; min-height: 3rem; padding: 0.85rem 1.6rem; background: var(--accion, #9c4124); color: var(--papel-claro, #f3ebdc); font-family: 'Alegreya Sans', ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; text-decoration: none; border-radius: 0; } .ds-boton-accion svg { width: 1.25rem; height: 1.25rem; } .ds-boton-accion:hover { background: var(--tinta, #2b1c14); } .ds-boton-accion:focus-visible { outline: 2px solid var(--tinta, #2b1c14); outline-offset: 3px; }"
+    },
+    {
+      "name": "Tarjeta de plato",
+      "kind": "card",
+      "refersTo": "tarjeta-plato",
+      "description": "Excepción pedida por el usuario: pergamino semirredondeado con miniatura cuadrada, nombre, línea de puntos y precio tabular; con ratón sube 0,25rem y aparece una sombra (solo opacidad).",
+      "html": "<article class=\"ds-tarjeta\"><div class=\"ds-tarjeta-foto\"></div><div><p class=\"ds-tarjeta-fila\"><span class=\"ds-tarjeta-nombre\">Guayoyo</span><span class=\"ds-tarjeta-precio\">$2,50</span></p><p class=\"ds-tarjeta-desc\">Café colado, largo y suave, como en casa.</p><p class=\"ds-tarjeta-origen\">Finca La Quebrada · Táchira · 1.450 m</p></div></article>",
+      "css": ".ds-tarjeta { position: relative; isolation: isolate; display: grid; grid-template-columns: 4.5rem 1fr; gap: 1rem; align-items: start; padding: 0.75rem 1rem 0.85rem 0.75rem; max-width: 26rem; background: var(--papel-claro, #f3ebdc); color: var(--tinta, #2b1c14); border: 1px solid color-mix(in srgb, var(--linea, #8c7a5e) 55%, transparent); border-radius: 0.75rem; font-family: 'Alegreya Sans', ui-sans-serif, system-ui, sans-serif; transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-tarjeta::after { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; box-shadow: 0 1.1rem 1.6rem -1rem color-mix(in srgb, var(--tinta, #2b1c14) 55%, transparent), 0 0.3rem 0.6rem -0.35rem color-mix(in srgb, var(--tinta, #2b1c14) 30%, transparent); opacity: 0; transition: opacity 250ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-tarjeta:hover { transform: translateY(-0.25rem); transition-duration: 250ms; } .ds-tarjeta:hover::after { opacity: 1; } .ds-tarjeta-foto { aspect-ratio: 1; border-radius: 0.5rem; background: var(--papel, #e8dcc2); } .ds-tarjeta-fila { display: flex; align-items: baseline; gap: 0.75rem; margin: 0; font-size: 1.375rem; } .ds-tarjeta-nombre { font-family: 'Marcellus', 'Iowan Old Style', Georgia, serif; } .ds-tarjeta-fila::after { content: ''; order: 1; flex: 1; border-bottom: 1px dotted var(--linea, #8c7a5e); transform: translateY(-0.3em); } .ds-tarjeta-precio { order: 2; font-size: 1.0625rem; font-variant-numeric: tabular-nums lining-nums; } .ds-tarjeta-desc { margin: 0.25rem 0 0; } .ds-tarjeta-origen { margin: 0.3rem 0 0; color: var(--tinta-suave, #5c4636); font-size: 0.875rem; font-variant-numeric: tabular-nums lining-nums; } @media (prefers-reduced-motion: reduce) { .ds-tarjeta, .ds-tarjeta::after { transition: none; } .ds-tarjeta:hover { transform: none; } }"
+    },
+    {
+      "name": "Navegación de cabecera",
+      "kind": "nav",
+      "refersTo": "cabecera",
+      "description": "Cabecera kraft con filete inferior, enlaces en etiqueta espaciada; activo y hover en terracota.",
+      "html": "<nav class=\"ds-nav\"><span class=\"ds-nav-sello\"></span><ul><li><a href=\"#carta\" aria-current=\"true\">Carta</a></li><li><a href=\"#origen\">Origen</a></li><li><a href=\"#visitanos\">Visítanos</a></li></ul><span class=\"ds-nav-estado\"><i></i>Abierto ahora · cierra a las 7 p. m.</span></nav>",
+      "css": ".ds-nav { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1rem; min-height: 4.5rem; padding-inline: 2.5rem; background: var(--papel, #e8dcc2); border-bottom: 1px solid var(--linea, #8c7a5e); font-family: 'Alegreya Sans', ui-sans-serif, system-ui, sans-serif; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; } .ds-nav-sello { width: 3rem; height: 3rem; border: 2px solid var(--tinta, #2b1c14); border-radius: 50%; } .ds-nav ul { display: flex; gap: 2.75rem; margin: 0; padding: 0; list-style: none; } .ds-nav a { display: inline-block; padding-block: 0.75rem; color: var(--tinta, #2b1c14); text-decoration: none; } .ds-nav a:hover { color: var(--accion, #9c4124); text-decoration: underline; text-underline-offset: 0.25em; } .ds-nav a[aria-current='true'] { color: var(--accion, #9c4124); } .ds-nav a:focus-visible { outline: 2px solid var(--tinta, #2b1c14); outline-offset: 3px; } .ds-nav-estado { justify-self: end; display: inline-flex; align-items: center; gap: 0.6rem; color: var(--tinta, #2b1c14); } .ds-nav-estado i { width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--accion, #9c4124); }"
+    },
+    {
+      "name": "Etiqueta espaciada",
+      "kind": "chip",
+      "refersTo": "tira-lema",
+      "description": "Mayúsculas sans espaciadas sobre la tira terracota del lema (en producción, con cantos rasgados de PapelRasgado arriba y abajo).",
+      "html": "<p class=\"ds-tira\">Café de las fincas de Mérida · molido al momento</p>",
+      "css": ".ds-tira { margin: 0; padding: 0.35rem 1rem; background: var(--accion, #9c4124); color: var(--papel-claro, #f3ebdc); font-family: 'Alegreya Sans', ui-sans-serif, system-ui, sans-serif; font-size: 0.9375rem; font-weight: 500; letter-spacing: 0.24em; text-transform: uppercase; text-align: center; }"
+    },
+    {
+      "name": "Marco de foto",
+      "kind": "custom",
+      "refersTo": "marco-foto",
+      "description": "Passe-partout de pergamino (con fibra y cuatro cantos rasgados en producción) con ventana de overflow oculto; se solapa y gira, sin sombra.",
+      "html": "<figure class=\"ds-marco\"><div class=\"ds-marco-ventana\"></div></figure>",
+      "css": ".ds-marco { margin: 0; max-width: 20rem; padding: 0.85rem; background: var(--papel-claro, #f3ebdc); border-radius: 0; rotate: -2deg; } .ds-marco-ventana { aspect-ratio: 3 / 2; overflow: hidden; background: linear-gradient(160deg, var(--franja, #55542b), var(--tinta-suave, #5c4636)); }"
+    },
+    {
+      "name": "Horario con día cerrado",
+      "kind": "custom",
+      "refersTo": "franja-visitanos",
+      "description": "Filas de horario en la franja espresso; el día cerrado va rayado con «Cerrado» en mostaza y hoy subrayado en mostaza.",
+      "html": "<dl class=\"ds-horario\"><div class=\"ds-fila ds-cerrado\"><dt>Lunes</dt><dd>Cerrado</dd></div><div class=\"ds-fila ds-hoy\"><dt>Martes</dt><dd>7 a. m. a 7 p. m.</dd></div><div class=\"ds-fila\"><dt>Miércoles</dt><dd>7 a. m. a 7 p. m.</dd></div></dl>",
+      "css": ".ds-horario { margin: 0; padding: 1.5rem; background: var(--tinta, #2b1c14); color: var(--papel-claro, #f3ebdc); font-family: 'Alegreya Sans', ui-sans-serif, system-ui, sans-serif; } .ds-fila { display: flex; justify-content: space-between; gap: 1rem; padding: 0.7rem 0.5rem; border-bottom: 1px solid var(--linea, #8c7a5e); } .ds-fila dt, .ds-fila dd { margin: 0; font-variant-numeric: tabular-nums lining-nums; } .ds-cerrado { background: repeating-linear-gradient(-45deg, transparent 0 6px, color-mix(in srgb, var(--papel-claro, #f3ebdc) 10%, transparent) 6px 7px); } .ds-cerrado dd { color: var(--acento, #c99a2e); } .ds-hoy dt { text-decoration: underline; text-decoration-color: var(--acento, #c99a2e); text-decoration-thickness: 2px; text-underline-offset: 0.35em; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La Cafetería de Pueblo",
+    "overview": "Molienda es la identidad de una cafetería andina de los noventa: un sol grabado sobre el páramo, papel kraft rasgado y mayúsculas romanas muy espaciadas. La página entera es una mesa de papeles: un suelo kraft con fibra, tiras de color de canto rasgado que marcan las secciones y fotos pegadas en passe-partouts de pergamino, ligeramente giradas y superpuestas. Todo es plano y de esquina recta; la profundidad la da el papel encima de otro papel.\n\nLa densidad es la de una carta impresa: listas con línea de puntos entre el plato y el precio, cifras tabulares, procedencia en letra pequeña. El tono visual es de oficio, no de lujo; rechaza de forma expresa el hero partido «titular serif + foto de taza» de todo café de especialidad.\n\nLa única concesión al relieve es la tarjeta de producto, pedida por el usuario (2026-11-03): pergamino semirredondeado que, con ratón, se eleva y proyecta una sombra. Es una excepción con nombre, no la regla.",
+    "keyCharacteristics": [
+      "Suelo kraft con fibra raster estática; tiras de color con canto de papel rasgado.",
+      "Sello grabado circular (xilografía) como marca y como indicador de sección.",
+      "Mayúsculas romanas (Marcellus) muy espaciadas para la marca y los títulos; sans humanista (Alegreya Sans) para el texto.",
+      "Esquinas rectas y sin sombras, salvo la tarjeta de producto y su miniatura.",
+      "Movimiento editorial: revelados enmascarados, fotos que suben dentro de su marco, sello que se re-estampa; con reduced-motion no se carga nada."
+    ],
+    "rules": [
+      {
+        "name": "La Regla de los Pares Probados",
+        "body": "Solo llevan texto los pares que `tests/unit/tokens.test.ts` comprueba a 4,5:1: tinta y tinta suave sobre los dos papeles, terracota sobre los dos papeles, pergamino sobre terracota, oliva y espresso, y mostaza sobre espresso. Un par nuevo entra primero en el test.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regla de la Terracota Escasa",
+        "body": "La terracota es la acción, lo activo (incluido el hover de enlaces) y la única tira del lema. Si una pantalla tiene terracota en algo que no se pulsa, no está activo y no es esa tira, sobra.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regla de la Mostaza Nocturna",
+        "body": "La mostaza solo se lee como texto sobre espresso; en cualquier otro fondo es adorno.",
+        "section": "colors"
+      },
+      {
+        "name": "La Regla del Rótulo",
+        "body": "Marcellus se escribe en mayúsculas y espaciada cuando rotula (marca, secciones, categorías); en caja mixta solo nombra (platos, zona). Nunca en negrita.",
+        "section": "typography"
+      },
+      {
+        "name": "La Regla del Centrado Real",
+        "body": "Todo título centrado con tracking compensa el aire de la última letra con un margen derecho negativo igual al tracking.",
+        "section": "typography"
+      },
+      {
+        "name": "La Regla de las Cifras en Columna",
+        "body": "Precios, altitudes y horas llevan cifras tabulares y de caja alta.",
+        "section": "typography"
+      },
+      {
+        "name": "La Regla del Papel Encima",
+        "body": "Para separar planos se superpone papel (solape, giro, canto rasgado); nunca una sombra.",
+        "section": "elevation"
+      },
+      {
+        "name": "La Regla de la Excepción Única",
+        "body": "La única sombra del sistema es la de la tarjeta de producto, aparece solo con hover de puntero fino y nunca se anima `box-shadow`: se anima la opacidad de una capa que ya la lleva.",
+        "section": "elevation"
+      },
+      {
+        "name": "La Regla del Canto Quieto",
+        "body": "El papel rasgado es siempre una máscara SVG estática; nunca un polígono de `clip-path` y nunca se anima.",
+        "section": "shapes"
+      },
+      {
+        "name": "La Regla de la Fibra Medida",
+        "body": "La fibra (tesela raster de 180px, ~13 KB) va en el suelo y en los passe-partouts, no en las tarjetas: con imagen de fondo la tarjeta del primer viewport pasaba a ser el LCP.",
+        "section": "shapes"
+      }
+    ],
+    "dos": [
+      "**Do** usar los roles de color (`var(--tinta)`, `bg-accion`…); los hex solo viven en `:root` de `global.css`.",
+      "**Do** añadir al test de contraste cualquier par nuevo de texto sobre fondo antes de usarlo.",
+      "**Do** dar profundidad superponiendo papel: solape, giro de 1,5–2,5° y canto rasgado.",
+      "**Do** rotular en Marcellus mayúscula con tracking 0,18em y compensar el tracking al centrar.",
+      "**Do** poner precios, altitudes y horas con cifras tabulares, y unir plato y precio con la línea de puntos.",
+      "**Do** mantener las esquinas rectas salvo en la tarjeta de producto (0,75rem) y su miniatura (0,5rem).",
+      "**Do** animar solo `transform` y `opacity`, y dejar todo visible sin JS y con reduced-motion."
+    ],
+    "donts": [
+      "**Don't** recortar el papel rasgado con polígonos de `clip-path` ni animar sus cantos.",
+      "**Don't** poner sombras fuera del hover de la tarjeta de producto, ni animar `box-shadow`.",
+      "**Don't** poner la mostaza como texto sobre papel ni el filete como color de texto.",
+      "**Don't** usar la terracota fuera de la acción principal, los estados activos o de hover y la tira del lema.",
+      "**Don't** poner fibra de papel en las tarjetas.",
+      "**Don't** usar Marcellus en negrita ni Alegreya Sans en mayúsculas sin tracking.",
+      "**Don't** volver al hero partido «titular serif + foto de taza»."
+    ]
+  }
+}

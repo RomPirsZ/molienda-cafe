@@ -108,3 +108,27 @@ Siete fotos en `src/assets/fotos/`: vista de la finca, hacienda, cafeto, pan and
 Se descartó la foto de un interior porque era un local real reconocible (Kitsuné Café, Montreal): presentarlo como el café ficticio sería engañoso. Ninguna foto se presenta como un local o un cliente real.
 
 **Sello y bordes (plan §5):** `src/components/Sello.astro` (variantes `sol`, `taza`, `grano` y `puerta`, y `compacto` sin anillo de texto para tamaños pequeños) y `src/components/PapelRasgado.astro`. Los bordes salen de `scripts/generar-bordes.mjs` (semilla fija, tileables a 1200 px) y se usan como máscara: el canto claro y el color.
+
+**Cambio 2026-11-03 (M09), pedido por el usuario:** cada producto lleva una **foto ilustrativa** en su tarjeta.
+- Son 12 fotos más de Commons, en `src/assets/fotos/carta/`: recortadas en cuadrado a 600 px, con su crédito en el pie («recortada y redimensionada»). El pan andino reutiliza la foto que ya existía.
+- La carta lo rotula: «fotos ilustrativas».
+- Para la pisca andina no hay foto en Commons. Se usa una changua (caldo andino colombiano con huevo y cilantro), y su texto alternativo describe lo que se ve, sin decir que es pisca.
+- Todas las fotos llevan su procedencia incrustada (`impeccable embed-prompt`).
+
+## 10. Rendimiento medido (M10)
+
+Lighthouse 13.5.0, perfil móvil, sobre el build de producción servido en local (2026-11-03):
+
+| Categoría | Nota |
+|---|---|
+| Rendimiento | 99–100 |
+| Accesibilidad | 100 |
+| Buenas prácticas | 100 |
+| SEO | 100 |
+
+Métricas: FCP 1,1–1,5 s, LCP 1,4–1,8 s, TBT 60 ms y CLS 0,009.
+
+Dos lecciones:
+- **Fibra del papel.** Como SVG con `feTurbulence` bajaba el rendimiento a 91, porque se dibuja en el hilo principal. Ahora es raster.
+- **Tarjetas sin fibra.** Como imagen de fondo de una tarjeta, convertía el primer café en el LCP, y no contaba como pintado hasta acabar su entrada animada.
+
