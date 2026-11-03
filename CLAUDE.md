@@ -30,7 +30,7 @@ Textos de interfaz siempre en `src/i18n/es.json`.
 | Ilustraciones estáticas en la paleta del sitio | **canvas-design** |
 
 Choques conocidos:
-- **Movimiento:** solo `transform` y `opacity`. Nada de `filter` animado, `clip-path` animado ni WebGL. Si un skill lo propone, se descarta.
+- **Movimiento (constitución II, 1.3.0):** se pueden animar `transform`, `opacity`, `clip-path`, `mask`, filtros (blur incluido), color, fondo, borde y `box-shadow`. Nunca propiedades que recalculan el diseño (`width`, `height`, `top`, `left`, `margin`…). Sin WebGL (el fondo WebGL es solo del portafolio). Si un skill propone otra cosa, se descarta.
 - **Scripts:** nunca por CDN. GSAP y Lenis van por npm.
 - **Fotos de stock:** solo como ambientación y con créditos.
 - **Despliegue:** ninguno en esta fase (el portafolio sigue en Vercel Hobby).

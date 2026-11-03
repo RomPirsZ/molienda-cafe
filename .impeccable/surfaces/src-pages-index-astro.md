@@ -9,7 +9,7 @@ related_targets: []
 
 - **Modo:** Persuade. Visitante: cliente del café en el móvil (simulado) y quien evalúa a [A]nkordev (real). Acción: llegar a la carta y saber cuándo abre.
 - **Contenido:** carta con precios ficticios rotulados, procedencia por café, horario y zona ficticios, aviso de concepto. Sin reseñas ni cifras.
-- **Restricciones:** constitución (solo `transform`/`opacity`, contenido visible sin JS, AA, reduced-motion = nada se mueve); nada comercial real; fotos de stock con créditos.
+- **Restricciones:** constitución (II 1.3.0: nada que recalcule el diseño; contenido visible sin JS; AA; reduced-motion = nada se mueve); nada comercial real; fotos de stock con créditos.
 - **Momento memorable:** el sello de la cabecera se vuelve a estampar al entrar en cada sección.
 - **Pendiente:** las tipografías exactas (deben estar en @fontsource y no ser las de la lista de evitar), las fotos concretas y el dibujo del sello.
 

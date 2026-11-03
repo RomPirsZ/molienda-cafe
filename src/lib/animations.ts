@@ -1,5 +1,6 @@
 // Movimiento de Molienda (spec §6, plan §6). Solo se carga sin reduced-motion (motion.ts).
-// Solo se anima transform y opacity (constitución II): nada de filter ni clip-path.
+// Hoy se anima transform y opacity; la constitución II (1.3.0) admite también clip-path,
+// mask, filtros, color y sombras, nunca propiedades que recalculan el diseño.
 // Los tiempos del revelado de fotos salen de noovolife (medido el 2026-11-03).
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';

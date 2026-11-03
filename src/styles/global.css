@@ -131,8 +131,8 @@
 
   /* Tarjeta de producto (cambio pedido por el usuario el 2026-11-03): esquinas
      semirredondeadas y, con ratón, se eleva un poco con una sombra debajo. La sombra
-     vive en un pseudo-elemento y solo cambia su opacidad: la constitución II solo deja
-     animar transform y opacity, nunca box-shadow. */
+     vive en un pseudo-elemento y solo cambia su opacidad: animar box-shadow repinta en
+     cada fotograma, la opacidad se compone (más fluido en móviles de gama media). */
   .tarjeta {
     position: relative;
     isolation: isolate;

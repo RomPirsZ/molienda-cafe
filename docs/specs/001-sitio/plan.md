@@ -9,7 +9,7 @@
 | Principio | Cómo se cumple |
 |---|---|
 | I. Contenido primero | Astro genera HTML estático. Las animaciones son una capa: el estado inicial oculto lo pone JS, nunca el CSS. Sin JS se ve todo, también el horario completo. |
-| II. Movimiento con propósito | GSAP solo sobre `transform` y `opacity`. Sin `filter` (el «estampado» del sello es escala + opacidad) y sin WebGL. Con `prefers-reduced-motion` no se inicia nada. |
+| II. Movimiento con propósito | Hoy GSAP anima `transform` y `opacity`. La constitución 1.3.0 (2026-11-03) admite también `clip-path`, `mask`, filtros, color y sombras, pero nunca propiedades que recalculan el diseño. Sin WebGL. Con `prefers-reduced-motion` no se inicia nada. |
 | III. Accesibilidad | HTML semántico, contraste AA medido por token (incluidos los textos sobre terracota y oliva), foco visible, axe en móvil y escritorio. |
 | IV. Rendimiento | Salida estática, fuentes alojadas en el propio sitio, fotos con `astro:assets` (AVIF/WebP, `srcset`, diferidas salvo la primera), JS solo para el movimiento y el estado de apertura. |
 | V. Seguridad | Sin servidor, formularios ni secretos. Cuando se despliegue, cabeceras como en el portafolio (CSP solo `self`). |

@@ -70,7 +70,7 @@ El contrato completo está en `.impeccable/surfaces/src-pages-index-astro.md`, y
 - Platos de la carta que entran escalonados.
 - Cabecera que se oculta y reaparece.
 - Scroll suave (Lenis).
-- Solo `transform` y `opacity`. Con `prefers-reduced-motion` no hay ninguna animación, y sin JS todo se ve en su sitio.
+- Solo propiedades que no recalculan el diseño (constitución II, 1.3.0: `transform`, `opacity`, `clip-path`, `mask`, filtros, color y sombras). Con `prefers-reduced-motion` no hay ninguna animación, y sin JS todo se ve en su sitio.
 
 ## 7. Restricciones
 
