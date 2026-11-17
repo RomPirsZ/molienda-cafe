@@ -2,7 +2,7 @@
 // Worker solo sirve dist/. Las cabeceras de seguridad van en public/_headers.
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "molienda",
+  "name": "molienda-cafe",
   // Fecha fija: el comportamiento del runtime no cambia sin decidirlo
   "compatibility_date": "2026-10-23",
   "workers_dev": true,
