@@ -26,17 +26,16 @@ const tick = (tiempo: number) => lenis?.raf(tiempo * 1000);
 /** El respaldo CSS ya lo mostró (el módulo llegó tarde): no se vuelve a ocultar. */
 const yaVisible = (el: Element) => getComputedStyle(el).opacity !== '0';
 
-/** «MOLIENDA»: las letras suben dentro de su línea, al cargar. */
-function titular(raiz: ParentNode) {
-  const h1 = raiz.querySelector<HTMLElement>('h1[data-revelar="titulo"]');
-  if (!h1 || yaVisible(h1)) return;
-  SplitText.create(h1, {
-    type: 'chars',
-    mask: 'chars',
-    charsClass: 'letra',
-    aria: 'auto',
-    onSplit: (self) => gsap.from(self.chars, { yPercent: 105, duration: 0.5, ease: SALIDA, stagger: 0.04, delay: 0.15 }),
-  });
+/**
+ * La fachada se enciende una vez al cargar (contrato de dirección): las ventanas y la
+ * puerta pasan de apagadas a su luz. Solo si el café está abierto; si no, se quedan
+ * apagadas, que es la verdad.
+ */
+function luces(raiz: ParentNode) {
+  const fachada = raiz.querySelector<HTMLElement>('[data-fachada]');
+  if (!fachada || fachada.dataset['abierto'] === 'false') return;
+  const luces = fachada.querySelectorAll('[data-luz]:not(.c-luz-vecina)');
+  gsap.from(luces, { opacity: 0, duration: 0.6, ease: 'power2.out', stagger: 0.12, delay: 0.2 });
 }
 
 /** Títulos de sección: suben por líneas, dentro de una máscara, al entrar en pantalla. */
@@ -57,13 +56,6 @@ function titulos(raiz: ParentNode) {
         }),
     });
   });
-}
-
-/** La tira terracota del hero: sube y aparece justo después del titular. */
-function tira(raiz: ParentNode) {
-  const el = raiz.querySelector<HTMLElement>('[data-revelar="tira"]');
-  if (!el || yaVisible(el)) return;
-  gsap.from(el, { y: 24, opacity: 0, duration: 0.9, ease: SALIDA, delay: 0.35 });
 }
 
 /**
@@ -118,47 +110,6 @@ function fotos(raiz: ParentNode) {
   });
 }
 
-/**
- * Sello de la cabecera: al entrar en cada sección se «estampa» su variante (escala 1,15 → 1
- * y opacidad). El enlace de la sección activa se marca en terracota (aria-current).
- */
-function selloCabecera(raiz: ParentNode) {
-  const sellos = [...raiz.querySelectorAll<SVGElement>('[data-sello-cabecera] svg[data-variante]')];
-  const enlaces = [...raiz.querySelectorAll<HTMLAnchorElement>('[data-cabecera] nav a')];
-  if (!sellos.length) return;
-  let actual = 'sol';
-  gsap.set(sellos, { autoAlpha: (i: number) => (sellos[i]!.dataset['variante'] === actual ? 1 : 0), transformOrigin: '50% 50%' });
-
-  const estampar = (variante: string) => {
-    if (variante === actual) return;
-    actual = variante;
-    for (const s of sellos) {
-      if (s.dataset['variante'] === variante) {
-        // Cambio de icono: simétrico, 250 ms y ease-in-out en los dos sentidos (M08)
-        gsap.fromTo(s, { autoAlpha: 0, scale: 1.15 }, { autoAlpha: 1, scale: 1, duration: 0.25, ease: 'power1.inOut', overwrite: true });
-      } else {
-        gsap.to(s, { autoAlpha: 0, duration: 0.25, ease: 'power1.inOut', overwrite: true });
-      }
-    }
-  };
-
-  raiz.querySelectorAll<HTMLElement>('[data-seccion]').forEach((seccion) => {
-    ScrollTrigger.create({
-      trigger: seccion,
-      start: 'top 45%',
-      end: 'bottom 45%',
-      onToggle: (self) => {
-        if (!self.isActive) return;
-        estampar(seccion.dataset['seccion'] ?? 'sol');
-        for (const a of enlaces) {
-          if (a.hash === `#${seccion.id}`) a.setAttribute('aria-current', 'true');
-          else a.removeAttribute('aria-current');
-        }
-      },
-    });
-  });
-}
-
 /** La cabecera se oculta al bajar y vuelve al subir; nunca mientras tiene el foco del teclado. */
 function cabeceraOculta(raiz: ParentNode) {
   const cabecera = raiz.querySelector<HTMLElement>('[data-cabecera]');
@@ -205,12 +156,10 @@ export function initAnimations() {
   }
 
   contexto = gsap.context(() => {
-    titular(document);
-    tira(document);
+    luces(document);
     titulos(document);
     platos(document);
     fotos(document);
-    selloCabecera(document);
     cabeceraOculta(document);
   });
   // Las entradas ya tienen su estado inicial: el CSS deja de ocultarlas

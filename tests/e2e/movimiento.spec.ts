@@ -21,15 +21,14 @@ async function esperarQueSeDetenga(page: Page) {
 const opacidad = (page: Page, selector: string) =>
   page.locator(selector).first().evaluate((el) => getComputedStyle(el).opacity);
 
-test('el titular entra por letras y queda legible para lectores de pantalla', async ({ page }) => {
+test('la fachada se enciende y acaba con todas las luces visibles', async ({ page }) => {
+  // Sin reloj fijo: GSAP mide el tiempo con Date.now y, congelado, no avanzaría.
+  // Abierto o cerrado, al final todas las luces son visibles (encendidas o apagadas).
   await page.goto('/');
   await expect(page.locator('html')).toHaveClass(/\bmotion-ready\b/);
-  const h1 = page.getByRole('heading', { level: 1 });
-  await expect(h1).toHaveAccessibleName(es['marca.nombre']);
-  // Las letras acaban en su sitio
-  await expect
-    .poll(() => page.locator('h1 .letra').first().evaluate((el) => new DOMMatrix(getComputedStyle(el).transform).m42))
-    .toBe(0);
+  for (const luz of await page.locator('[data-fachada] [data-luz]').all()) {
+    await expect.poll(() => luz.evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
+  }
 });
 
 test('al bajar, platos y fotos terminan visibles; las tarjetas siguen respondiendo al ratón', async ({ page, isMobile }) => {
@@ -67,10 +66,3 @@ test('con el foco en la cabecera, la cabecera está a la vista', async ({ page }
   await expect.poll(() => cabecera.evaluate((el) => el.getBoundingClientRect().top)).toBeGreaterThanOrEqual(0);
 });
 
-test('en la carta, el sello de la cabecera estampa la taza y el enlace queda activo', async ({ page }) => {
-  await page.goto('/');
-  await page.getByRole('link', { name: es['hero.cta'] }).click();
-  const taza = page.locator('[data-sello-cabecera] svg[data-variante="taza"]');
-  await expect.poll(() => taza.evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
-  await expect(page.locator('[data-cabecera] nav a[href="#carta"]')).toHaveAttribute('aria-current', 'true');
-});

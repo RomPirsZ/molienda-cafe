@@ -1,10 +1,8 @@
 ---
-// Origen (spec §4): la franja oliva con bordes rasgados. Las cuatro estaciones del
-// recorrido (finca → tueste → molino → taza) van en una lista ordenada, unidas por una
-// línea: el orden es la información, así que no llevan números. Las fotos se superponen
-// como papeles pegados, con un leve giro; nada de sombras.
+// Cafés de origen (spec §4 y §10): un bloque oliva a todo el ancho, como los del panel.
+// Las cuatro estaciones del recorrido (finca → tueste → molino → taza) van en una lista
+// ordenada, unidas por una línea: el orden es la información, así que no llevan números.
 import { t } from '../i18n';
-import PapelRasgado from './PapelRasgado.astro';
 import Foto from './Foto.astro';
 
 const estaciones = [
@@ -15,12 +13,11 @@ const estaciones = [
 ];
 ---
 
-<section id="origen" class="origen" aria-labelledby="origen-titulo" data-seccion="grano">
-  <PapelRasgado />
+<section id="origen" class="origen" aria-labelledby="origen-titulo">
   <div class="origen-franja">
     <div class="contenedor origen-rejilla">
       <div class="origen-texto">
-        <h2 id="origen-titulo" class="origen-titulo" data-revelar="titulo">{t('origen.titulo')}</h2>
+        <h2 id="origen-titulo" class="titulo-seccion origen-titulo" data-revelar="titulo">{t('origen.titulo')}</h2>
         <p>{t('origen.texto')}</p>
         <ol class="estaciones">
           {
@@ -40,16 +37,12 @@ const estaciones = [
       </div>
     </div>
   </div>
-  <PapelRasgado lado="abajo" corte={2} />
 </section>
 
 <style>
-  .origen {
-    margin-top: clamp(1rem, 3vw, 2rem);
-  }
   .origen-franja {
-    background: var(--franja);
-    color: var(--papel-claro);
+    background: var(--oliva);
+    color: var(--pergamino);
     padding-block: clamp(2.5rem, 6vw, 5rem);
   }
   .origen-rejilla {
@@ -63,11 +56,7 @@ const estaciones = [
     }
   }
   .origen-titulo {
-    margin: 0 0 1.25rem;
-    font-size: var(--text-titulo);
-    line-height: 1.1;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    margin-bottom: 1.25rem;
   }
   .origen-texto > p {
     max-width: 34rem;
@@ -89,7 +78,7 @@ const estaciones = [
     top: 0.6rem;
     bottom: 0.6rem;
     left: 0.3rem;
-    border-left: 1px dashed var(--papel-claro);
+    border-left: 1px dashed var(--pergamino);
   }
   .estacion {
     position: relative;
@@ -101,14 +90,13 @@ const estaciones = [
     left: -1.75rem;
     width: 0.65rem;
     height: 0.65rem;
-    border-radius: 50%;
-    background: var(--franja);
-    border: 1.5px solid var(--papel-claro);
+    background: var(--oliva);
+    border: 2px solid var(--frailejon);
   }
   .estacion-titulo {
     margin: 0;
-    font-size: 1.25rem;
-    letter-spacing: 0.06em;
+    font-size: 1.75rem;
+    line-height: 1;
   }
   .estacion-texto {
     margin: 0.15rem 0 0;
@@ -126,16 +114,14 @@ const estaciones = [
   .origen-fotos :global(.origen-foto-hacienda) {
     grid-column: 1 / 8;
     grid-row: 2;
+    align-self: start;
     margin-top: -12%;
-    margin-left: -0.5rem;
-    rotate: -2deg;
   }
   .origen-fotos :global(.origen-foto-cafeto) {
     grid-column: 8 / 13;
     grid-row: 2;
+    align-self: start;
     margin-top: -4%;
-    margin-right: -0.5rem;
-    rotate: 2.5deg;
   }
   @media (min-width: 64rem) {
     .origen-fotos :global(.origen-foto-principal) {

@@ -1,9 +1,11 @@
 ---
 import Base from '../layouts/Base.astro';
 import Cabecera from '../components/Cabecera.astro';
+import Panel from '../components/Panel.astro';
 import Hero from '../components/Hero.astro';
-import Origen from '../components/Origen.astro';
 import Carta from '../components/Carta.astro';
+import Origen from '../components/Origen.astro';
+import ParaLlevar from '../components/ParaLlevar.astro';
 import Ambiente from '../components/Ambiente.astro';
 import Visitanos from '../components/Visitanos.astro';
 import Pie from '../components/Pie.astro';
@@ -11,10 +13,12 @@ import Pie from '../components/Pie.astro';
 
 <Base>
   <Cabecera />
+  <Panel />
   <main id="contenido">
     <Hero />
     <Carta />
     <Origen />
+    <ParaLlevar />
     <Ambiente />
     <Visitanos />
   </main>

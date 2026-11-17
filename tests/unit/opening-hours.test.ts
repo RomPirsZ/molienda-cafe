@@ -2,6 +2,7 @@
 // Caracas está en UTC−4 todo el año, así que las 10:00 locales son las 14:00 UTC.
 import { describe, expect, it } from 'vitest';
 import {
+  describirApertura,
   describirEstado,
   estadoApertura,
   formatearHora,
@@ -112,5 +113,16 @@ describe('describirEstado', () => {
 
   it('sin apertura prevista, solo dice que está cerrado', () => {
     expect(describirEstado({ abierto: false, abre: null })).toBe('Cerrado');
+  });
+});
+
+describe('describirApertura (placa del portón)', () => {
+  it('abierto: sin segunda línea', () => {
+    expect(describirApertura({ abierto: true, cierra: '19:00' })).toBeNull();
+  });
+  it('cerrado: dice cuándo abre', () => {
+    expect(describirApertura({ abierto: false, abre: { dia: 2, hora: '07:00', cuando: 'hoy' } })).toMatch(/^Abre a las 7\sa\.\sm\.$/);
+    expect(describirApertura({ abierto: false, abre: { dia: 2, hora: '07:00', cuando: 'manana' } })).toMatch(/^Mañana, 7\sa\.\sm\.$/);
+    expect(describirApertura({ abierto: false, abre: { dia: 0, hora: '08:00', cuando: 'otro-dia' } })).toMatch(/^El domingo, 8\sa\.\sm\.$/);
   });
 });

@@ -1,9 +1,10 @@
 ---
-// Pie (spec §4): el aviso de concepto, los créditos de cada foto (autor, licencia y el
+// Pie (spec §10.3): la navegación de la página (sin JS es el destino del botón
+// «Secciones»), el aviso de concepto, los créditos de cada foto (autor, licencia y el
 // cambio hecho, como piden CC BY y CC BY-SA) y el año.
 import { t } from '../i18n';
 import { FOTOS } from '../data/fotos';
-import Sello from './Sello.astro';
+import { SECCIONES } from '../data/secciones';
 
 const anio = String(new Date().getFullYear());
 ---
@@ -11,11 +12,23 @@ const anio = String(new Date().getFullYear());
 <footer class="pie">
   <div class="contenedor pie-rejilla">
     <div class="pie-marca">
-      <Sello decorativo class="w-20" />
+      <p class="pie-nombre">{t('marca.nombre')}</p>
       <p class="pie-concepto">{t('pie.concepto')}</p>
       <p class="etiqueta">{t('pie.anio', { anio })}</p>
     </div>
-    <div>
+    <nav id="navegacion" class="pie-nav" aria-label={t('nav.pie')}>
+      <h2 class="pie-titulo etiqueta">{t('pie.navTitulo')}</h2>
+      <ul>
+        {
+          SECCIONES.map((s) => (
+            <li>
+              <a href={s.href}>{t(s.nombre)}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="pie-creditos-bloque">
       <h2 class="pie-titulo etiqueta">{t('creditos.titulo')}</h2>
       <ul class="pie-creditos">
         {
@@ -35,7 +48,7 @@ const anio = String(new Date().getFullYear());
 <style>
   .pie {
     padding-block: clamp(2.5rem, 6vw, 4rem);
-    color: var(--tinta-suave);
+    color: var(--pergamino-suave);
     font-size: 0.9375rem;
   }
   .pie-rejilla {
@@ -44,7 +57,7 @@ const anio = String(new Date().getFullYear());
   }
   @media (min-width: 64rem) {
     .pie-rejilla {
-      grid-template-columns: 1fr 2fr;
+      grid-template-columns: 1fr 1fr 2fr;
     }
   }
   .pie-marca {
@@ -55,13 +68,42 @@ const anio = String(new Date().getFullYear());
   .pie-marca p {
     margin: 0;
   }
+  .pie-nombre {
+    color: var(--pergamino);
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+  }
   .pie-concepto {
     max-width: 22rem;
-    color: var(--tinta);
+    color: var(--pergamino);
   }
   .pie-titulo {
     margin: 0 0 0.75rem;
-    color: var(--tinta);
+    color: var(--pergamino);
+  }
+  .pie-nav ul {
+    display: grid;
+    gap: 0.1rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .pie-nav a {
+    display: inline-block;
+    padding-block: 0.4rem;
+    color: var(--pergamino);
+    font-family: var(--font-display);
+    font-size: var(--text-plato);
+    font-weight: 800;
+    line-height: 1;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .pie-nav a:hover {
+    color: var(--frailejon);
   }
   /* Más de veinte créditos (CC BY y BY-SA piden citarlos): en columnas desde 768 px */
   .pie-creditos {
@@ -81,10 +123,7 @@ const anio = String(new Date().getFullYear());
       column-gap: 2.5rem;
     }
   }
-  .pie a {
-    color: inherit;
-  }
-  .pie a:hover {
-    color: var(--accion);
+  .pie-creditos a:hover {
+    color: var(--frailejon);
   }
 </style>

@@ -1,185 +1,155 @@
 ---
-// Primer viewport (contrato de dirección, FIRST VIEWPORT): sello centrado, «MOLIENDA»
-// grande y espaciado, la tira terracota rasgada con el lema, el aviso de concepto y la
-// acción «Ver la carta» (antes de la lista: así cabe en el primer viewport del móvil, y
-// el orden del teclado es el mismo que se ve) y la carta empezando: tres cafés con foto.
+// Primer viewport (contrato de dirección, FIRST VIEWPORT): la fachada de la casona a
+// todo el ancho; el titular arriba a la izquierda, sobre el cielo; la pizarra de acera
+// con tres cafés y su precio; abajo a la izquierda, el estado de apertura, la frase del
+// origen y «Ver la carta». El aviso de concepto, bajo el titular, sin scroll.
 import { t } from '../i18n';
-import { CARTA, precio } from '../data/carta';
-import Sello from './Sello.astro';
-import PapelRasgado from './PapelRasgado.astro';
+import Fachada from './Fachada.astro';
+import Pizarra from './Pizarra.astro';
 import EstadoApertura from './EstadoApertura.astro';
-import Miniatura from './Miniatura.astro';
-
-const destacados = CARTA[0]!.platos.slice(0, 3);
 ---
 
-<section id="inicio" class="hero" aria-labelledby="titulo" data-seccion="sol">
-  <div class="contenedor hero-cabeza">
-    <Sello class="hero-sello" />
-    <h1 id="titulo" class="hero-titulo" data-revelar="titulo">{t('marca.nombre')}</h1>
+<section id="inicio" class="hero" aria-labelledby="titulo">
+  <div class="hero-escena">
+    <Fachada />
+    <Pizarra class="hero-pizarra" />
   </div>
 
-  <div class="hero-tira" style="--rasgado-color: var(--accion)" data-revelar="tira">
-    <PapelRasgado corte={2} />
-    <p class="hero-lema etiqueta">{t('hero.lema')}</p>
-    <PapelRasgado lado="abajo" />
-  </div>
-
-  <div class="contenedor hero-cuerpo">
-    <p class="hero-texto">{t('hero.texto')}</p>
+  <div class="hero-cabeza contenedor">
+    <h1 id="titulo" class="hero-titular">
+      <span class="sr-only">{t('hero.oculto')}</span>{t('hero.titular')}
+    </h1>
     <p class="hero-aviso">{t('concepto.aviso')}</p>
-    <EstadoApertura class="hero-estado" />
+  </div>
 
+  <div class="hero-pie contenedor">
+    <div class="hero-pie-texto">
+      <EstadoApertura class="hero-estado" />
+      <p class="hero-texto">{t('hero.texto')}</p>
+    </div>
     <a href="#carta" class="boton-accion hero-cta">
       {t('hero.cta')}
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
-        <path d="M12 4v16M5 13l7 7 7-7"></path>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" aria-hidden="true">
+        <path d="M12 4v15M6 13l6 6 6-6"></path>
       </svg>
     </a>
-
-    <h2 class="hero-hoy etiqueta">{t('hero.hoy')}</h2>
-    <ul class="hero-cafes" data-revelar="platos">
-      {
-        destacados.map((p) => (
-          <li class="hero-cafe tarjeta">
-            <Miniatura foto={p.foto} lado={56} prioritaria class="hero-cafe-foto" />
-            <div class="hero-cafe-texto">
-              <p class="hero-cafe-fila">
-                <span class="hero-cafe-nombre">{t(p.nombre)}</span>
-                <span class="cifras">{precio(p.precio)}</span>
-              </p>
-              {p.origen && (
-                <p class="hero-cafe-origen cifras">
-                  {t(p.origen.finca)} · {p.origen.region} · {t('carta.altitud', { metros: p.origen.altitud.toLocaleString('es-VE') })}
-                </p>
-              )}
-            </div>
-          </li>
-        ))
-      }
-    </ul>
-
   </div>
 </section>
 
 <style>
+  /* El hero ocupa la pantalla bajo la cabecera; la fachada lo llena por alto (su ancho
+     es 2,4 veces el alto) y se recorta por los lados, centrada en el portón */
   .hero {
-    padding-block: clamp(1rem, 2.5vh, 3rem) clamp(2.5rem, 6vh, 4.5rem);
-    text-align: center;
+    --alto: max(34rem, 100svh - 4rem);
+    /* Franja de abajo para el estado y la acción: la calle sigue en el mismo color */
+    --pie-alto: 6.5rem;
+    /* La escena llena el alto que deja la franja; su calle (el 10 % de abajo, lisa) pasa
+       por debajo de la franja, así el texto queda sobre la calle y nunca sobre el dibujo */
+    --fachada-alto: max(100cqw / 2.4, (100cqh - var(--pie-alto)) / 0.9);
+    --fachada-ancho: calc(var(--fachada-alto) * 2.4);
+    position: relative;
+    height: var(--alto);
+    overflow: hidden;
+    container-type: size;
+  }
+  .hero-escena {
+    position: absolute;
+    left: 50%;
+    bottom: calc(var(--pie-alto) - var(--fachada-alto) * 0.1);
+    width: var(--fachada-ancho);
+    translate: -50% 0;
   }
   .hero-cabeza {
-    display: grid;
-    justify-items: center;
-    gap: clamp(0.75rem, 2vh, 1.25rem);
+    position: relative;
+    padding-top: clamp(1rem, 4cqh, 2.5rem);
   }
-  .hero :global(.hero-sello) {
-    /* También según la altura: en portátiles de 720–768 px la acción debe caber */
-    width: clamp(5.5rem, min(4rem + 6vw, 15vh), 8.5rem);
-  }
-  .hero-titulo {
+  .hero-titular {
+    max-width: 15ch;
     margin: 0;
-    font-size: var(--text-marca);
-    line-height: 0.9;
-    letter-spacing: var(--tracking-marca);
-    text-transform: uppercase;
-    /* El espaciado deja aire tras la última letra: se compensa para centrar de verdad */
-    margin-right: calc(var(--tracking-marca) * -1);
-  }
-  .hero-tira {
-    width: min(100% - 2rem, 60rem);
-    margin: clamp(0.75rem, 2vh, 1.75rem) auto 0;
-  }
-  .hero-lema {
-    margin: 0;
-    padding: 0.35rem 1rem;
-    background: var(--accion);
-    color: var(--papel-claro);
-    font-size: clamp(0.8125rem, 0.75rem + 0.3vw, 1rem);
-  }
-  .hero-tira :global(.rasgado) {
-    height: 1.1rem;
-  }
-  .hero-cuerpo {
-    display: grid;
-    justify-items: center;
-    gap: clamp(0.6rem, 1.6vh, 1rem);
-    margin-top: clamp(0.9rem, 2vh, 2rem);
-  }
-  .hero-texto {
-    max-width: 38rem;
-    margin: 0;
-    font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
-    text-wrap: pretty;
+    /* También según la altura: en portátiles de 720 px el titular cabe sobre el tejado */
+    font-size: min(var(--text-titular), 12.5cqh);
+    line-height: 0.86;
   }
   .hero-aviso {
-    margin: 0;
-    max-width: 34rem;
-    color: var(--tinta-suave);
+    max-width: 30rem;
+    margin: 0.9rem 0 0;
+    color: var(--pergamino-suave);
     font-size: 0.9375rem;
     font-style: italic;
+    line-height: 1.4;
   }
-  .hero-hoy {
-    margin: clamp(0.25rem, 1vh, 1.5rem) 0 0;
-    color: var(--tinta-suave);
-  }
-  .hero-cafes {
-    display: grid;
-    gap: 0.6rem;
-    width: 100%;
-    max-width: 62rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  /* Tres columnas solo con sitio para foto, nombre, precio y procedencia (a 768 px
-     desbordaban: la revisión visual lo midió) */
-  @media (min-width: 64rem) {
-    .hero-cafes {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-    }
-  }
-  .hero-cafe-texto {
-    min-width: 0;
-  }
-  .hero-cafe {
-    display: grid;
-    grid-template-columns: 3.5rem 1fr;
-    align-items: center;
-    gap: 0.9rem;
-    padding: 0.6rem 1rem 0.6rem 0.6rem;
-    text-align: left;
-  }
-  @media (min-width: 64rem) {
-    .hero-cafe {
-      padding: clamp(0.5rem, 1.2vh, 0.75rem) 1rem clamp(0.5rem, 1.2vh, 0.75rem) clamp(0.5rem, 1.2vh, 0.75rem);
-    }
-  }
-  .hero-cafe-fila {
+  .hero-pie {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 0;
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1.75rem;
+    min-height: var(--pie-alto);
+    padding-block: 0.5rem;
+  }
+  .hero-pie-texto {
+    display: grid;
+    gap: 0.3rem;
+    max-width: 24rem;
+  }
+  .hero :global(.hero-estado) {
+    color: var(--frailejon);
+  }
+  .hero-texto {
     margin: 0;
-    font-size: var(--text-plato);
+    font-size: 1rem;
+    line-height: 1.4;
   }
-  .hero-cafe-nombre {
-    font-family: var(--font-display);
+  /* La pizarra, delante de la ventana derecha y apoyada en la acera */
+  .hero :global(.hero-pizarra) {
+    position: absolute;
+    left: 56%;
+    bottom: 13.5%;
   }
-  .hero-cafe-origen {
-    margin: 0.2rem 0 0;
-    color: var(--tinta-suave);
-    font-size: 0.875rem;
-    line-height: 1.35;
-  }
-  .hero-cta {
-    margin-top: clamp(0rem, 0.8vh, 0.5rem);
-  }
-
-  /* En escritorio el estado vive en la cabecera */
-  @media (min-width: 64rem) {
-    .hero :global(.hero-estado) {
+  /* En el móvil la casona no llena el alto: se ve entera la parte del portón y las dos
+     ventanas, apoyada abajo; el cielo de arriba es el mismo color que la página. El
+     estado y la acción van debajo, sobre la calle, que sigue en el mismo color. */
+  @media (max-width: 47.99rem) {
+    .hero {
+      --fachada-alto: calc(300vw / 2.4);
+      --fachada-ancho: 300vw;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: auto;
+      min-height: var(--alto);
+      container-type: normal;
+    }
+    .hero-escena {
+      position: relative;
+      left: auto;
+      bottom: auto;
+      margin-top: auto;
+      margin-left: calc(50% - var(--fachada-ancho) / 2);
+      translate: none;
+    }
+    .hero-cabeza {
+      order: -1;
+      padding-top: 1.25rem;
+    }
+    .hero-titular {
+      font-size: var(--text-titular);
+    }
+    .hero-texto {
       display: none;
+    }
+    .hero :global(.hero-pizarra) {
+      left: auto;
+      right: calc((var(--fachada-ancho) - 100vw) / 2 + 0.5rem);
+      bottom: 11%;
+    }
+    .hero-pie {
+      position: relative;
+      min-height: 0;
+      padding-top: 0.25rem;
+      padding-bottom: 1.25rem;
     }
   }
 </style>

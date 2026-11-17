@@ -5,10 +5,10 @@ import { t } from '../i18n';
 import Foto from './Foto.astro';
 ---
 
-<section class="ambiente" aria-labelledby="ambiente-titulo" data-seccion="sol">
+<section class="ambiente" aria-labelledby="ambiente-titulo">
   <div class="contenedor ambiente-rejilla">
     <div class="ambiente-texto">
-      <h2 id="ambiente-titulo" class="ambiente-titulo" data-revelar="titulo">{t('ambiente.titulo')}</h2>
+      <h2 id="ambiente-titulo" class="titulo-seccion ambiente-titulo" data-revelar="titulo">{t('ambiente.titulo')}</h2>
       <p>{t('ambiente.texto')}</p>
       <p class="ambiente-nota">{t('ambiente.nota')}</p>
     </div>
@@ -31,10 +31,7 @@ import Foto from './Foto.astro';
     grid-column: 1 / -1;
   }
   .ambiente-titulo {
-    margin: 0 0 1rem;
-    font-size: var(--text-titulo);
-    letter-spacing: var(--tracking-marca);
-    text-transform: uppercase;
+    margin-bottom: 1rem;
   }
   .ambiente-texto > p {
     max-width: 26rem;
@@ -42,25 +39,23 @@ import Foto from './Foto.astro';
   }
   .ambiente-texto > .ambiente-nota {
     margin-top: 1rem;
-    color: var(--tinta-suave);
+    color: var(--pergamino-suave);
     font-size: 0.9375rem;
   }
   .ambiente-rejilla :global(.ambiente-taza) {
     grid-column: 1 / -1;
   }
-  /* Las dos fotos pequeñas comparten fila y se solapan, como papeles pegados */
+  /* Las dos fotos pequeñas comparten fila y se solapan, superpuestas */
   .ambiente-rejilla :global(.ambiente-tostador) {
     grid-column: 1 / 7;
     grid-row: 3;
     margin-top: -2rem;
-    rotate: -1.5deg;
   }
   .ambiente-rejilla :global(.ambiente-preparacion) {
     grid-column: 6 / -1;
     grid-row: 3;
     align-self: end;
     margin-bottom: -1.5rem;
-    rotate: 1.5deg;
   }
   @media (min-width: 64rem) {
     .ambiente-rejilla {

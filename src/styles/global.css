@@ -1,59 +1,62 @@
 @import 'tailwindcss';
 
-/* Tokens (plan §4). Solo aquí hay colores: los componentes usan los roles. */
+/* Tokens (plan §11, spec §10): la noche andina. Solo aquí hay colores: los componentes
+   y la ilustración usan los roles (tokens.test.ts lo comprueba). Un solo tema, oscuro. */
 :root {
-  --papel: #e8dcc2; /* kraft: el suelo de la página */
-  --papel-claro: #f3ebdc; /* pergamino: tiras y superficies superpuestas */
-  --tinta: #2b1c14; /* espresso: texto y trazos (fijado por el usuario) */
-  --tinta-suave: #5c4636; /* texto secundario */
-  --accion: #9c4124; /* terracota: solo la acción principal y lo activo */
-  --franja: #55542b; /* oliva: franjas de sección */
-  --acento: #c99a2e; /* mostaza de frailejón: acento mínimo, nunca texto sobre papel */
-  --linea: #8c7a5e; /* filetes decorativos */
+  --noche: #17110d; /* suelo: espresso casi negro, cálido */
+  --espresso: #2a1e16; /* superficies elevadas, último bloque del panel */
+  --pergamino: #ecdfc4; /* texto principal y primer bloque del panel */
+  --pergamino-suave: #b8a68a; /* texto secundario sobre la noche */
+  --frailejon: #b6c07a; /* verde frailejón: la acción principal y lo activo */
+  --kraft: #c99560; /* caramelo: bloque «Para llevar» y el ticket */
+  --tostado: #6b4630; /* marrón tostado: bloque «Horario», madera de la casona */
+  --oliva: #3d4a2a; /* verde oliva profundo: la montaña cercana, el zócalo */
+  --pizarra: #1c241a; /* la pizarra de la acera */
+  --luz: #f2d9a0; /* luz de las ventanas (plana, sin brillo) */
+  --linea: #5c4838; /* filetes decorativos, nunca texto */
+  /* Solo ilustración (nunca texto) */
+  --monte: #26301f; /* la cordillera lejana */
+  --muro: #3b2c22; /* muros de la casona de noche */
+  --teja: #7a4a2e; /* tejas de barro */
+  --apagado: #4a3a2c; /* ventanas con el café cerrado */
 
-  color-scheme: only light;
-
-  /* Fibra del papel (revisión final de impeccable): tesela raster estática de 180 px
-     (src/assets/marcas/fibra.webp, ~13 KB), ruido en tinta con alfa muy bajo. Antes era
-     un SVG con feTurbulence: Chrome lo dibujaba en el hilo principal y Lighthouse bajó
-     de 100 a 91 en rendimiento. */
-  --fibra: url('../assets/marcas/fibra.webp');
+  color-scheme: only dark;
 }
 
 @theme inline {
-  --color-papel: var(--papel);
-  --color-papel-claro: var(--papel-claro);
-  --color-tinta: var(--tinta);
-  --color-tinta-suave: var(--tinta-suave);
-  --color-accion: var(--accion);
-  --color-franja: var(--franja);
-  --color-acento: var(--acento);
+  --color-noche: var(--noche);
+  --color-espresso: var(--espresso);
+  --color-pergamino: var(--pergamino);
+  --color-pergamino-suave: var(--pergamino-suave);
+  --color-frailejon: var(--frailejon);
+  --color-kraft: var(--kraft);
+  --color-tostado: var(--tostado);
+  --color-oliva: var(--oliva);
+  --color-pizarra: var(--pizarra);
+  --color-luz: var(--luz);
   --color-linea: var(--linea);
 
-  --font-display: 'Marcellus', 'Iowan Old Style', Georgia, serif;
-  --font-sans: 'Alegreya Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Sofia Sans Extra Condensed', 'Arial Narrow', sans-serif;
+  --font-sans: 'Sofia Sans', ui-sans-serif, system-ui, sans-serif;
 
   /* Escala fluida: de 390 px a 1440 px */
-  --text-marca: clamp(2.5rem, 0.9rem + 6.6vw, 7rem);
-  --text-titulo: clamp(1.75rem, 1.2rem + 2.2vw, 3.25rem);
-  --text-plato: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  --text-titular: clamp(3.25rem, 1.6rem + 6.4vw, 7.5rem);
+  --text-titulo: clamp(2.5rem, 1.6rem + 3.6vw, 5rem);
+  --text-bloque: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+  --text-plato: clamp(1.375rem, 1.25rem + 0.5vw, 1.75rem);
   --text-cuerpo: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
   --text-etiqueta: clamp(0.8125rem, 0.78rem + 0.1vw, 0.875rem);
-
-  /* Mayúsculas espaciadas del mundo «Cafetería de pueblo» */
-  --tracking-marca: 0.18em;
-  --tracking-etiqueta: 0.24em;
 }
 
 @layer base {
   html {
-    background: var(--fibra), var(--papel);
-    color: var(--tinta);
+    background: var(--noche);
+    color: var(--pergamino);
     font-family: var(--font-sans);
     font-size: 100%;
     -webkit-text-size-adjust: 100%;
     text-size-adjust: 100%;
-    scrollbar-color: var(--tinta-suave) var(--papel);
+    scrollbar-color: var(--tostado) var(--noche);
     /* Los enlaces a secciones no quedan tapados por la cabecera fija */
     scroll-padding-top: 4.5rem;
   }
@@ -61,21 +64,22 @@
   body {
     font-size: var(--text-cuerpo);
     line-height: 1.55;
-    caret-color: var(--accion);
+    caret-color: var(--frailejon);
   }
 
   /* Superficies del navegador (impeccable, craft floor): también son del diseño */
   ::selection {
-    background: var(--tinta);
-    color: var(--papel-claro);
+    background: var(--frailejon);
+    color: var(--noche);
   }
 
   :focus-visible {
-    outline: 2px solid var(--tinta);
+    outline: 2px solid var(--frailejon);
     outline-offset: 3px;
   }
 
   a {
+    color: inherit;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.25em;
   }
@@ -84,15 +88,25 @@
   h2,
   h3 {
     font-family: var(--font-display);
-    font-weight: 400;
+    font-weight: 800;
+    line-height: 0.92;
+    text-transform: uppercase;
     text-wrap: balance;
+  }
+
+  /* Lo que solo funciona con JS no se enseña sin él (html.js se pone en <head>) */
+  html:not(.js) .solo-con-js {
+    display: none !important;
+  }
+  html.js .solo-sin-js {
+    display: none !important;
   }
 }
 
 @layer components {
   .contenedor {
     width: 100%;
-    max-width: 75rem;
+    max-width: 80rem;
     margin-inline: auto;
     padding-inline: 1rem;
   }
@@ -102,102 +116,64 @@
     }
   }
 
-  /* Mayúsculas espaciadas en sans: navegación, etiquetas de procedencia, tiras */
+  /* Etiquetas: avisos, estado de apertura, subtítulos de bloque */
   .etiqueta {
     font-family: var(--font-sans);
     font-size: var(--text-etiqueta);
-    font-weight: 500;
-    letter-spacing: var(--tracking-etiqueta);
+    font-weight: 600;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    line-height: 1.5;
+    line-height: 1.4;
   }
 
-  /* Cuatro cantos de papel rasgado como máscara (revisión final de impeccable): tiras de
-     src/assets/marcas/canto-*.svg en los bordes y un rectángulo opaco en el centro.
-     Estático; nunca clip-path poligonal. --canto es el grosor de la franja rasgada. */
-  .cantos-rasgados {
-    --canto: 0.6rem;
-    mask-image:
-      url('../assets/marcas/canto-arriba.svg'), url('../assets/marcas/canto-abajo.svg'),
-      url('../assets/marcas/canto-izquierda.svg'), url('../assets/marcas/canto-derecha.svg'),
-      linear-gradient(black, black);
-    /* Los lados se paran antes de las esquinas: si llegan a ellas asoman «postes» sobre
-       el canto rasgado de arriba y de abajo */
-    mask-position: left top, left bottom, left center, right center, center;
-    mask-size:
-      18rem var(--canto), 18rem var(--canto),
-      var(--canto) calc(100% - 2 * var(--canto)), var(--canto) calc(100% - 2 * var(--canto)),
-      calc(100% - 2 * var(--canto) + 2px) calc(100% - 2 * var(--canto) + 2px);
-    /* round: la tira entra un número entero de veces, así las dos esquinas acaban rasgadas */
-    mask-repeat: round no-repeat, round no-repeat, no-repeat, no-repeat, no-repeat;
+  /* Título de sección: la condensada negra, grande, alineada a la izquierda */
+  .titulo-seccion {
+    margin: 0;
+    font-size: var(--text-titulo);
   }
 
-  /* Acción principal: terracota con canto rasgado. El relleno va en un pseudo-elemento
-     enmascarado; el botón no, para que el anillo de foco no quede recortado. */
+  /* Acción principal: un bloque plano verde frailejón, como los del panel */
   .boton-accion {
-    position: relative;
-    isolation: isolate;
     display: inline-flex;
     align-items: center;
-    gap: 0.9rem;
+    gap: 0.75rem;
     min-height: 3rem;
-    padding: 0.85rem 1.6rem;
-    color: var(--papel-claro);
-    font-size: 0.875rem;
-    font-weight: 500;
-    letter-spacing: var(--tracking-etiqueta);
-    text-transform: uppercase;
+    padding: 0.8rem 1.4rem;
+    background: var(--frailejon);
+    color: var(--noche);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 700;
     text-decoration: none;
+    transition: background-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .boton-accion::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: var(--accion);
-    /* Rasgado arriba y abajo, laterales rectos: como la tira terracota del lema */
-    --canto: 0.45rem;
-    mask-image:
-      url('../assets/marcas/canto-arriba.svg'), url('../assets/marcas/canto-abajo.svg'),
-      linear-gradient(black, black);
-    mask-position: left top, left bottom, center;
-    mask-size: 18rem var(--canto), 18rem var(--canto), 100% calc(100% - 2 * var(--canto) + 2px);
-    mask-repeat: round no-repeat, round no-repeat, no-repeat;
-  }
-  .boton-accion:hover::before {
-    background: var(--tinta);
+  .boton-accion:hover {
+    background: var(--pergamino);
   }
   .boton-accion svg {
     width: 1.25rem;
     height: 1.25rem;
   }
 
-  /* Tarjeta de producto (cambio pedido por el usuario el 2026-11-03): esquinas
-     semirredondeadas y, con ratón, se eleva un poco con una sombra debajo. La sombra
-     vive en un pseudo-elemento y solo cambia su opacidad: animar box-shadow repinta en
-     cada fotograma, la opacidad se compone (más fluido en móviles de gama media). */
+  /* Tarjeta de producto (excepción pedida por el usuario el 2026-11-03): con ratón se
+     eleva y aparece una sombra. En el mundo oscuro, esquina recta. La sombra vive en un
+     pseudo-elemento y solo cambia su opacidad (fluido en móviles de gama media). */
   .tarjeta {
     position: relative;
     isolation: isolate;
-    /* Sin fibra: con imagen de fondo, la tarjeta del primer viewport pasaba a ser el LCP
-       y no contaba como pintada hasta acabar su entrada animada (LCP 1,1 → 2,7 s) */
-    background: var(--papel-claro);
-    border: 1px solid color-mix(in srgb, var(--linea) 55%, transparent);
-    border-radius: 0.75rem;
+    background: var(--espresso);
   }
   .tarjeta::after {
     content: '';
     position: absolute;
     inset: 0;
     z-index: -1;
-    border-radius: inherit;
     box-shadow:
-      0 1.1rem 1.6rem -1rem color-mix(in srgb, var(--tinta) 55%, transparent),
-      0 0.3rem 0.6rem -0.35rem color-mix(in srgb, var(--tinta) 30%, transparent);
+      0 1.1rem 1.6rem -1rem color-mix(in srgb, black 80%, transparent),
+      0 0.3rem 0.6rem -0.35rem color-mix(in srgb, black 60%, transparent);
     opacity: 0;
     pointer-events: none;
   }
-  /* Entrar: directo, 250 ms. Salir: más blando, 350 ms, sin rebote ni retardo (M08) */
   @media (hover: hover) and (pointer: fine) {
     .tarjeta {
       transition: transform 350ms cubic-bezier(0.22, 1, 0.36, 1);
@@ -213,7 +189,6 @@
       opacity: 1;
     }
   }
-  /* Movimiento reducido: sin elevación ni transición; la sombra sigue señalando el hover */
   @media (prefers-reduced-motion: reduce) {
     .tarjeta,
     .tarjeta:hover,
@@ -226,7 +201,7 @@
     }
   }
 
-  /* Precios y altitudes: cifras tabulares, alineadas en columna */
+  /* Precios, cantidades y horas: cifras tabulares, alineadas en columna */
   .cifras {
     font-variant-numeric: tabular-nums lining-nums;
   }
@@ -250,7 +225,6 @@
   html {
     scroll-behavior: smooth;
   }
-  /* Con Lenis activo, el desplazamiento suave es suyo: dos a la vez se pelean */
   html.lenis {
     scroll-behavior: auto;
   }

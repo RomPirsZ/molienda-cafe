@@ -1,0 +1,189 @@
+---
+// La fachada de Molienda al anochecer (spec §10.2, punto 4): una casona merideña con su
+// tejado, ventanas de balaustres, el portón abierto y el pico nevado detrás. Ilustración
+// propia, plana, en los tokens (cada forma lleva una clase de color: nada de hex).
+// Lo que se lee (el letrero y la placa de la puerta) es HTML encima del dibujo; el
+// estado completo, para lectores de pantalla, está en el hero (EstadoApertura).
+// Las ventanas se apagan cuando el café está cerrado: data-abierto lo pone el script del
+// estado de apertura.
+import { t } from '../i18n';
+---
+
+<div class="fachada" data-fachada aria-hidden="true">
+  <svg class="fachada-dibujo" viewBox="0 0 2400 1000" preserveAspectRatio="xMidYMax meet" focusable="false">
+    <rect class="c-noche" width="2400" height="1000"/>
+    <circle class="c-estrella" cx="1460" cy="60" r="2.2"/>
+    <circle class="c-estrella" cx="1580" cy="140" r="1.6"/>
+    <circle class="c-estrella" cx="1690" cy="70" r="2"/>
+    <circle class="c-estrella" cx="1820" cy="210" r="1.5"/>
+    <circle class="c-estrella" cx="2010" cy="60" r="1.8"/>
+    <circle class="c-estrella" cx="2140" cy="170" r="2.2"/>
+    <circle class="c-estrella" cx="2290" cy="90" r="1.6"/>
+    <circle class="c-estrella" cx="2230" cy="260" r="1.4"/>
+    <circle class="c-estrella" cx="1380" cy="190" r="1.4"/>
+    <circle class="c-estrella" cx="1990" cy="300" r="1.5"/>
+    <circle class="c-estrella" cx="2360" cy="330" r="1.8"/>
+    <circle class="c-estrella" cx="160" cy="330" r="1.5"/>
+    <circle class="c-estrella" cx="60" cy="180" r="1.8"/>
+    <circle class="c-estrella" cx="260" cy="90" r="1.4"/>
+    <circle class="c-luna" cx="1370" cy="110" r="30"/><circle class="c-noche" cx="1384" cy="101" r="28"/>
+    <path class="c-monte" d="M0 600L140 520L260 560L400 470L540 540L700 480L860 545L1000 500L1100 430L1180 380L1250 440L1310 470L1440 455L1560 410L1660 350L1760 290L1850 380L1960 340L2080 430L2220 390L2400 460V1000H0Z"/>
+    <path class="c-nieve" d="M1702 342L1760 290L1812 345L1790 338L1774 356L1758 336L1738 352L1722 337Z"/>
+    <path class="c-nieve" d="M1152 402L1180 380L1206 404L1194 400L1182 410L1169 399Z"/>
+    <path class="c-nieve" d="M1938 356L1960 340L1990 368L1976 364L1964 374L1951 362Z"/>
+    <path class="c-oliva" d="M0 690C240 640 420 660 640 625C860 592 1040 640 1260 615C1500 588 1700 640 1920 612C2120 588 2280 620 2400 600V1000H0Z"/>
+    <rect class="c-muro-vecino" x="0" y="640" width="340" height="200"/>
+    <rect class="c-espresso" x="330" y="580" width="350" height="260"/>
+    <rect class="c-noche" x="320" y="572" width="370" height="12"/>
+    <rect class="c-ventana-vecina" x="410" y="650" width="90" height="120"/>
+    <rect class="c-ventana-vecina" x="540" y="650" width="90" height="120"/>
+    <rect class="c-espresso" x="1720" y="570" width="360" height="270"/>
+    <rect class="c-noche" x="1710" y="562" width="380" height="12"/>
+    <rect class="c-ventana-vecina" x="1790" y="640" width="90" height="130"/>
+    <rect class="c-luz c-luz-vecina" x="1930" y="640" width="90" height="130" data-luz />
+    <rect class="c-muro-vecino" x="2070" y="650" width="330" height="190"/>
+    <clipPath id="f-tejado"><path d="M650 562L735 488L1665 488L1750 562Z"/></clipPath>
+    <path class="c-teja" d="M650 562L735 488L1665 488L1750 562Z"/>
+    <g clip-path="url(#f-tejado)"><rect class="c-teja-canal" x="660" y="488" width="7" height="74"/><rect class="c-teja-canal" x="694" y="488" width="7" height="74"/><rect class="c-teja-canal" x="728" y="488" width="7" height="74"/><rect class="c-teja-canal" x="762" y="488" width="7" height="74"/><rect class="c-teja-canal" x="796" y="488" width="7" height="74"/><rect class="c-teja-canal" x="830" y="488" width="7" height="74"/><rect class="c-teja-canal" x="864" y="488" width="7" height="74"/><rect class="c-teja-canal" x="898" y="488" width="7" height="74"/><rect class="c-teja-canal" x="932" y="488" width="7" height="74"/><rect class="c-teja-canal" x="966" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1000" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1034" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1068" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1102" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1136" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1170" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1204" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1238" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1272" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1306" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1340" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1374" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1408" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1442" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1476" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1510" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1544" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1578" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1612" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1646" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1680" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1714" y="488" width="7" height="74"/><rect class="c-teja-canal" x="1748" y="488" width="7" height="74"/><rect class="c-teja-canal" x="640" y="522" width="1120" height="5"/></g>
+    <rect class="c-tostado" x="642" y="560" width="1116" height="12"/>
+        <rect class="c-muro" x="680" y="572" width="1040" height="268"/>
+    <rect class="c-tostado" x="672" y="572" width="14" height="12"/><rect class="c-tostado" x="736" y="572" width="14" height="12"/><rect class="c-tostado" x="800" y="572" width="14" height="12"/><rect class="c-tostado" x="864" y="572" width="14" height="12"/><rect class="c-tostado" x="928" y="572" width="14" height="12"/><rect class="c-tostado" x="992" y="572" width="14" height="12"/><rect class="c-tostado" x="1056" y="572" width="14" height="12"/><rect class="c-tostado" x="1120" y="572" width="14" height="12"/><rect class="c-tostado" x="1184" y="572" width="14" height="12"/><rect class="c-tostado" x="1248" y="572" width="14" height="12"/><rect class="c-tostado" x="1312" y="572" width="14" height="12"/><rect class="c-tostado" x="1376" y="572" width="14" height="12"/><rect class="c-tostado" x="1440" y="572" width="14" height="12"/><rect class="c-tostado" x="1504" y="572" width="14" height="12"/><rect class="c-tostado" x="1568" y="572" width="14" height="12"/><rect class="c-tostado" x="1632" y="572" width="14" height="12"/><rect class="c-tostado" x="1696" y="572" width="14" height="12"/>
+    <rect class="c-oliva" x="680" y="790" width="1040" height="50"/>
+    <rect class="c-linea" x="680" y="786" width="1040" height="4"/>
+    <rect class="c-tostado" x="1012" y="598" width="376" height="58"/>
+    <rect class="c-espresso" x="1018" y="604" width="364" height="46"/>
+    <rect class="c-tostado" x="1112" y="668" width="176" height="172"/>
+    <rect class="c-luz" x="1126" y="680" width="148" height="160" data-luz />
+    <rect class="c-tostado" x="1156" y="806" width="88" height="34"/>
+    <rect class="c-muro" x="1150" y="800" width="100" height="6"/>
+    <path class="c-tostado" d="M1126 680L1144 688V840H1126Z"/><path class="c-tostado" d="M1274 680L1256 688V840H1274Z"/>
+    <rect class="c-tostado" x="800" y="664" width="250" height="132"/><rect class="c-luz" x="812" y="676" width="226" height="108" data-luz /><rect class="c-tostado" x="830" y="676" width="7" height="108"/><rect class="c-tostado" x="856" y="676" width="7" height="108"/><rect class="c-tostado" x="882" y="676" width="7" height="108"/><rect class="c-tostado" x="908" y="676" width="7" height="108"/><rect class="c-tostado" x="934" y="676" width="7" height="108"/><rect class="c-tostado" x="960" y="676" width="7" height="108"/><rect class="c-tostado" x="986" y="676" width="7" height="108"/><rect class="c-tostado" x="1012" y="676" width="7" height="108"/><rect class="c-tostado" x="812" y="726" width="226" height="6"/><rect class="c-tostado" x="788" y="794" width="274" height="12"/>
+    <rect class="c-tostado" x="1350" y="664" width="250" height="132"/><rect class="c-luz" x="1362" y="676" width="226" height="108" data-luz /><rect class="c-tostado" x="1380" y="676" width="7" height="108"/><rect class="c-tostado" x="1406" y="676" width="7" height="108"/><rect class="c-tostado" x="1432" y="676" width="7" height="108"/><rect class="c-tostado" x="1458" y="676" width="7" height="108"/><rect class="c-tostado" x="1484" y="676" width="7" height="108"/><rect class="c-tostado" x="1510" y="676" width="7" height="108"/><rect class="c-tostado" x="1536" y="676" width="7" height="108"/><rect class="c-tostado" x="1562" y="676" width="7" height="108"/><rect class="c-tostado" x="1362" y="726" width="226" height="6"/><rect class="c-tostado" x="1338" y="794" width="274" height="12"/>
+    <path class="c-trazo" d="M1312 700h22v14"/>
+    <path class="c-tostado" d="M1322 714h24l-4-8h-16Z"/>
+    <rect class="c-luz" x="1326" y="714" width="16" height="22" data-luz />
+    <rect class="c-tostado" x="1323" y="736" width="22" height="5"/>
+    <path class="c-teja" d="M1046 806h50l-6 34h-38Z"/>
+    <rect class="c-tostado" x="1068" y="752" width="7" height="56"/>
+    <ellipse class="c-frailejon" cx="1071" cy="740" rx="6" ry="26" transform="rotate(-75 1071 752)"/><ellipse class="c-frailejon" cx="1071" cy="740" rx="6" ry="26" transform="rotate(-50 1071 752)"/><ellipse class="c-frailejon" cx="1071" cy="740" rx="6" ry="26" transform="rotate(-25 1071 752)"/><ellipse class="c-frailejon" cx="1071" cy="740" rx="6" ry="26" transform="rotate(0 1071 752)"/><ellipse class="c-frailejon" cx="1071" cy="740" rx="6" ry="26" transform="rotate(25 1071 752)"/><ellipse class="c-frailejon" cx="1071" cy="740" rx="6" ry="26" transform="rotate(50 1071 752)"/><ellipse class="c-frailejon" cx="1071" cy="740" rx="6" ry="26" transform="rotate(75 1071 752)"/>
+    <rect class="c-espresso" x="0" y="840" width="2400" height="44"/>
+    <rect class="c-linea" x="0" y="884" width="2400" height="6"/>
+    <rect class="c-noche" x="0" y="890" width="2400" height="140"/>
+      </svg>
+  <p class="fachada-letrero">
+    <span class="fachada-letrero-nombre">{t('hero.letrero')}</span>
+    <span class="fachada-letrero-sub">{t('hero.letreroSub')}</span>
+  </p>
+  <p class="fachada-placa" data-placa hidden>
+    <span data-placa-texto></span>
+    <span class="fachada-placa-abre" data-placa-abre hidden></span>
+  </p>
+</div>
+
+<style>
+  /* La caja mantiene la proporción del dibujo: lo que va encima se coloca en % y su
+     letra se mide en cqi (ancho de la fachada), así escala con el dibujo */
+  .fachada {
+    position: relative;
+    aspect-ratio: 2400 / 1000;
+    container-type: inline-size;
+  }
+  .fachada-dibujo {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+  .c-noche { fill: var(--noche); }
+  .c-estrella { fill: var(--pergamino); opacity: 0.55; }
+  .c-monte { fill: var(--monte); }
+  .c-nieve { fill: var(--pergamino-suave); }
+  .c-oliva { fill: var(--oliva); }
+  .c-muro { fill: var(--muro); }
+  .c-muro-vecino { fill: var(--muro); opacity: 0.6; }
+  .c-espresso { fill: var(--espresso); }
+  .c-ventana-vecina { fill: var(--apagado); }
+  .c-teja { fill: var(--teja); }
+  .c-teja-canal { fill: var(--noche); opacity: 0.28; }
+  .c-tostado { fill: var(--tostado); }
+  .c-linea { fill: var(--linea); }
+  .c-trazo { fill: none; stroke: var(--tostado); stroke-width: 5; }
+  .c-frailejon { fill: var(--frailejon); }
+  .c-luna { fill: var(--luz); }
+  .c-luz {
+    fill: var(--luz);
+    transition: fill 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  /* Cerrado: las ventanas y la puerta se apagan (la del vecino sigue encendida) */
+  .fachada[data-abierto='false'] .c-luz:not(.c-luz-vecina) {
+    fill: var(--apagado);
+  }
+
+  .fachada-letrero {
+    position: absolute;
+    left: 42.4%;
+    top: 60.4%;
+    width: 15.2%;
+    height: 4.6%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 0.9cqi;
+    color: var(--pergamino);
+  }
+  .fachada-letrero-nombre {
+    font-family: var(--font-display);
+    font-size: 1.75cqi;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .fachada-letrero-sub {
+    font-size: 0.5cqi;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  /* Placa colgada en el portón: ABIERTO o CERRADO, en vivo */
+  .fachada-placa {
+    position: absolute;
+    left: 50%;
+    top: 69.4%;
+    translate: -50% 0;
+    margin: 0;
+    padding: 0.25cqi 0.6cqi;
+    background: var(--pergamino);
+    color: var(--noche);
+    font-family: var(--font-display);
+    font-size: 1.05cqi;
+    font-weight: 800;
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .fachada-placa-abre {
+    display: block;
+    margin-top: 0.15cqi;
+    font-family: var(--font-sans);
+    font-size: max(0.75rem, 0.6cqi);
+    font-weight: 700;
+  }
+  .fachada-placa-abre[hidden] {
+    display: none;
+  }
+  /* En el móvil la pizarra tapa ese lado del letrero: basta con el nombre */
+  @container (max-width: 80rem) {
+    .fachada-letrero {
+      justify-content: center;
+    }
+    .fachada-letrero-sub {
+      display: none;
+    }
+  }
+  .fachada-placa[hidden] {
+    display: none;
+  }
+</style>

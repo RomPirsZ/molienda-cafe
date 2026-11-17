@@ -7,7 +7,7 @@ test.use({ javaScriptEnabled: false });
 
 test('sin JS se ven todas las secciones, la carta completa y el horario', async ({ page }) => {
   await page.goto('/');
-  for (const titulo of ['carta.titulo', 'origen.titulo', 'ambiente.titulo', 'visitanos.titulo'] as const) {
+  for (const titulo of ['carta.titulo', 'origen.titulo', 'paraLlevar.titulo', 'ambiente.titulo', 'visitanos.titulo'] as const) {
     await expect(page.getByRole('heading', { name: es[titulo], level: 2 })).toBeVisible();
   }
   const total = CARTA.reduce((n, c) => n + c.platos.length, 0);
@@ -30,4 +30,15 @@ test('sin JS las fotos están en su sitio (nada queda oculto esperando una anima
     await expect(foto).toBeVisible();
     expect(await foto.evaluate((img) => getComputedStyle(img).opacity)).toBe('1');
   }
+});
+
+test('sin JS, «Secciones» es un enlace a la navegación del pie, y «Para llevar» se pide en la barra', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('[data-abrir-panel]')).toBeHidden();
+  await expect(page.locator('[data-panel]')).toBeHidden();
+  await page.getByRole('link', { name: es['panel.abrir'] }).click();
+  await expect(page).toHaveURL(/#navegacion$/);
+  await expect(page.getByRole('navigation', { name: es['nav.pie'] })).toBeInViewport();
+  await expect(page.getByText(es['paraLlevar.sinJs'])).toBeVisible();
+  await expect(page.locator('[data-llevar]')).toBeHidden();
 });

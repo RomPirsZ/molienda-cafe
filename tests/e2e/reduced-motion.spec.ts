@@ -11,8 +11,8 @@ test('nada se anima, nada queda oculto y GSAP no se descarga', async ({ page }) 
   });
   await page.goto('/');
   await expect(page.locator('html')).not.toHaveClass(/\b(motion|motion-ready|lenis)\b/);
-  // El titular no se parte en letras
-  expect(await page.locator('h1 *').count()).toBe(0);
+  // Los títulos no se parten en líneas (SplitText no se ejecuta)
+  expect(await page.locator('h2[data-revelar] div').count()).toBe(0);
 
   // Recorrido completo: la cabecera no se mueve y todo está visible
   for (let y = 0; y < 6000; y += 700) {

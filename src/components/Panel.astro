@@ -1,0 +1,252 @@
+---
+// Panel de secciones (spec §10.2, punto 3; plan §11). Un <dialog> modal que entra desde
+// la derecha: bloques planos a toda la altura, de claro a oscuro, y cada uno lleva a su
+// sección. Cajón con scroll-snap (modern-web-guidance «navigation-drawer»): el gesto de
+// deslizar lo hace el navegador, y el fondo se oscurece ligado a ese desplazamiento.
+// Solo existe con JS; sin él, la navegación del pie hace su trabajo.
+import { t } from '../i18n';
+import { SECCIONES } from '../data/secciones';
+---
+
+<dialog id="panel" class="panel solo-con-js" aria-label={t('nav.etiqueta')} data-panel>
+  <div class="panel-carril" data-panel-carril>
+    <nav class="panel-hoja" aria-label={t('nav.etiqueta')} data-panel-hoja>
+      <button type="button" class="panel-cerrar" autofocus data-cerrar-panel>
+        {t('panel.cerrar')}
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <path d="M6 6l12 12M18 6L6 18"></path>
+        </svg>
+      </button>
+      <ul class="panel-bloques">
+        {
+          SECCIONES.map((s) => (
+            <li class={`panel-bloque panel-bloque--${s.fondo}`}>
+              <a href={s.href} data-bloque>
+                <span class="panel-nombre">{t(s.nombre)}</span>
+                <span class="panel-detalle">{t(s.detalle)}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</dialog>
+
+<script>
+  const panel = document.querySelector<HTMLDialogElement>('[data-panel]');
+  const carril = panel?.querySelector<HTMLElement>('[data-panel-carril]');
+  const hoja = panel?.querySelector<HTMLElement>('[data-panel-hoja]');
+  const abrir = document.querySelector<HTMLButtonElement>('[data-abrir-panel]');
+  const cerrarBoton = panel?.querySelector<HTMLButtonElement>('[data-cerrar-panel]');
+
+  if (panel && carril && hoja && abrir && cerrarBoton) {
+    // Cerrado = el carril en 0 (el espaciador a la vista, la hoja fuera por la derecha);
+    // abierto = el carril al final. Con reduced-motion, scroll-behavior es auto: salta.
+    const abrirPanel = () => {
+      panel.showModal();
+      requestAnimationFrame(() => carril.scrollTo({ left: carril.scrollWidth, behavior: 'auto' }));
+    };
+    const cerrarPanel = () => carril.scrollTo({ left: 0, behavior: 'auto' });
+
+    // La hoja manda: cuando sale del todo, se cierra el diálogo (el navegador devuelve el
+    // foco al botón); cuando entra del todo, el botón dice que está abierto
+    const umbral = 1 / window.innerWidth;
+    new IntersectionObserver(
+      (entradas) => {
+        const e = entradas.at(-1);
+        if (!e || !panel.open) return;
+        if (e.intersectionRatio < umbral) {
+          panel.close();
+          abrir.setAttribute('aria-expanded', 'false');
+        } else if (e.intersectionRatio === 1) {
+          abrir.setAttribute('aria-expanded', 'true');
+        }
+      },
+      { root: panel, threshold: [umbral, 1] },
+    ).observe(hoja);
+
+    // Sin scroll-driven animations, el fondo sigue al desplazamiento desde aquí
+    if (!CSS.supports('animation-timeline: scroll()')) {
+      carril.addEventListener('scroll', () => {
+        const abierto = carril.scrollLeft / Math.max(1, hoja.offsetWidth);
+        panel.style.setProperty('--panel-fondo', String(Math.min(1, abierto)));
+      });
+    }
+
+    abrir.addEventListener('click', abrirPanel);
+    cerrarBoton.addEventListener('click', cerrarPanel);
+    // Tocar fuera de la hoja cierra (el diálogo ocupa la pantalla: closedby no serviría)
+    panel.addEventListener('click', (e) => {
+      if (!hoja.contains(e.target as Node)) cerrarPanel();
+    });
+    // Esc: en vez de cerrar de golpe, la hoja sale deslizando
+    panel.addEventListener('cancel', (e) => {
+      if (e.cancelable) {
+        e.preventDefault();
+        cerrarPanel();
+      }
+    });
+    // Un bloque lleva a su sección: el panel se cierra ya y el enlace hace el resto
+    for (const a of hoja.querySelectorAll('[data-bloque]')) {
+      a.addEventListener('click', () => {
+        panel.close();
+        carril.scrollTo({ left: 0, behavior: 'instant' });
+        abrir.setAttribute('aria-expanded', 'false');
+      });
+    }
+  }
+</script>
+
+<style>
+  .panel {
+    --panel-ancho: min(26rem, 88vw);
+    --panel-fondo: 0;
+    inset: 0;
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    overflow: visible;
+    overscroll-behavior: contain;
+  }
+  .panel::backdrop {
+    background: var(--noche);
+    opacity: calc(var(--panel-fondo) * 0.7);
+    overflow: hidden;
+    overscroll-behavior: contain;
+  }
+  /* Espaciador a la izquierda (cerrado) y la hoja a la derecha (abierto) */
+  .panel-carril {
+    display: grid;
+    grid-template-columns: 100% var(--panel-ancho);
+    height: 100%;
+    overflow-x: scroll;
+    overscroll-behavior: none;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+  }
+  .panel-carril::before {
+    content: '';
+    scroll-snap-align: start;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .panel-carril {
+      scroll-behavior: smooth;
+    }
+  }
+  .panel-hoja {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100svh;
+    background: var(--noche);
+    scroll-snap-align: end;
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+  .panel-cerrar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.6rem;
+    min-height: 4rem;
+    padding: 0 1.25rem;
+    border: 0;
+    background: var(--noche);
+    color: var(--pergamino);
+    font: 700 0.9375rem/1 var(--font-sans);
+    cursor: pointer;
+  }
+  .panel-cerrar svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  .panel-bloques {
+    display: grid;
+    grid-auto-rows: minmax(6.5rem, 1fr);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .panel-bloque a {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    padding: 1rem 1.25rem 1.1rem;
+    text-decoration: none;
+  }
+  .panel-bloque a:focus-visible {
+    outline-offset: -5px;
+  }
+  .panel-nombre {
+    font-family: var(--font-display);
+    font-size: var(--text-bloque);
+    font-weight: 800;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+  .panel-detalle {
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+  /* De claro a oscuro; el texto cambia de lado del contraste a mitad (tokens.test.ts) */
+  .panel-bloque--pergamino a {
+    background: var(--pergamino);
+    color: var(--noche);
+  }
+  .panel-bloque--frailejon a {
+    background: var(--frailejon);
+    color: var(--noche);
+  }
+  .panel-bloque--kraft a {
+    background: var(--kraft);
+    color: var(--noche);
+  }
+  .panel-bloque--tostado a {
+    background: var(--tostado);
+    color: var(--pergamino);
+  }
+  .panel-bloque--espresso a {
+    background: var(--espresso);
+    color: var(--pergamino);
+  }
+  /* El nombre se desplaza un poco al pasar el ratón: el bloque se pulsa entero */
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .panel-nombre {
+      transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .panel-bloque a:hover .panel-nombre {
+      transform: translateX(0.5rem);
+    }
+  }
+
+  /* El fondo sigue a la hoja: 0 cerrado, 1 abierto (plan §11) */
+  @supports (animation-timeline: scroll()) {
+    @property --panel-fondo {
+      syntax: '<number>';
+      inherits: true;
+      initial-value: 0;
+    }
+    .panel {
+      timeline-scope: --panel-carril;
+      animation: panel-fondo linear both;
+      animation-timeline: --panel-carril;
+    }
+    .panel-carril {
+      scroll-timeline: --panel-carril x;
+    }
+    @keyframes panel-fondo {
+      from {
+        --panel-fondo: 0;
+      }
+      to {
+        --panel-fondo: 1;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,337 @@
+---
+// «Para llevar» (spec §10.2, punto 5; plan §11): se eligen productos de la carta y se arma
+// un ticket en pantalla para enseñarlo en la barra. Demostración: no se envía nada, no se
+// recogen datos ni se guarda nada fuera de la página. Sin JS, se pide en la barra.
+import { t } from '../i18n';
+import { CARTA, precio } from '../data/carta';
+import type { Catalogo } from '../lib/ticket';
+
+const catalogo: Catalogo = CARTA.flatMap((c) => c.platos.map((p) => ({ id: p.nombre, nombre: t(p.nombre), precio: p.precio })));
+---
+
+<section id="para-llevar" class="llevar" aria-labelledby="llevar-titulo">
+  <div class="contenedor llevar-rejilla">
+    <div class="llevar-intro">
+      <h2 id="llevar-titulo" class="titulo-seccion" data-revelar="titulo">{t('paraLlevar.titulo')}</h2>
+      <p class="llevar-texto solo-con-js">{t('paraLlevar.texto')}</p>
+      <p class="llevar-texto solo-sin-js">{t('paraLlevar.sinJs')}</p>
+      <p class="llevar-aviso solo-con-js">{t('paraLlevar.aviso')}</p>
+    </div>
+
+    <div class="llevar-elegir solo-con-js" data-llevar data-catalogo={JSON.stringify(catalogo)}>
+      {
+        CARTA.map((c) => (
+          <section class="llevar-categoria" aria-labelledby={`llevar-${c.id}`}>
+            <h3 id={`llevar-${c.id}`} class="llevar-categoria-titulo etiqueta">{t(c.titulo)}</h3>
+            <ul class="llevar-lista">
+              {c.platos.map((p) => (
+                <li class="llevar-fila">
+                  <span class="llevar-nombre">{t(p.nombre)}</span>
+                  <span class="llevar-precio cifras">{precio(p.precio)}</span>
+                  <span class="llevar-control">
+                    <button type="button" class="llevar-boton" aria-label={t('paraLlevar.quitar', { plato: t(p.nombre) })} data-quitar={p.nombre} disabled>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M5 12h14" /></svg>
+                    </button>
+                    <span class="llevar-cantidad cifras" data-cantidad={p.nombre}>0</span>
+                    <button type="button" class="llevar-boton" aria-label={t('paraLlevar.anadir', { plato: t(p.nombre) })} data-anadir={p.nombre}>
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+                    </button>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </div>
+
+    <p class="llevar-barra solo-con-js" data-ticket-barra hidden>
+      <span class="cifras" data-ticket-barra-texto></span>
+      <a href="#ticket">{t('ticket.ver')}</a>
+    </p>
+
+    <aside id="ticket" class="ticket solo-con-js" aria-labelledby="ticket-titulo">
+      <h3 id="ticket-titulo" class="ticket-titulo">{t('ticket.titulo')}</h3>
+      <p class="ticket-vacio" data-ticket-vacio>{t('ticket.vacio')}</p>
+      <ul class="ticket-lineas" data-ticket-lineas></ul>
+      <p class="ticket-total cifras">
+        <span>{t('ticket.total')}</span>
+        <span data-ticket-total>{precio(0)}</span>
+      </p>
+      <p class="ticket-pie etiqueta">{t('ticket.pie')}</p>
+      <button type="button" class="ticket-vaciar" data-ticket-vaciar disabled>{t('ticket.vaciar')}</button>
+      <p class="sr-only" aria-live="polite" data-ticket-anuncio></p>
+    </aside>
+  </div>
+</section>
+
+<script>
+  import { t } from '../i18n';
+  import { precio } from '../data/carta';
+  import { anadir, cantidad, lineas, quitar, total, unidades, MAXIMO, type Catalogo, type Ticket } from '../lib/ticket';
+
+  const raiz = document.querySelector<HTMLElement>('[data-llevar]');
+  const lista = document.querySelector<HTMLElement>('[data-ticket-lineas]');
+  const vacio = document.querySelector<HTMLElement>('[data-ticket-vacio]');
+  const totalEl = document.querySelector<HTMLElement>('[data-ticket-total]');
+  const vaciar = document.querySelector<HTMLButtonElement>('[data-ticket-vaciar]');
+  const anuncio = document.querySelector<HTMLElement>('[data-ticket-anuncio]');
+  const barra = document.querySelector<HTMLElement>('[data-ticket-barra]');
+  const barraTexto = document.querySelector<HTMLElement>('[data-ticket-barra-texto]');
+
+  if (raiz && lista && vacio && totalEl && vaciar && anuncio && barra && barraTexto) {
+    const catalogo = JSON.parse(raiz.dataset['catalogo'] ?? '[]') as Catalogo;
+    let ticket: Ticket = {};
+
+    const pintar = () => {
+      for (const p of catalogo) {
+        const n = cantidad(ticket, p.id);
+        const salida = raiz.querySelector(`[data-cantidad="${p.id}"]`);
+        if (salida) salida.textContent = String(n);
+        raiz.querySelector<HTMLButtonElement>(`[data-quitar="${p.id}"]`)!.disabled = n === 0;
+        raiz.querySelector<HTMLButtonElement>(`[data-anadir="${p.id}"]`)!.disabled = n >= MAXIMO;
+      }
+      const filas = lineas(ticket, catalogo).map((l) => {
+        const li = document.createElement('li');
+        li.className = 'ticket-linea cifras';
+        const nombre = document.createElement('span');
+        nombre.textContent = `${l.cantidad} × ${l.nombre}`;
+        const sub = document.createElement('span');
+        sub.textContent = precio(l.subtotal);
+        li.append(nombre, sub);
+        return li;
+      });
+      lista.replaceChildren(...filas);
+      vacio.hidden = filas.length > 0;
+      totalEl.textContent = precio(total(ticket, catalogo));
+      vaciar.disabled = filas.length === 0;
+      const n = String(unidades(ticket));
+      const suma = precio(total(ticket, catalogo));
+      anuncio.textContent = t('ticket.anuncio', { n, total: suma });
+      // En el móvil el ticket queda debajo de la lista: una barra fija enseña el total
+      barraTexto.textContent = t('ticket.barra', { n, total: suma });
+      barra.hidden = filas.length === 0;
+    };
+
+    raiz.addEventListener('click', (e) => {
+      const boton = (e.target as Element).closest<HTMLButtonElement>('button');
+      if (!boton) return;
+      const mas = boton.dataset['anadir'];
+      const menos = boton.dataset['quitar'];
+      if (mas) ticket = anadir(ticket, mas);
+      else if (menos) ticket = quitar(ticket, menos);
+      else return;
+      pintar();
+    });
+    vaciar.addEventListener('click', () => {
+      ticket = {};
+      pintar();
+      // El botón se desactiva al vaciar: el foco vuelve al principio de la lista
+      raiz.querySelector<HTMLButtonElement>('[data-anadir]')?.focus();
+    });
+  }
+</script>
+
+<style>
+  .llevar {
+    padding-block: clamp(3.5rem, 9vw, 7rem);
+  }
+  .llevar-rejilla {
+    display: grid;
+    gap: 2rem 3rem;
+  }
+  @media (min-width: 64rem) {
+    .llevar-rejilla {
+      grid-template-columns: minmax(0, 1fr) 22rem;
+      grid-template-areas: 'intro ticket' 'elegir ticket';
+      align-items: start;
+    }
+    .llevar-intro {
+      grid-area: intro;
+    }
+    .llevar-elegir {
+      grid-area: elegir;
+    }
+    .ticket {
+      grid-area: ticket;
+      position: sticky;
+      top: 5.5rem;
+    }
+  }
+  .llevar-texto {
+    max-width: 34rem;
+    margin: 1rem 0 0;
+  }
+  .llevar-aviso {
+    max-width: 34rem;
+    margin: 0.5rem 0 0;
+    color: var(--pergamino-suave);
+    font-size: 0.9375rem;
+    font-style: italic;
+  }
+  .llevar-elegir {
+    display: grid;
+    gap: 1.75rem;
+  }
+  @media (min-width: 48rem) {
+    .llevar-elegir {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.75rem 2.5rem;
+    }
+  }
+  .llevar-categoria-titulo {
+    margin: 0 0 0.25rem;
+    color: var(--frailejon);
+  }
+  .llevar-lista {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .llevar-fila {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 0.75rem;
+    min-height: 3.25rem;
+    border-bottom: 1px solid var(--linea);
+  }
+  .llevar-nombre {
+    font-weight: 600;
+  }
+  .llevar-precio {
+    color: var(--pergamino-suave);
+  }
+  .llevar-control {
+    display: inline-flex;
+    align-items: center;
+  }
+  .llevar-boton {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border: 0;
+    background: transparent;
+    color: var(--pergamino);
+    cursor: pointer;
+    transition: background-color 150ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .llevar-boton svg {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+  .llevar-boton:hover:not(:disabled) {
+    background: var(--espresso);
+    color: var(--frailejon);
+  }
+  .llevar-boton:disabled {
+    color: var(--linea);
+    cursor: default;
+  }
+  .llevar-cantidad {
+    min-width: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  /* El ticket: un bloque caramelo, como el de «Para llevar» en el panel */
+  /* Barra del total en el móvil: pegada abajo mientras se ve la sección */
+  .llevar-barra {
+    position: sticky;
+    bottom: 0.75rem;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    background: var(--kraft);
+    color: var(--noche);
+    font-weight: 700;
+  }
+  .llevar-barra[hidden] {
+    display: none;
+  }
+  .llevar-barra a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0 1rem;
+    background: var(--noche);
+    color: var(--kraft);
+    text-decoration: none;
+  }
+  @media (min-width: 64rem) {
+    .llevar-barra {
+      display: none !important;
+    }
+  }
+  .ticket {
+    scroll-margin-top: 5rem;
+    padding: 1.25rem 1.25rem 1.5rem;
+    background: var(--kraft);
+    color: var(--noche);
+  }
+  .ticket-titulo {
+    margin: 0 0 0.75rem;
+    font-size: var(--text-bloque);
+  }
+  .ticket-vacio {
+    margin: 0;
+    font-size: 0.9375rem;
+  }
+  .ticket-lineas {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .ticket-lineas:empty {
+    display: none;
+  }
+  .ticket-lineas :global(.ticket-linea) {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.9375rem;
+  }
+  .ticket-total {
+    display: flex;
+    justify-content: space-between;
+    margin: 1rem 0 0;
+    padding-top: 0.75rem;
+    border-top: 2px dashed var(--noche);
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+  .ticket-pie {
+    margin: 0.75rem 0 0;
+  }
+  .ticket-vaciar {
+    margin-top: 1rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--noche);
+    background: transparent;
+    color: var(--noche);
+    font: 700 0.9375rem/1 var(--font-sans);
+    cursor: pointer;
+  }
+  .ticket-vaciar:hover:not(:disabled) {
+    background: var(--noche);
+    color: var(--kraft);
+  }
+  .ticket-vaciar:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+  .ticket :focus-visible {
+    outline-color: var(--noche);
+  }
+</style>

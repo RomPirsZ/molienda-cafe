@@ -1,8 +1,9 @@
 ---
-import '@fontsource/marcellus/latin-400.css';
-import '@fontsource/alegreya-sans/latin-400.css';
-import '@fontsource/alegreya-sans/latin-400-italic.css';
-import '@fontsource/alegreya-sans/latin-500.css';
+import '@fontsource/sofia-sans-extra-condensed/latin-800.css';
+import '@fontsource/sofia-sans/latin-400.css';
+import '@fontsource/sofia-sans/latin-400-italic.css';
+import '@fontsource/sofia-sans/latin-600.css';
+import '@fontsource/sofia-sans/latin-700.css';
 import '../styles/global.css';
 import { t } from '../i18n';
 
@@ -22,16 +23,18 @@ const { title = t('sitio.titulo'), description = t('sitio.descripcion') } = Astr
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <!-- Mismo color que --papel: la barra del navegador móvil continúa la página -->
-    <meta name="theme-color" content="rgb(232 220 194)" />
-    <meta name="color-scheme" content="only light" />
+    <!-- Mismo color que --noche: la barra del navegador móvil continúa la página -->
+    <meta name="theme-color" content="rgb(23 17 13)" />
+    <meta name="color-scheme" content="only dark" />
     <!--
-      Con JS y sin reduced-motion, marca la página para que lo que se va a revelar nazca
-      oculto (global.css) hasta que GSAP lo tome. Si el módulo no llega, el CSS lo muestra
-      igual a los 2,5 s: el contenido nunca depende de JS (constitución I).
-      Al desplegar con CSP, este script necesita su hash.
+      `js`: hay JavaScript (el panel y el ticket existen; sin JS, sus alternativas).
+      `motion`: con JS y sin reduced-motion, lo que se va a revelar nace oculto
+      (global.css) hasta que GSAP lo tome. Si el módulo no llega, el CSS lo muestra igual
+      a los 2,5 s: el contenido nunca depende de JS (constitución I).
+      Con CSP, este script necesita su hash (public/_headers).
     -->
     <script is:inline>
+      document.documentElement.classList.add('js');
       if (matchMedia('(prefers-reduced-motion: no-preference)').matches) {
         document.documentElement.classList.add('motion');
       }
@@ -40,7 +43,7 @@ const { title = t('sitio.titulo'), description = t('sitio.descripcion') } = Astr
   <body>
     <a
       href="#contenido"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-papel-claro focus:px-4 focus:py-2"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:bg-pergamino focus:text-noche focus:px-4 focus:py-2"
       >{t('nav.saltar')}</a
     >
     <slot />

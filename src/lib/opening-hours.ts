@@ -94,6 +94,15 @@ export function nombreDia(dia: Dia): string {
   return formatoDia.format(new Date(Date.UTC(2026, 10, 1 + dia)));
 }
 
+/** Segunda línea de la placa del portón cuando está cerrado: «Mañana, 7 a. m.» */
+export function describirApertura(estado: Estado): string | null {
+  if (estado.abierto || !estado.abre) return null;
+  const hora = formatearHora(estado.abre.hora);
+  if (estado.abre.cuando === 'hoy') return t('placa.abreHoy', { hora: horaConArticulo(estado.abre.hora) });
+  if (estado.abre.cuando === 'manana') return t('placa.abreManana', { hora });
+  return t('placa.abreOtroDia', { dia: nombreDia(estado.abre.dia), hora });
+}
+
 /** Texto del estado para la interfaz, p. ej. «Abierto ahora · cierra a las 7 p. m.» */
 export function describirEstado(estado: Estado): string {
   if (estado.abierto) return t('horario.abierto', { hora: horaConArticulo(estado.cierra) });

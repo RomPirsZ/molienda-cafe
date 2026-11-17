@@ -16,8 +16,15 @@ test('inicio con movimiento: sin violaciones serias de axe, tras las entradas', 
   await page.goto('/');
   // axe mide el contraste: se espera a que las entradas del primer viewport terminen
   await expect(page.locator('html')).toHaveClass(/\bmotion-ready\b/);
-  await expect.poll(() => page.locator('.hero-cafe').last().evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
-  await expect.poll(() => page.locator('[data-revelar="tira"]').evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
+  await expect.poll(() => page.locator('[data-luz]').last().evaluate((el) => getComputedStyle(el).opacity)).toBe('1');
+  await sinViolacionesSerias(page);
+});
+
+test('panel de secciones abierto: sin violaciones serias de axe', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('[data-abrir-panel]').click();
+  await expect(page.locator('[data-panel]')).toHaveAttribute('aria-label', /\S/);
+  await expect(page.locator('[data-abrir-panel]')).toHaveAttribute('aria-expanded', 'true');
   await sinViolacionesSerias(page);
 });
 

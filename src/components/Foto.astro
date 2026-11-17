@@ -1,8 +1,7 @@
 ---
-// Foto de ambientación en un marco de papel (plan §5 y §6): un passe-partout claro y,
-// dentro, una ventana con overflow oculto donde la foto se podrá revelar (M07) sin
-// salirse del marco. Sin JS y con reduced-motion, la foto está en su sitio desde el
-// principio. Profundidad solo por superposición: sin sombras.
+// Foto de ambientación (plan §6 y §11): una ventana con overflow oculto donde la foto se
+// revela (M07) sin salirse del marco. Sin JS y con reduced-motion, la foto está en su
+// sitio desde el principio. Esquina recta, sin sombras.
 import { Picture } from 'astro:assets';
 import { t } from '../i18n';
 import { FOTOS } from '../data/fotos';
@@ -11,8 +10,8 @@ interface Props {
   foto: keyof typeof FOTOS;
   /** `sizes` del <picture>: cuánto ocupa la foto en pantalla */
   sizes: string;
-  /** Proporción de la ventana, p. ej. "4 / 3" */
-  proporcion?: string;
+  /** Proporción de la ventana. Va por clase y no por style="": la CSP no admite estilos en línea */
+  proporcion?: '4 / 3' | '3 / 2' | '1 / 1' | '4 / 5';
   /** La primera foto que se ve sin scroll se carga sin esperar */
   prioritaria?: boolean;
   class?: string;
@@ -22,8 +21,8 @@ const { foto, sizes, proporcion = '4 / 3', prioritaria = false, class: clase } =
 const datos = FOTOS[foto];
 ---
 
-<figure class:list={['foto cantos-rasgados', clase]} data-foto>
-  <div class="foto-ventana" style={`aspect-ratio: ${proporcion}`}>
+<figure class:list={['foto', clase]} data-foto>
+  <div class:list={['foto-ventana', `proporcion-${proporcion.replace(/\s*\/\s*/, '-')}`]}>
     <Picture
       src={datos.src}
       alt={t(datos.alt)}
@@ -40,15 +39,21 @@ const datos = FOTOS[foto];
 </figure>
 
 <style>
-  /* Passe-partout de pergamino con los cuatro cantos rasgados (.cantos-rasgados) */
   .foto {
-    background: var(--fibra), var(--papel-claro);
-    padding: 0.6rem;
+    margin: 0;
+    background: var(--espresso);
   }
-  @media (min-width: 48rem) {
-    .foto {
-      padding: 0.85rem;
-    }
+  .proporcion-4-3 {
+    aspect-ratio: 4 / 3;
+  }
+  .proporcion-3-2 {
+    aspect-ratio: 3 / 2;
+  }
+  .proporcion-1-1 {
+    aspect-ratio: 1 / 1;
+  }
+  .proporcion-4-5 {
+    aspect-ratio: 4 / 5;
   }
   .foto-ventana {
     overflow: hidden;

@@ -1,17 +1,16 @@
-// Tarjetas de producto (cambio del 2026-11-03): con ratón se elevan y muestran una
-// sombra. Solo se anima transform (la tarjeta) y opacity (la sombra): constitución II.
+// Tarjetas de producto (cambio del 2026-11-03; esquina recta desde el rediseño oscuro):
+// con ratón se elevan y muestran una sombra. Solo se anima transform (la tarjeta) y opacity (la sombra): constitución II.
 import { test, expect, type Locator } from '@playwright/test';
 
 const sombra = (tarjeta: Locator) => tarjeta.evaluate((el) => getComputedStyle(el, '::after').opacity);
 const elevacion = (tarjeta: Locator) => tarjeta.evaluate((el) => new DOMMatrix(getComputedStyle(el).transform).m42);
 
-test('cada producto de la carta y del primer viewport es una tarjeta redondeada', async ({ page }) => {
+test('cada producto de la carta es una tarjeta', async ({ page }) => {
   await page.goto('/');
-  const tarjetas = page.locator('.plato, .hero-cafe');
-  await expect(tarjetas.first()).toBeVisible();
+  const tarjetas = page.locator('.plato');
+  await expect(tarjetas.first()).toBeAttached();
   for (const t of await tarjetas.all()) {
     expect(await t.evaluate((el) => el.classList.contains('tarjeta'))).toBe(true);
-    expect(parseFloat(await t.evaluate((el) => getComputedStyle(el).borderTopLeftRadius))).toBeGreaterThan(0);
   }
 });
 
@@ -39,8 +38,8 @@ test.describe('con movimiento reducido', () => {
 
 test('cada producto muestra su foto, cargada y con texto alternativo', async ({ page }) => {
   await page.goto('/');
-  const tarjetas = page.locator('.plato, .hero-cafe');
-  expect(await tarjetas.count()).toBe(16); // 13 de la carta + 3 del primer viewport
+  const tarjetas = page.locator('.plato');
+  expect(await tarjetas.count()).toBe(13);
   for (const t of await tarjetas.all()) {
     const img = t.locator('img[data-miniatura]');
     await img.scrollIntoViewIfNeeded();

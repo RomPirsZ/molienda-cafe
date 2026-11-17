@@ -12,11 +12,11 @@ test('el primer Tab muestra «Saltar al contenido» y lleva al contenido', async
   await expect(page).toHaveURL(/#contenido$/);
 });
 
-test('la navegación y la acción principal se alcanzan con Tab y tienen foco visible', async ({ page }) => {
+test('la cabecera y la acción principal se alcanzan con Tab y tienen foco visible', async ({ page }) => {
   await page.goto('/');
-  const destinos = [es['nav.inicio'], es['nav.carta'], es['nav.origen'], es['nav.visitanos'], es['hero.cta']];
+  const destinos = [es['nav.inicio'], es['panel.abrir'], es['hero.cta']];
   const alcanzados: string[] = [];
-  for (let i = 0; i < 12 && alcanzados.length < destinos.length; i++) {
+  for (let i = 0; i < 8 && alcanzados.length < destinos.length; i++) {
     await page.keyboard.press('Tab');
     const nombre = await page.evaluate(() => {
       const el = document.activeElement as HTMLElement | null;
@@ -32,9 +32,9 @@ test('la navegación y la acción principal se alcanzan con Tab y tienen foco vi
   expect(alcanzados).toEqual(destinos);
 });
 
-test('los enlaces de la cabecera llevan a su sección', async ({ page }) => {
+test('la navegación del pie lleva a cada sección', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('navigation', { name: es['nav.etiqueta'] }).getByRole('link', { name: es['nav.visitanos'] }).click();
+  await page.getByRole('navigation', { name: es['nav.pie'] }).getByRole('link', { name: es['nav.visitanos'] }).click();
   await expect(page).toHaveURL(/#visitanos$/);
   await expect(page.getByRole('heading', { name: es['visitanos.titulo'], level: 2 })).toBeInViewport();
 });

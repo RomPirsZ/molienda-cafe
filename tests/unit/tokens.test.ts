@@ -1,6 +1,5 @@
-// Contraste de los tokens de color (constitución III, plan §4). Cada par que el sitio
-// usa como texto sobre fondo tiene que llegar a AA (4,5:1); los textos grandes y los
-// elementos gráficos, a 3:1.
+// Contraste de los tokens de color (constitución III, plan §11). Cada par que el sitio
+// usa como texto sobre fondo tiene que llegar a AA (4,5:1).
 import { describe, expect, it } from 'vitest';
 // ?raw (Vite): el CSS como texto, sin depender de los tipos de Node
 import css from '../../src/styles/global.css?raw';
@@ -22,32 +21,38 @@ function contrast(a: string, b: string): number {
 }
 
 describe('tokens de color', () => {
-  it('define todos los roles del plan §4', () => {
+  it('define todos los roles del plan §11', () => {
     expect(Object.keys(t).sort()).toEqual(
-      ['acento', 'accion', 'franja', 'linea', 'papel', 'papel-claro', 'tinta', 'tinta-suave'].sort(),
+      [
+        'noche', 'espresso', 'pergamino', 'pergamino-suave', 'frailejon', 'kraft', 'tostado', 'oliva',
+        'pizarra', 'luz', 'linea', 'monte', 'muro', 'teja', 'apagado',
+      ].sort(),
     );
   });
 
   it.each([
-    ['tinta', 'papel'],
-    ['tinta', 'papel-claro'],
-    ['tinta-suave', 'papel'],
-    ['tinta-suave', 'papel-claro'],
-    // La acción puede ir como texto (enlaces activos) sobre los dos papeles
-    ['accion', 'papel'],
-    ['accion', 'papel-claro'],
-    // Texto claro sobre los rellenos de color
-    ['papel-claro', 'accion'],
-    ['papel-claro', 'franja'],
-    ['papel-claro', 'tinta'],
-    // La mostaza solo va como texto sobre la tinta
-    ['acento', 'tinta'],
+    // Texto sobre la noche y las superficies oscuras
+    ['pergamino', 'noche'],
+    ['pergamino', 'espresso'],
+    ['pergamino-suave', 'noche'],
+    ['pergamino-suave', 'espresso'],
+    ['frailejon', 'noche'],
+    ['frailejon', 'espresso'],
+    // La pizarra de la acera
+    ['pergamino', 'pizarra'],
+    ['pergamino-suave', 'pizarra'],
+    ['frailejon', 'pizarra'],
+    // Bloques claros del panel y del ticket: texto noche
+    ['noche', 'pergamino'],
+    ['noche', 'frailejon'],
+    ['noche', 'kraft'],
+    // Bloques oscuros del panel: texto pergamino
+    ['pergamino', 'tostado'],
+    ['pergamino', 'oliva'],
+    // La placa de la puerta, de noche sobre la luz
+    ['noche', 'luz'],
   ])('%s sobre %s cumple AA (4,5:1)', (texto, fondo) => {
     expect(contrast(t[texto]!, t[fondo]!)).toBeGreaterThanOrEqual(4.5);
-  });
-
-  it('la mostaza sobre la oliva solo alcanza para texto grande o adornos (3:1)', () => {
-    expect(contrast(t['acento']!, t['franja']!)).toBeGreaterThanOrEqual(3);
   });
 
   it('ningún componente usa un hex propio: los colores salen de los tokens', () => {

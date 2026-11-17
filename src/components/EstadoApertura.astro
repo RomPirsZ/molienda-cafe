@@ -16,7 +16,8 @@ const { class: clase } = Astro.props;
 
 <script>
   import { HORARIO } from '../data/horario';
-  import { describirEstado, estadoApertura, horaLocal } from '../lib/opening-hours';
+  import { describirApertura, describirEstado, estadoApertura, horaLocal } from '../lib/opening-hours';
+  import { t } from '../i18n';
 
   function pintar() {
     const ahora = new Date();
@@ -27,6 +28,19 @@ const { class: clase } = Astro.props;
       const destino = el.querySelector('[data-estado-texto]');
       if (destino) destino.textContent = texto;
       el.hidden = false;
+    }
+    // La fachada: ventanas encendidas o apagadas, y la placa del portón
+    for (const fachada of document.querySelectorAll<HTMLElement>('[data-fachada]')) {
+      fachada.dataset['abierto'] = String(estado.abierto);
+      const placa = fachada.querySelector<HTMLElement>('[data-placa]');
+      const texto = placa?.querySelector('[data-placa-texto]');
+      const abre = placa?.querySelector<HTMLElement>('[data-placa-abre]');
+      if (placa && texto && abre) {
+        texto.textContent = t(estado.abierto ? 'placa.abierto' : 'placa.cerrado');
+        abre.textContent = describirApertura(estado) ?? '';
+        abre.hidden = !abre.textContent;
+        placa.hidden = false;
+      }
     }
     // El día de hoy en la tabla de horario
     const { dia } = horaLocal(ahora);
@@ -58,7 +72,7 @@ const { class: clase } = Astro.props;
     opacity: 0.45;
   }
   .estado[data-abierto='true'] .estado-punto {
-    background: var(--accion);
+    background: var(--frailejon);
     opacity: 1;
   }
 </style>

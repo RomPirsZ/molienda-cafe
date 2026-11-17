@@ -5,7 +5,7 @@ test('la página carga en español con su título', async ({ page }) => {
   expect(respuesta?.status()).toBe(200);
   await expect(page.locator('html')).toHaveAttribute('lang', 'es');
   await expect(page).toHaveTitle(/Molienda/);
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Molienda');
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText(/Molienda.*La finca queda aquí arriba/);
 });
 
 test('las fuentes del sitio cargan desde el propio origen', async ({ page }) => {
@@ -15,12 +15,12 @@ test('las fuentes del sitio cargan desde el propio origen', async ({ page }) => 
   const cargadas = await page.evaluate(() =>
     [...document.fonts].filter((f) => f.status === 'loaded').map((f) => f.family.replace(/"/g, '')),
   );
-  expect(cargadas).toContain('Marcellus');
-  expect(cargadas).toContain('Alegreya Sans');
+  expect(cargadas).toContain('Sofia Sans Extra Condensed');
+  expect(cargadas).toContain('Sofia Sans');
 });
 
-test('theme-color coincide con el papel de la página', async ({ page }) => {
-  // La meta no admite variables CSS: este test evita que se desincronice de --papel
+test('theme-color coincide con la noche de la página', async ({ page }) => {
+  // La meta no admite variables CSS: este test evita que se desincronice de --noche
   await page.goto('/');
   const fondo = await page.evaluate(() => getComputedStyle(document.documentElement).backgroundColor);
   const meta = await page.locator('meta[name="theme-color"]').getAttribute('content');

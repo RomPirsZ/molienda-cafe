@@ -11,6 +11,9 @@ export default defineConfig({
   use: {
     baseURL: `http://localhost:${PORT}`,
     trace: 'on-first-retry',
+    // Sin los navegadores de Playwright descargados, se puede usar el Chromium del sistema:
+    // CHROMIUM_PATH=/usr/bin/chromium npm test
+    launchOptions: process.env['CHROMIUM_PATH'] ? { executablePath: process.env['CHROMIUM_PATH'] } : {},
   },
   projects: [
     { name: 'mobile', use: { ...devices['Pixel 7'] } },

@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Favicon de Molienda: el sello simplificado (sol sobre el macizo andino), en los
-       colores de global.css (papel #e8dcc2, tinta #2b1c14, acento #c99a2e) -->
-  <circle cx="32" cy="32" r="30" fill="#e8dcc2" stroke="#2b1c14" stroke-width="4"/>
-  <circle cx="24" cy="24" r="7" fill="#c99a2e"/>
-  <path d="M10 46L22 32L27 36L35 22L43 32L48 29L54 46Z" fill="#2b1c14"/>
+  <!-- Favicon de Molienda: el portón encendido de la casona, en los colores de global.css
+       (noche #17110d, tostado #6b4630, luz #f2d9a0) -->
+  <rect width="64" height="64" fill="#17110d"/>
+  <path d="M8 26L16 16H48L56 26Z" fill="#6b4630"/>
+  <rect x="22" y="32" width="20" height="32" fill="#6b4630"/>
+  <rect x="26" y="36" width="12" height="28" fill="#f2d9a0"/>
 </svg>
