@@ -44,27 +44,41 @@ import { SECCIONES } from '../data/secciones';
     // Cerrado = el carril en 0 (el espaciador a la vista, la hoja fuera por la derecha);
     // abierto = el carril al final. Con reduced-motion, scroll-behavior es auto: salta.
     const abrirPanel = () => {
+      observar();
+      abriendo = true;
       panel.showModal();
       requestAnimationFrame(() => carril.scrollTo({ left: carril.scrollWidth, behavior: 'auto' }));
     };
-    const cerrarPanel = () => carril.scrollTo({ left: 0, behavior: 'auto' });
+    const cerrarPanel = () => {
+      abriendo = false;
+      carril.scrollTo({ left: 0, behavior: 'auto' });
+    };
 
     // La hoja manda: cuando sale del todo, se cierra el diálogo (el navegador devuelve el
-    // foco al botón); cuando entra del todo, el botón dice que está abierto
-    const umbral = 1 / window.innerWidth;
-    new IntersectionObserver(
-      (entradas) => {
-        const e = entradas.at(-1);
-        if (!e || !panel.open) return;
-        if (e.intersectionRatio < umbral) {
-          panel.close();
-          abrir.setAttribute('aria-expanded', 'false');
-        } else if (e.intersectionRatio === 1) {
-          abrir.setAttribute('aria-expanded', 'true');
-        }
-      },
-      { root: panel, threshold: [umbral, 1] },
-    ).observe(hoja);
+    // foco al botón); cuando entra del todo, el botón dice que está abierto. El observador
+    // se crea al abrir por primera vez: al cargar no añade trabajo (TBT)
+    let observador: IntersectionObserver | undefined;
+    // Mientras entra, la hoja aún está fuera: esa primera lectura no debe cerrarlo
+    let abriendo = false;
+    const observar = () => {
+      if (observador) return;
+      const umbral = 1 / window.innerWidth;
+      observador = new IntersectionObserver(
+        (entradas) => {
+          const e = entradas.at(-1);
+          if (!e || !panel.open) return;
+          if (e.intersectionRatio < umbral && !abriendo) {
+            panel.close();
+            abrir.setAttribute('aria-expanded', 'false');
+          } else if (e.intersectionRatio === 1) {
+            abriendo = false;
+            abrir.setAttribute('aria-expanded', 'true');
+          }
+        },
+        { root: panel, threshold: [umbral, 1] },
+      );
+      observador.observe(hoja);
+    };
 
     // Sin scroll-driven animations, el fondo sigue al desplazamiento desde aquí
     if (!CSS.supports('animation-timeline: scroll()')) {

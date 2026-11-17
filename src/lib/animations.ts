@@ -136,6 +136,16 @@ function cabeceraOculta(raiz: ParentNode) {
 }
 
 let iniciado = false;
+// Cada arranque tiene su número: si se detiene mientras quedan pasos, esos pasos no se ejecutan
+let generacion = 0;
+
+/** Cede el hilo principal entre pasos: el arranque no es una sola tarea larga (TBT). */
+const ceder = () =>
+  new Promise<void>((resolver) => {
+    const planificador = (globalThis as { scheduler?: { yield?: () => Promise<void> } }).scheduler;
+    if (planificador?.yield) void planificador.yield().then(resolver);
+    else setTimeout(resolver, 0);
+  });
 
 export function initAnimations() {
   if (iniciado) return;
@@ -155,20 +165,25 @@ export function initAnimations() {
     gsap.ticker.lagSmoothing(0);
   }
 
-  contexto = gsap.context(() => {
-    luces(document);
-    titulos(document);
-    platos(document);
-    fotos(document);
-    cabeceraOculta(document);
-  });
+  // Primero lo que se ve al cargar (las luces de la fachada); lo demás está fuera de
+  // pantalla y espera su turno, cada paso en su propia tarea
+  const turno = ++generacion;
+  contexto = gsap.context(() => luces(document));
   // Las entradas ya tienen su estado inicial: el CSS deja de ocultarlas
   raiz.classList.add('motion-ready');
-  // Las líneas y las posiciones dependen de las fuentes
-  void document.fonts.ready.then(() => ScrollTrigger.refresh());
+  const pasos = [titulos, platos, fotos, cabeceraOculta];
+  void (async () => {
+    for (const paso of pasos) {
+      await ceder();
+      if (turno !== generacion) return;
+      contexto?.add(() => paso(document));
+    }
+    // Las líneas y las posiciones dependen de las fuentes
+    void document.fonts.ready.then(() => ScrollTrigger.refresh());
+  })();
 }
-
 export function destroyAnimations() {
+  generacion++;
   contexto?.revert();
   contexto = undefined;
   limpiezas.splice(0).forEach((limpiar) => limpiar());
