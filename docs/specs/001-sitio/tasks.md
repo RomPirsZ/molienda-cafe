@@ -45,6 +45,6 @@
 - [x] M14 «Para llevar»: `ticket.ts` (tests unitarios primero), componente y e2e — *suma en céntimos, tope de 20 por producto; barra fija con el total en el móvil*
 - [x] M15 Carta, cafés de origen, ambiente, visítanos y pie en la estética nueva; retirar lo que ya no se use; movimiento revisado — *fuera el sello, el papel rasgado, la fibra y `generar-bordes.mjs`; sin estilos en línea (la CSP solo `self`)*
 - [x] M16 Cierre visual: polish y critique de impeccable, revisión de Taste a 375, 768 y 1440 px, `DESIGN.md`, axe y Lighthouse móvil — *revisión final de impeccable: «fix» (8 correcciones) y después «ship»; Taste: aplicadas las que no chocan con la spec; `DESIGN.md` reescrito; axe en los e2e. Lighthouse queda para M17, sobre la URL publicada*
-- [ ] M17 Despliegue: repo en GitHub (revisar el historial antes), `wrangler.jsonc`, `_headers`, Workers Builds y URL en vivo comprobada
+- [x] M17 Despliegue: repo en GitHub (revisar el historial antes), `wrangler.jsonc`, `_headers`, Workers Builds y URL en vivo comprobada — *hecha 2026-11-17: https://molienda-cafe.ankordev.workers.dev desde RomPirsZ/molienda-cafe (público), con la CSP y las cabeceras del portafolio; astro 7.4.8 (0 vulnerabilidades). Lighthouse móvil en esta máquina: 100 en accesibilidad, buenas prácticas y SEO; rendimiento 84–93, en la misma franja ruidosa que el portafolio (76–97 aquí, 98 en su CI)*
 
 **Al terminar cada fase:** parar y esperar revisión.
