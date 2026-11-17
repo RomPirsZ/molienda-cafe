@@ -16,3 +16,7 @@ COTZ.md
 
 # Informes de Lighthouse (M10): se regeneran; las notas quedan en tasks.md
 .lighthouse/
+
+# Cloudflare (M17): secretos locales y caché de wrangler
+.dev.vars
+.wrangler/
