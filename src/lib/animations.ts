@@ -39,8 +39,8 @@ function luces(raiz: ParentNode) {
 }
 
 /** Títulos de sección: suben por líneas, dentro de una máscara, al entrar en pantalla. */
-function titulos(raiz: ParentNode) {
-  raiz.querySelectorAll<HTMLElement>('h2[data-revelar="titulo"]').forEach((h2) => {
+function titulo(h2: HTMLElement) {
+  {
     if (yaVisible(h2)) return;
     SplitText.create(h2, {
       type: 'lines',
@@ -55,7 +55,7 @@ function titulos(raiz: ParentNode) {
           scrollTrigger: { trigger: h2, start: AL_ENTRAR, once: true },
         }),
     });
-  });
+  }
 }
 
 /**
@@ -63,8 +63,8 @@ function titulos(raiz: ParentNode) {
  * del hover (si no, suavizaría el tween) y al acabar se limpian las propiedades para que
  * el hover vuelva a mandar.
  */
-function platos(raiz: ParentNode) {
-  raiz.querySelectorAll<HTMLElement>('[data-revelar="platos"]').forEach((lista) => {
+function platos(lista: HTMLElement) {
+  {
     if (yaVisible(lista)) return;
     const items = lista.querySelectorAll(':scope > li');
     gsap.from(items, {
@@ -78,7 +78,7 @@ function platos(raiz: ParentNode) {
       clearProps: 'transform,opacity,transition',
       scrollTrigger: { trigger: lista, start: AL_ENTRAR, once: true },
     });
-  });
+  }
 }
 
 /**
@@ -86,8 +86,8 @@ function platos(raiz: ParentNode) {
  * ventana con overflow oculto, pasa de escala 1,12 a 1. Después, un zoom lento ligado
  * al scroll (en el <picture>, para no pisar el tween de la <img>).
  */
-function fotos(raiz: ParentNode) {
-  raiz.querySelectorAll<HTMLElement>('[data-foto]').forEach((marco) => {
+function foto(marco: HTMLElement) {
+  {
     const img = marco.querySelector('img');
     const picture = marco.querySelector('picture');
     if (!img) return;
@@ -107,7 +107,7 @@ function fotos(raiz: ParentNode) {
         { scale: 1.08, ease: 'none', scrollTrigger: { trigger: marco, start: 'top bottom', end: 'bottom top', scrub: true } },
       );
     }
-  });
+  }
 }
 
 /** La cabecera se oculta al bajar y vuelve al subir; nunca mientras tiene el foco del teclado. */
@@ -165,23 +165,32 @@ export function initAnimations() {
     gsap.ticker.lagSmoothing(0);
   }
 
-  // Primero lo que se ve al cargar (las luces de la fachada); lo demás está fuera de
-  // pantalla y espera su turno, cada paso en su propia tarea
+  // Primero lo que se ve al cargar (las luces de la fachada). Lo demás está fuera de
+  // pantalla y se prepara de uno en uno, cada elemento en su propia tarea: partir un
+  // título o crear un ScrollTrigger fuerza un layout, y todos juntos eran una tarea larga
+  // (TBT). Hasta el final, el CSS los mantiene ocultos; si esto tarda más de 2,5 s, el
+  // CSS los muestra y yaVisible() evita ocultarlos de nuevo.
   const turno = ++generacion;
   contexto = gsap.context(() => luces(document));
-  // Las entradas ya tienen su estado inicial: el CSS deja de ocultarlas
-  raiz.classList.add('motion-ready');
-  const pasos = [titulos, platos, fotos, cabeceraOculta];
+  const pasos: (() => void)[] = [
+    ...[...document.querySelectorAll<HTMLElement>('h2[data-revelar="titulo"]')].map((h2) => () => titulo(h2)),
+    ...[...document.querySelectorAll<HTMLElement>('[data-revelar="platos"]')].map((lista) => () => platos(lista)),
+    ...[...document.querySelectorAll<HTMLElement>('[data-foto]')].map((marco) => () => foto(marco)),
+    () => cabeceraOculta(document),
+  ];
   void (async () => {
     for (const paso of pasos) {
       await ceder();
       if (turno !== generacion) return;
-      contexto?.add(() => paso(document));
+      contexto?.add(paso);
     }
+    // Las entradas ya tienen su estado inicial: el CSS deja de ocultarlas
+    raiz.classList.add('motion-ready');
     // Las líneas y las posiciones dependen de las fuentes
     void document.fonts.ready.then(() => ScrollTrigger.refresh());
   })();
 }
+
 export function destroyAnimations() {
   generacion++;
   contexto?.revert();
