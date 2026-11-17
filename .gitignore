@@ -20,3 +20,4 @@ COTZ.md
 # Cloudflare (M17): secretos locales y caché de wrangler
 .dev.vars
 .wrangler/
+.lighthouseci/
