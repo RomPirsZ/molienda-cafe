@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// Sin @types/node en el proyecto (plan §2): basta con declarar lo que se lee del entorno
+declare const process: { env: Record<string, string | undefined> };
+
 // Puerto propio, distinto del de `astro dev` (4321) y del de los e2e del portafolio
 // (4329): con reuseExistingServer, compartir puerto haría probar el sitio equivocado.
 const PORT = 4339;
