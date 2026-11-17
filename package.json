@@ -13,7 +13,8 @@
     "test:unit": "vitest run",
     "test:e2e": "playwright test",
     "test": "npm run test:unit && npm run test:e2e",
-    "lighthouse": "lhci autorun"
+    "lighthouse": "lhci autorun",
+    "audit": "node scripts/audit.mjs"
   },
   "engines": {
     "node": "26.x"
