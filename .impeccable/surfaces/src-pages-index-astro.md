@@ -7,22 +7,22 @@ related_targets: []
 
 # Inicio de Molienda (página única)
 
-- **Modo:** Persuade. Visitante: cliente del café en el móvil (simulado) y quien evalúa a [A]nkordev (real). Acción: llegar a la carta y saber cuándo abre.
-- **Contenido:** carta con precios ficticios rotulados, procedencia por café, horario y zona ficticios, aviso de concepto. Sin reseñas ni cifras.
-- **Restricciones:** constitución (II 1.3.0: nada que recalcule el diseño; contenido visible sin JS; AA; reduced-motion = nada se mueve); nada comercial real; fotos de stock con créditos.
-- **Momento memorable:** el sello de la cabecera se vuelve a estampar al entrar en cada sección.
-- **Pendiente:** las tipografías exactas (deben estar en @fontsource y no ser las de la lista de evitar), las fotos concretas y el dibujo del sello.
+- **Modo:** Persuade. Visitante: cliente del café en el móvil (simulado) y quien evalúa a [A]nkordev (real). Acción: llegar a la carta, saber si está abierto y armar un pedido para llevar.
+- **Contenido:** carta con precios ficticios rotulados, procedencia por café, ticket «Para llevar» sin envío, horario y zona ficticios, aviso de concepto. Sin reseñas ni cifras.
+- **Restricciones:** constitución (II 1.3.0: nada que recalcule el diseño; contenido visible sin JS; AA; reduced-motion = nada se mueve); spec §10; un solo tema oscuro; CSP solo `self`.
+- **Momento memorable:** la fachada dice la verdad: con el café cerrado, las ventanas se apagan y la placa de la puerta dice cuándo abre.
+- **Pendiente:** ninguno de producto; el dibujo exacto de la casona se resuelve en M12.
 
 ## Direction contract
 
-THESIS: Molienda como identidad de cafetería andina de los noventa: un sol grabado sobre el páramo, papel kraft rasgado y mayúsculas muy espaciadas. Rechaza el hero partido «titular serif + foto de taza» de todo café de especialidad.
+THESIS: La página es la fachada de Molienda al anochecer: una casona merideña cuya pizarra del ventanal lleva los cafés del día con precio (HTML real) y cuya placa de la puerta dice en vivo si está abierto. Rechaza el hero partido «titular + foto de taza» y la fila de tarjetas iguales.
 
-OWN-WORLD: fondo kraft/pergamino; tinta espresso (fijada por el usuario); terracota solo para la acción principal y el estado activo; oliva para las franjas de sección; mostaza de frailejón como acento mínimo. Bordes de papel rasgado como recurso SVG estático (nunca polígonos de `clip-path`). Sello grabado circular. Mayúsculas romanas serif muy espaciadas para los titulares y sans humanista para el texto. Esquinas rectas, sin sombras: la profundidad sale solo del papel superpuesto. Excepción pedida por el usuario el 2026-11-03: los productos van en tarjetas semirredondeadas de pergamino que, con ratón, se elevan con una sombra debajo (la sombra solo cambia de opacidad).
+OWN-WORLD: suelo de noche andina, espresso casi negro y cálido; muros de tierra oscura, tejas en marrón tostado, ventanas con luz beige plana, la montaña en verde oliva profundo; ilustración plana, sin degradados ni brillos. Panel derecho de bloques planos a toda la altura, de claro a oscuro: pergamino, verde frailejón, caramelo kraft, marrón tostado, espresso. Titulares en Sofia Sans Extra Condensed negra en mayúsculas; texto en Sofia Sans. Esquinas rectas, sin sombras salvo la elevación del producto al pasar el ratón.
 
-STORY: el visitante entiende que es un café de Mérida que sirve grano de fincas cercanas, ve precios y horario sin buscar, cree que el sitio está hecho con oficio, y baja a la carta.
+STORY: el visitante ve un café de Mérida, abierto o con su hora de apertura, lee tres cafés con precio en la pizarra, cree que está hecho con oficio y pulsa «Ver la carta» o abre «Secciones».
 
-FIRST VIEWPORT: navegación centrada en mayúsculas espaciadas; sello grabado centrado (sol sobre la montaña); «MOLIENDA» enorme y espaciado; tira terracota rasgada con el lema; aviso de concepto; una fila de tres cafés con precio y procedencia (finca ficticia · región · altitud) visible sin scroll; «Ver la carta» como acción principal; estado «Abierto ahora», calculado con la hora de Mérida.
+FIRST VIEWPORT: cabecera mínima, «MOLIENDA» a la izquierda y el botón «Secciones» a la derecha. «LA FINCA QUEDA AQUÍ ARRIBA» enorme, en dos líneas, arriba a la izquierda sobre el cielo nocturno y la montaña. Debajo, la casona a todo el ancho: una pizarra de acera (caballete HTML) delante de la ventana derecha con tres cafés y precio, porque dentro del ventanal no se leería en el móvil; placa de la puerta con el estado en vivo y, cerrado, cuándo abre. Abajo a la izquierda, el estado y la zona con «Ver la carta» en un bloque verde frailejón; aviso de concepto visible. En el móvil, la casona se recorta en puerta y ventanal.
 
-FORM: challenger brand-identity-canon-village-coffeehouse-identity (las secciones son estaciones de un mapa, al cambiar de sección se estampa una marca nueva en la cabecera y el estado activo se calienta a terracota), elegido por el usuario frente a la asignada, la n.º 6 de la lista propia (ruana merideña). seed:7adb036359871fd0. Movimiento: re-estampado del sello (escala + opacidad); fotos que se revelan dentro de marcos de papel rasgado (suben 50 px, escala 1,12→1, ~1,2 s, cubic-bezier(.22, 1, .36, 1), medido en noovolife) y zoom lento ligado al scroll; platos escalonados; los días cerrados aparecen como franjas apagadas.
+FORM: dirección fijada por el usuario (spec §10.1, captura del 2026-11-17) sobre la tirada; la tirada se registró como provocación y no cambia la dirección. seed:7b4decf330f66d24. Interacción firma: el panel entra desde la derecha como cajón de scroll-snap (el dedo lo arrastra; el fondo se oscurece ligado al desplazamiento). Movimiento: las ventanas se encienden una vez al cargar (opacidad); se conserva el de M07 (títulos por líneas enmascaradas, platos escalonados, revelado y zoom lento de las fotos, cabecera que se oculta al bajar).
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

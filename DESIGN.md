@@ -1,269 +1,276 @@
 ---
 name: Molienda
-description: Cafetería de pueblo andina de los noventa — papel kraft rasgado, sello grabado y mayúsculas romanas muy espaciadas.
+description: La noche andina — una casona merideña al anochecer, ilustración plana, bloques de color a toda la altura y condensada negra en mayúsculas.
 colors:
-  papel: "#e8dcc2"
-  papel-claro: "#f3ebdc"
-  tinta: "#2b1c14"
-  tinta-suave: "#5c4636"
-  accion: "#9c4124"
-  franja: "#55542b"
-  acento: "#c99a2e"
-  linea: "#8c7a5e"
+  noche: "#17110d"
+  espresso: "#2a1e16"
+  pergamino: "#ecdfc4"
+  pergamino-suave: "#b8a68a"
+  frailejon: "#b6c07a"
+  kraft: "#c99560"
+  tostado: "#6b4630"
+  oliva: "#3d4a2a"
+  pizarra: "#1c241a"
+  luz: "#f2d9a0"
+  linea: "#5c4838"
+  monte: "#26301f"
+  muro: "#3b2c22"
+  teja: "#7a4a2e"
+  apagado: "#4a3a2c"
 typography:
-  marca:
-    fontFamily: "Marcellus, Iowan Old Style, Georgia, serif"
-    fontSize: "clamp(2.5rem, 0.9rem + 6.6vw, 7rem)"
-    fontWeight: 400
-    lineHeight: 0.9
-    letterSpacing: "0.18em"
+  titular:
+    fontFamily: "Sofia Sans Extra Condensed, Arial Narrow, sans-serif"
+    fontSize: "clamp(3.25rem, 1.6rem + 6.4vw, 7.5rem)"
+    fontWeight: 800
+    lineHeight: 0.86
   titulo:
-    fontFamily: "Marcellus, Iowan Old Style, Georgia, serif"
-    fontSize: "clamp(1.75rem, 1.2rem + 2.2vw, 3.25rem)"
-    fontWeight: 400
-    letterSpacing: "0.18em"
+    fontFamily: "Sofia Sans Extra Condensed, Arial Narrow, sans-serif"
+    fontSize: "clamp(2.5rem, 1.6rem + 3.6vw, 5rem)"
+    fontWeight: 800
+    lineHeight: 0.92
+  bloque:
+    fontFamily: "Sofia Sans Extra Condensed, Arial Narrow, sans-serif"
+    fontSize: "clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem)"
+    fontWeight: 800
+    lineHeight: 0.95
   plato:
-    fontFamily: "Marcellus, Iowan Old Style, Georgia, serif"
-    fontSize: "clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem)"
-    fontWeight: 400
+    fontFamily: "Sofia Sans Extra Condensed, Arial Narrow, sans-serif"
+    fontSize: "clamp(1.375rem, 1.25rem + 0.5vw, 1.75rem)"
+    fontWeight: 800
+    lineHeight: 1
   cuerpo:
-    fontFamily: "Alegreya Sans, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Sofia Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem)"
     fontWeight: 400
     lineHeight: 1.55
+  nota:
+    fontFamily: "Sofia Sans, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "0.9375rem"
+    fontWeight: 400
+    lineHeight: 1.4
   etiqueta:
-    fontFamily: "Alegreya Sans, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Sofia Sans, ui-sans-serif, system-ui, sans-serif"
     fontSize: "clamp(0.8125rem, 0.78rem + 0.1vw, 0.875rem)"
-    fontWeight: 500
-    lineHeight: 1.5
-    letterSpacing: "0.24em"
+    fontWeight: 600
+    lineHeight: 1.4
+    letterSpacing: "0.08em"
+  boton:
+    fontFamily: "Sofia Sans, ui-sans-serif, system-ui, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 700
+    lineHeight: 1
   cifras:
-    fontFamily: "Alegreya Sans, ui-sans-serif, system-ui, sans-serif"
+    fontFamily: "Sofia Sans, ui-sans-serif, system-ui, sans-serif"
     fontFeature: "tnum, lnum"
 rounded:
   recto: "0"
-  miniatura: "0.5rem"
-  tarjeta: "0.75rem"
 spacing:
   gutter-movil: "1rem"
   gutter: "2.5rem"
-  contenedor: "75rem"
+  contenedor: "80rem"
+  cabecera: "4rem"
 components:
   boton-accion:
-    backgroundColor: "{colors.accion}"
-    textColor: "{colors.papel-claro}"
-    typography: "{typography.etiqueta}"
+    backgroundColor: "{colors.frailejon}"
+    textColor: "{colors.noche}"
+    typography: "{typography.boton}"
     rounded: "{rounded.recto}"
-    padding: "0.85rem 1.6rem"
+    padding: "0.8rem 1.4rem"
     height: "3rem"
   boton-accion-hover:
-    backgroundColor: "{colors.tinta}"
-    textColor: "{colors.papel-claro}"
-  tarjeta-plato:
-    backgroundColor: "{colors.papel-claro}"
-    textColor: "{colors.tinta}"
-    rounded: "{rounded.tarjeta}"
-    padding: "0.75rem 1rem 0.85rem 0.75rem"
-  miniatura-plato:
-    backgroundColor: "{colors.papel}"
-    rounded: "{rounded.miniatura}"
-    size: "4.5rem"
-  cabecera:
-    backgroundColor: "{colors.papel}"
-    textColor: "{colors.tinta}"
-    typography: "{typography.etiqueta}"
-    height: "4.5rem"
-  enlace-nav-activo:
-    textColor: "{colors.accion}"
-  marco-foto:
-    backgroundColor: "{colors.papel-claro}"
+    backgroundColor: "{colors.pergamino}"
+    textColor: "{colors.noche}"
+  boton-secciones:
+    backgroundColor: "{colors.pergamino}"
+    textColor: "{colors.noche}"
+    typography: "{typography.boton}"
     rounded: "{rounded.recto}"
-    padding: "0.85rem"
-  franja-origen:
-    backgroundColor: "{colors.franja}"
-    textColor: "{colors.papel-claro}"
-  franja-visitanos:
-    backgroundColor: "{colors.tinta}"
-    textColor: "{colors.papel-claro}"
-  tira-lema:
-    backgroundColor: "{colors.accion}"
-    textColor: "{colors.papel-claro}"
-    typography: "{typography.etiqueta}"
-    padding: "0.35rem 1rem"
+    padding: "0.5rem 1rem"
+    height: "2.75rem"
+  boton-secciones-hover:
+    backgroundColor: "{colors.frailejon}"
+  tarjeta:
+    backgroundColor: "{colors.espresso}"
+    textColor: "{colors.pergamino}"
+    rounded: "{rounded.recto}"
+    padding: "0.75rem 1rem 0.85rem 0.75rem"
+  panel-bloque-pergamino:
+    backgroundColor: "{colors.pergamino}"
+    textColor: "{colors.noche}"
+    typography: "{typography.bloque}"
+    padding: "1rem 1.25rem 1.1rem"
+  panel-bloque-frailejon:
+    backgroundColor: "{colors.frailejon}"
+    textColor: "{colors.noche}"
+  panel-bloque-kraft:
+    backgroundColor: "{colors.kraft}"
+    textColor: "{colors.noche}"
+  panel-bloque-tostado:
+    backgroundColor: "{colors.tostado}"
+    textColor: "{colors.pergamino}"
+  panel-bloque-espresso:
+    backgroundColor: "{colors.espresso}"
+    textColor: "{colors.pergamino}"
+  ticket:
+    backgroundColor: "{colors.kraft}"
+    textColor: "{colors.noche}"
+    rounded: "{rounded.recto}"
+    padding: "1.25rem 1.25rem 1.5rem"
+  pizarra:
+    backgroundColor: "{colors.pizarra}"
+    textColor: "{colors.pergamino}"
+    padding: "0.6rem 0.8rem 0.7rem"
+    width: "13.5rem"
+  placa-puerta:
+    backgroundColor: "{colors.pergamino}"
+    textColor: "{colors.noche}"
+    rounded: "{rounded.recto}"
 ---
 
 # Design System: Molienda
 
 ## Overview
 
-**Creative North Star: "La Cafetería de Pueblo"**
+**Creative North Star: "La noche andina"**
 
-Molienda es la identidad de una cafetería andina de los noventa: un sol grabado sobre el páramo, papel kraft rasgado y mayúsculas romanas muy espaciadas. La página entera es una mesa de papeles: un suelo kraft con fibra, tiras de color de canto rasgado que marcan las secciones y fotos pegadas en passe-partouts de pergamino, ligeramente giradas y superpuestas. Todo es plano y de esquina recta; la profundidad la da el papel encima de otro papel.
+La página es la fachada de Molienda al anochecer: una casona merideña de muros de tierra, tejas de barro y ventanas con luz plana, con la cordillera detrás. Todo es plano: la ilustración no lleva degradados ni brillos, las superficies no llevan sombra y la profundidad sale de capas de color, de la montaña lejana al portón. Sobre ese suelo casi negro y cálido, el texto es pergamino y la única voz que llama a actuar es el verde frailejón.
 
-La densidad es la de una carta impresa: listas con línea de puntos entre el plato y el precio, cifras tabulares, procedencia en letra pequeña. El tono visual es de oficio, no de lujo; rechaza de forma expresa el hero partido «titular serif + foto de taza» de todo café de especialidad.
+La marca habla en Sofia Sans Extra Condensed negra en mayúsculas: titulares enormes, alineados a la izquierda, muy apretados. El texto corrido es Sofia Sans, tranquilo y legible. El color en bloque se reserva para lo que se pulsa o se lleva: el panel de secciones, de claro a oscuro, y el ticket caramelo de «Para llevar».
 
-La única concesión al relieve es la tarjeta de producto, pedida por el usuario (2026-11-03): pergamino semirredondeado que, con ratón, se eleva y proyecta una sombra. Es una excepción con nombre, no la regla.
+Un solo tema, oscuro. La casona está viva: si el café está cerrado, sus ventanas se apagan y la placa de la puerta dice CERRADO y cuándo abre.
 
 **Key Characteristics:**
-- Suelo kraft con fibra raster estática; tiras de color con canto de papel rasgado.
-- Sello grabado circular (xilografía) como marca y como indicador de sección.
-- Mayúsculas romanas (Marcellus) muy espaciadas para la marca y los títulos; sans humanista (Alegreya Sans) para el texto.
-- Esquinas rectas y sin sombras, salvo la tarjeta de producto y su miniatura.
-- Movimiento editorial: revelados enmascarados, fotos que suben dentro de su marco, sello que se re-estampa; con reduced-motion no se carga nada.
+- Un solo tema oscuro (`color-scheme: only dark`), sin conmutador.
+- Ilustración SVG plana: cada relleno es un token; nunca degradados.
+- Esquinas rectas en todas las superficies.
+- Plano en reposo: la única sombra es la elevación de la tarjeta de producto con ratón.
+- Bloques de color a toda la altura como navegación.
+- Condensada negra en mayúsculas para toda la voz display.
 
 ## Colors
 
-Paleta de tierra cálida y baja saturación: papel, tinta espresso y tres pigmentos (terracota, oliva, mostaza) con funciones estrictas. Los hex solo existen en `:root` de `src/styles/global.css`; los componentes usan los roles (un test lo comprueba).
+Una paleta nocturna y terrosa: suelo de espresso casi negro, texto pergamino, un verde frailejón para la acción y los colores de la casona (caramelo, tostado, oliva) como bloques.
 
 ### Primary
-- **Terracota de Acción** (`accion`): la acción principal («Ver la carta»), la tira del lema del hero, el enlace de la sección activa (`aria-current`), el punto de «Abierto ahora» y el cursor de texto. Como texto vale sobre los dos papeles (4,83:1 sobre kraft, 5,55:1 sobre pergamino).
+- **Verde frailejón** (`frailejon`): la acción principal («Ver la carta»), lo activo (estado ABIERTO, el punto de apertura), el foco (`outline` de 2px), la selección, el cursor de texto y los títulos de categoría de la carta con su filete inferior de 2px.
 
 ### Secondary
-- **Oliva de Franja** (`franja`): fondo de la franja de sección Origen, con texto en pergamino (6,59:1).
+- **Caramelo kraft** (`kraft`): todo lo de «Para llevar»: su bloque en el panel, el ticket y la barra del total en el móvil. Siempre con texto noche.
 
 ### Tertiary
-- **Mostaza de Frailejón** (`acento`): acento mínimo. El sol del sello (adorno) y, como texto, solo sobre espresso (6,37:1): estado de apertura, título «Horario», «Cerrado», subrayado del día de hoy. Sobre oliva solo llega a 3,03:1 (texto grande o adorno); sobre papel, 1,9:1: nunca texto sobre papel.
+- **Marrón tostado** (`tostado`): la madera de la casona (puerta, marcos, el caballete de la pizarra), el bloque «Horario» del panel y el pulgar de la barra de desplazamiento. Con texto pergamino.
+- **Verde oliva profundo** (`oliva`): la montaña cercana, el zócalo de la casona y la franja de Origen, la única sección con fondo de color. Con texto pergamino.
 
 ### Neutral
-- **Kraft** (`papel`): el suelo de la página (con la tesela de fibra), la cabecera y el fondo de reserva de las miniaturas.
-- **Pergamino** (`papel-claro`): superficies superpuestas (tarjetas, passe-partouts), la fibra clara de los cantos rasgados y el texto sobre rellenos de color.
-- **Espresso** (`tinta`, fijado por el usuario): texto, trazos del sello, anillo de foco, selección y la franja de Visítanos.
-- **Tinta Suave** (`tinta-suave`): texto secundario (avisos, procedencias, créditos, notas); 6,48:1 sobre kraft.
-- **Filete** (`linea`): líneas decorativas (borde de la cabecera, líneas de puntos de la carta, borde de tarjeta al 55 %, separadores del horario). Nunca texto.
+- **Noche** (`noche`): el suelo de toda la página, la cabecera, la hoja del panel y el cielo de la fachada; texto sobre los bloques claros.
+- **Espresso** (`espresso`): superficies elevadas (tarjeta de producto, último bloque del panel, hover de los botones de cantidad).
+- **Pergamino** (`pergamino`): texto principal, primer bloque del panel, botón «Secciones», placa de la puerta.
+- **Pergamino suave** (`pergamino-suave`): texto secundario, avisos, el pie; borde de la tarjeta al pasar el ratón.
+- **Pizarra** (`pizarra`): solo el tablero de la pizarra de la acera.
+- **Luz** (`luz`): la luz de las ventanas y la luna, plana. Al cerrar, las ventanas pasan a `apagado`.
+- **Línea** (`linea`): filetes decorativos, bordes de tarjeta y de fila, la línea de puntos de la carta. Nunca texto.
+
+### Solo ilustración
+- **Monte** (`monte`), **Muro** (`muro`), **Teja** (`teja`), **Apagado** (`apagado`): la cordillera lejana, los muros de noche, las tejas de barro y las ventanas apagadas. Nunca texto ni fondo de UI.
 
 ### Named Rules
-**La Regla de los Pares Probados.** Solo llevan texto los pares que `tests/unit/tokens.test.ts` comprueba a 4,5:1: tinta y tinta suave sobre los dos papeles, terracota sobre los dos papeles, pergamino sobre terracota, oliva y espresso, y mostaza sobre espresso. Un par nuevo entra primero en el test.
+**The Un Solo Origen Rule.** Los hex viven solo en `:root` de `src/styles/global.css`; componentes e ilustración usan los roles. `tests/unit/tokens.test.ts` falla si aparece un hex fuera de ahí.
 
-**La Regla de la Terracota Escasa.** La terracota es la acción, lo activo (incluido el hover de enlaces) y la única tira del lema. Si una pantalla tiene terracota en algo que no se pulsa, no está activo y no es esa tira, sobra.
+**The Par Probado Rule.** Solo se pone texto sobre un fondo si el par está en `tokens.test.ts` con AA (4,5:1): pergamino y pergamino suave sobre noche, espresso y pizarra; frailejón sobre noche, espresso y pizarra; noche sobre pergamino, frailejón, kraft y luz; pergamino sobre tostado y oliva. Un par nuevo entra primero en el test.
 
-**La Regla de la Mostaza Nocturna.** La mostaza solo se lee como texto sobre espresso; en cualquier otro fondo es adorno.
+**The Claro a Oscuro Rule.** Los bloques de color van de claro a oscuro (pergamino, frailejón, kraft, tostado, espresso) y el texto cambia de noche a pergamino a mitad de la escala, en el tostado.
 
 ## Typography
 
-**Display Font:** Marcellus (con Iowan Old Style, Georgia, serif), solo peso 400.
-**Body Font:** Alegreya Sans (con ui-sans-serif, system-ui, sans-serif): 400, 400 itálica y 500.
+**Display Font:** Sofia Sans Extra Condensed 800 (con Arial Narrow)
+**Body Font:** Sofia Sans 400, 600, 700 y 400 itálica (con ui-sans-serif, system-ui)
 
-Ambas autoalojadas con `@fontsource` (subconjunto latin), cargadas en `src/layouts/Base.astro`.
-
-**Character:** romanas de rótulo grabado, abiertas y muy espaciadas, frente a una sans humanista cálida y legible: el letrero de la puerta y la letra de la carta.
+**Character:** Una condensada negra, alta y estrecha, como los rótulos pintados de una fachada, sobre una sans humanista de lectura tranquila. Son de la misma familia, así que conviven sin pelearse. Se sirven en local con `@fontsource` (solo latín).
 
 ### Hierarchy
-- **Marca** (Marcellus 400, `--text-marca`, interlineado 0,9, tracking 0,18em, mayúsculas): solo «MOLIENDA» en el hero.
-- **Título** (Marcellus 400, `--text-titulo`, tracking 0,18em, mayúsculas): títulos de sección (Carta, La casa, Visítanos). **Excepción del título largo:** «De la finca a la taza» va a 0,08em, porque a 0,18em pasaría de dos a tres líneas en el móvil. La regla de las dos líneas manda sobre el tracking.
-- **Categoría** (Marcellus 400, 1,5rem, tracking 0,12em, mayúsculas, filete inferior de 2px en tinta): Café, Panadería, Desayunos.
-- **Plato** (Marcellus 400, `--text-plato`, caja mixta): nombres de platos y de la zona; baja a 1,25rem en la carta de tres columnas.
-- **Cuerpo** (Alegreya Sans 400, `--text-cuerpo`, 1,55): texto corrido, medidas de 26–38rem.
-- **Etiqueta** (Alegreya Sans 500, `--text-etiqueta`, tracking 0,24em, mayúsculas): navegación, lema, avisos de la carta, estado de apertura, títulos de bloque menores, botón.
-- **Secundario** (Alegreya Sans 400, 0,875–0,9375rem, tinta suave): procedencias, notas, créditos; el aviso de concepto va en itálica.
+- **Titular** (800, `titular`, interlínea 0.86, máx. 15ch): solo el titular del hero, en dos líneas; en escritorio también se limita por la altura (12.5cqh) para caber sobre el tejado.
+- **Título** (800, `titulo`, 0.92): títulos de sección, alineados a la izquierda, `text-wrap: balance`.
+- **Bloque** (800, `bloque`, 0.95): nombres de los bloques del panel y título del ticket.
+- **Plato** (800, `plato`, 1): nombres de producto en la carta. La misma voz a tamaños fijos: categorías 2rem, marca del pie 2.5rem, estaciones de Origen y marca de la cabecera 1.75rem, enlaces del pie 1.5rem.
+- **Cuerpo** (400, `cuerpo`, 1.55, máx. ~34rem): texto corrido.
+- **Nota** (400, `nota`, 0.9375rem, 1.4): avisos de concepto (en itálica), notas de la carta y de la casa, líneas del ticket, detalle de los bloques del panel y el pie, en pergamino suave.
+- **Etiqueta** (600, `etiqueta`, 0.08em, mayúsculas): estado de apertura, título de la pizarra, títulos del pie y de las categorías para llevar.
+- **Botón** (700, 1rem; 0.9375rem en cabecera y panel): textos de botón y del cierre del panel.
 
 ### Named Rules
-**La Regla del Rótulo.** Marcellus se escribe en mayúsculas y espaciada cuando rotula (marca, secciones, categorías); en caja mixta solo nombra (platos, zona). Nunca en negrita.
+**The Una Voz Display Rule.** Todo lo display (h1, h2, h3, marca, nombres de producto, bloques, placa) es Sofia Sans Extra Condensed 800 en mayúsculas. No hay otro peso ni otra familia display.
 
-**La Regla del Centrado Real.** Todo título centrado con tracking compensa el aire de la última letra con un margen derecho negativo igual al tracking.
-
-**La Regla de las Cifras en Columna.** Precios, altitudes y horas llevan cifras tabulares y de caja alta.
+**The Cifras en Columna Rule.** Precios, cantidades y horas llevan cifras tabulares (`cifras`).
 
 ## Layout
 
-Un único contenedor centrado de 75rem como máximo, con márgenes laterales de 1rem en móvil y 2,5rem desde 48rem. Las franjas de color (tira del lema, Origen, Visítanos) rompen el contenedor a todo el ancho; la tira del lema llega a 60rem como máximo.
+Contenedor de 80rem centrado, con margen lateral de 1rem en el móvil y 2.5rem desde 48rem. La cabecera es fija arriba (4rem) y `scroll-padding-top` de 4.5rem evita que tape los destinos. Las secciones respiran con `padding-block` fluido (de ~3rem a 6–7rem).
 
-- **Primer viewport:** composición centrada y simétrica (sello, marca, tira, texto, acción, tres cafés). Las tres tarjetas destacadas van en fila desde 64rem; debajo, apiladas.
-- **Carta:** una columna por debajo de 56rem; entre 56 y 80rem cada categoría ocupa el ancho y sus platos van en dos columnas; tres columnas de categoría solo desde 80rem.
-- **Galerías (Origen, Ambiente):** retícula de 12 columnas donde las fotos se solapan con márgenes negativos y giros fijos de 1,5–2,5°.
-- **Cabecera:** dos columnas (sello | nav) en móvil; tres (sello | nav centrada | estado) desde 64rem. El estado de apertura vive en el hero por debajo de 64rem.
-- **Ritmo vertical:** bandas de sección con relleno fluido `clamp(2.5–3rem, 6–8vw, 5–6rem)`; espaciados del primer viewport ligados también a la altura (`vh`) para que la acción quepa en portátiles de 720–768px.
+El hero ocupa la pantalla bajo la cabecera: la fachada (proporción 2400:1000) lo llena por alto y se recorta por los lados, centrada en el portón; lo que va encima (letrero, placa, pizarra) se coloca en % y su letra se mide en `cqi`, así escala con el dibujo. Abajo, una franja de 6.5rem sobre la calle lisa lleva el estado y la acción. En el móvil (<48rem) la casona se recorta en puerta y ventanal a 300vw y el estado va debajo.
+
+Las rejillas son asimétricas: Origen 5fr / 7fr con un collage de fotos en 12 columnas que se solapan; «Para llevar» con el ticket fijo a la derecha (22rem) desde 64rem; la carta en tres columnas solo desde 80rem y con dos columnas de platos entre 56rem y 80rem. Puntos de corte en uso: 48rem, 56rem, 64rem, 80rem.
 
 ## Elevation & Depth
 
-El sistema es plano. La profundidad sale solo del papel superpuesto: tiras rasgadas sobre el kraft, passe-partouts que se solapan y giran, la cabecera opaca sobre el contenido. No hay sombras en reposo en ningún elemento.
+Plano en reposo. La profundidad sale de capas de color (cielo noche, monte, oliva, muro, portón) y del paso de noche a espresso. La única sombra del sistema es la de la tarjeta de producto con ratón fino (excepción pedida por el usuario el 2026-11-03): la tarjeta sube 0.25rem y aparece una sombra que vive en un pseudo-elemento y solo cambia de opacidad. El fondo del panel abierto es la noche al 70 %, sin desenfoque.
 
 ### Shadow Vocabulary
-- **Elevación de tarjeta** (`box-shadow: 0 1.1rem 1.6rem -1rem color-mix(in srgb, var(--tinta) 55%, transparent), 0 0.3rem 0.6rem -0.35rem color-mix(in srgb, var(--tinta) 30%, transparent)`): solo en el hover con ratón de la tarjeta de producto. Vive en un pseudo-elemento con opacidad 0 y solo anima su opacidad.
+- **Elevación de producto** (`box-shadow: 0 1.1rem 1.6rem -1rem color-mix(in srgb, black 80%, transparent), 0 0.3rem 0.6rem -0.35rem color-mix(in srgb, black 60%, transparent)`): solo en la tarjeta con `(hover: hover) and (pointer: fine)`; se anima la opacidad de la capa, nunca la sombra.
 
 ### Named Rules
-**La Regla del Papel Encima.** Para separar planos se superpone papel (solape, giro, canto rasgado); nunca una sombra.
-
-**La Regla de la Excepción Única.** La única sombra del sistema es la de la tarjeta de producto, aparece solo con hover de puntero fino y nunca se anima `box-shadow`: se anima la opacidad de una capa que ya la lleva.
+**The Plano en Reposo Rule.** Nada lleva sombra en reposo. La única sombra es la elevación de la tarjeta de producto al pasar el ratón; cualquier otra necesita una nueva decisión del usuario.
 
 ## Shapes
 
-Esquinas rectas en todo: botón, franjas, marcos de foto, cabecera, horario. Las dos únicas curvas son la tarjeta de producto (0,75rem) y su miniatura cuadrada (0,5rem), por petición del usuario. Los círculos se reservan para el sello y los puntos (estado de apertura, estaciones del recorrido).
-
-El canto rasgado es la silueta propia del mundo y existe en tres formas, todas como máscaras SVG estáticas de `src/assets/marcas/`:
-- **Tiras** (`PapelRasgado`): canto superior o inferior de una franja de color, dos capas (fibra en pergamino + color de la franja) y dos cortes alternos para que dos bordes seguidos no coincidan.
-- **Cuatro cantos** (passe-partout de foto): tiras en los cuatro lados con `mask-repeat: round`, para que las dos esquinas acaben rasgadas.
-- **Arriba y abajo** (botón de acción): laterales rectos, como la tira del lema.
-
-### Named Rules
-**La Regla del Canto Quieto.** El papel rasgado es siempre una máscara SVG estática; nunca un polígono de `clip-path` y nunca se anima.
-
-**La Regla de la Fibra Medida.** La fibra (tesela raster de 180px, ~13 KB) va en el suelo y en los passe-partouts, no en las tarjetas: con imagen de fondo la tarjeta del primer viewport pasaba a ser el LCP.
+Esquinas rectas (`recto`, 0) en botones, tarjetas, bloques, ticket, pizarra, placa, fotos y miniaturas. Las únicas formas redondas son las que el mundo dibuja: el punto del estado de apertura y la luna. Los bordes son finos: 1px `linea` en tarjetas y filas, 1px de puntos entre nombre y precio, 2px frailejón bajo las categorías, 1px discontinuo pergamino en el recorrido de Origen con estaciones cuadradas. La pizarra lleva un marco de madera de 0.4rem y dos patas inclinadas 6°.
 
 ## Components
 
 ### Buttons
-Una sola acción principal, de papel terracota rasgado.
-- **Shape:** rectángulo con cantos superior e inferior rasgados (máscara en un `::before`, para que el anillo de foco no se recorte), mínimo 3rem de alto.
-- **Primary:** relleno terracota, texto pergamino en etiqueta de 0,875rem con tracking 0,24em; flecha SVG de trazo a 1,25rem.
-- **Hover / Focus:** el relleno pasa a espresso; foco con contorno de 2px en tinta y 3px de separación (global).
+Bloques planos, como los del panel.
+- **Shape:** esquina recta (0), altura mínima 3rem (2.75rem en la cabecera y en los controles).
+- **Primary (`boton-accion`):** frailejón con texto noche, Sofia Sans 700, icono SVG de 1.25rem; hover a pergamino en 200ms `cubic-bezier(0.22, 1, 0.36, 1)`.
+- **Secciones (`boton-secciones`):** pergamino con texto noche en la cabecera; hover a frailejón.
+- **Cantidad:** cuadrados de 2.75rem, transparentes con icono pergamino; hover a espresso con icono frailejón; desactivado en `linea`.
+- **Focus:** `outline` de 2px frailejón a 3px (a −5px dentro de los bloques del panel).
 
 ### Cards / Containers
-La tarjeta de producto, la excepción semirredondeada.
-- **Corner Style:** 0,75rem.
-- **Background:** pergamino liso, sin fibra.
-- **Border:** 1px de filete al 55 %.
-- **Shadow Strategy:** ver Elevation & Depth; con ratón sube 0,25rem (`translateY`) y aparece la sombra. Entrada 250ms, salida 350ms, `cubic-bezier(0.22, 1, 0.36, 1)`. Con reduced-motion no sube ni transiciona; la sombra sigue señalando el hover.
-- **Internal Padding:** 0,75rem 1rem 0,85rem 0,75rem (carta); más ajustado en el hero.
-- **Contenido:** miniatura cuadrada a la izquierda (4,5rem; 4rem en tres columnas; 3,5rem en el hero), nombre en Marcellus, precio con cifras tabulares unido por una línea de puntos en filete, descripción y procedencia «finca · región · altitud» en tinta suave.
+- **Tarjeta de producto:** espresso, borde 1px `linea`, esquina recta, miniatura a la izquierda (4.5rem; 4rem en tres columnas). Con ratón sube 0.25rem, el borde pasa a pergamino suave y aparece la elevación de producto.
+- **Fila de carta:** nombre en `plato`, línea de puntos `linea` hasta el precio, descripción en cuerpo y origen en pergamino suave a 0.875rem.
 
 ### Navigation
-- **Cabecera** fija, kraft opaco con filete inferior; sello compacto a la izquierda (enlace al inicio), tres enlaces en etiqueta, estado de apertura a la derecha en escritorio. Sin menú desplegable: los tres enlaces caben en móvil.
-- **Estados:** reposo en tinta; hover en terracota subrayado; sección activa en terracota (`aria-current`).
-- **Comportamiento:** se oculta al bajar (150ms) y vuelve al subir (250ms); nunca mientras contiene el foco.
+- **Cabecera:** fija, noche, «MOLIENDA» en condensada 1.75rem a la izquierda y «Secciones» a la derecha. Se esconde al bajar y vuelve al subir.
+- **Pie (`#navegacion`):** enlaces en condensada 1.5rem pergamino, hover frailejón; es el respaldo sin JS del panel.
 
-### Sello grabado
-Firma del sistema: SVG circular de 200×200 a trazo `currentColor` (xilografía con rayado en las laderas en sombra), con el sol en mostaza. Variantes `sol`, `taza`, `grano`, `puerta` en la misma retícula; versión compacta sin anillo de texto ni cielo rayado para tamaños pequeños. En la cabecera se re-estampa la variante de cada sección al entrar en ella (inicio `sol`, carta `taza`, origen `grano`, la casa `sol`, visítanos `puerta`: dos secciones seguidas nunca comparten variante) (escala 1,15→1 y opacidad, 250ms, ease-in-out simétrico).
+### Panel de secciones (firma)
+Un `<dialog>` modal que entra desde la derecha con `scroll-snap` horizontal; la hoja mide `min(26rem, 88vw)` y cinco bloques planos a toda la altura (mín. 6.5rem) enlazan cada uno a su sección, de claro a oscuro: pergamino, frailejón, kraft, tostado, espresso. Nombre en `bloque` y detalle en 600 a 0.9375rem. Con ratón, el nombre se desplaza 0.5rem a la derecha. El fondo sigue a la hoja con `animation-timeline: scroll()` hasta la noche al 70 %.
 
-### Marco de foto
-Passe-partout de pergamino con fibra y cuatro cantos rasgados (0,6rem de relleno; 0,85rem desde 48rem), ventana con `overflow: hidden`. Sin sombra; se solapan y giran entre sí.
+### Fachada (firma)
+La casona en SVG plano: cada relleno es un token. Las ventanas usan `luz`; con el café cerrado pasan a `apagado` (la del vecino sigue encendida). La placa de la puerta, pergamino con texto noche en condensada, dice ABIERTO o CERRADO y, cerrado, la hora de apertura, en vivo desde EstadoApertura.
 
-### Franjas de sección
-Bandas a todo el ancho con canto rasgado arriba y abajo: oliva (Origen), espresso (Visítanos) y la tira terracota del lema. Texto en pergamino.
+### Pizarra de acera (firma)
+Caballete en HTML real delante de la ventana derecha: tablero `pizarra` con marco y patas `tostado`, título en etiqueta frailejón y tres cafés con precio en 600. 13.5rem en escritorio, 8.75rem en el móvil.
 
-### Horario
-Lista de días en la franja espresso con separadores en filete; el día cerrado no se omite: va como fila rayada (líneas de pergamino al 10 %, 45°) con «Cerrado» en mostaza; el día de hoy, subrayado en mostaza de 2px.
-
-### Estado de apertura
-Etiqueta con punto circular: terracota y opaco si está abierto, del color del texto al 45 % si está cerrado. Se calcula en el navegador con la hora de Mérida; sin JS queda oculto.
-
-### Pie
-Sello completo, aviso de concepto y créditos de cada foto (autor, licencia, cambios) en tinta suave, en dos columnas desde 48rem.
+### Ticket para llevar (firma)
+Bloque kraft con texto noche, título en `bloque`, pie en etiqueta. Es una demostración: no envía nada. Fijo a la derecha desde 64rem; en el móvil, una barra kraft del total pegada abajo con un enlace noche al ticket.
 
 ### Movimiento
-Solo `transform` y `opacity`; ninguna propiedad de diseño. Curva de salida común `power4.out` (equivalente GSAP de `cubic-bezier(0.22, 1, 0.36, 1)`, medida en noovolife).
-- **Revelado de foto:** el marco sube 50px (1,2s) y aparece (0,6s); la foto pasa de escala 1,12 a 1 (1,2s); después, zoom ligado al scroll hasta 1,08.
-- **Títulos:** «MOLIENDA» por letras enmascaradas (0,5s, escalonado 40ms); títulos de sección por líneas enmascaradas (0,9s, escalonado 80ms).
-- **Platos:** entran escalonados 40ms (sube 30px, 0,9s).
-- **Disparo:** al 92 % del viewport, una sola vez.
-- **Scroll suave:** Lenis solo con puntero fino; en táctil, el scroll nativo.
-- **Reduced-motion:** el módulo de animaciones no se descarga. Sin JS o si el módulo tarda más de 2,5s, todo se muestra.
+GSAP, solo sin reduced-motion; con reduced-motion no se anima nada. Las ventanas se encienden una vez al cargar si está abierto (opacidad, 0.6s, escalonado 0.12s). Los títulos de sección suben por líneas dentro de una máscara (0.9s, `power4.out`). Los platos entran escalonados (30px, 40ms). Las fotos se revelan al entrar y hacen un zoom lento ligado al scroll (1.12 → 1, luego hasta 1.08). La cabecera se esconde al bajar. Lenis solo con puntero fino. Solo se animan las propiedades que permite la constitución II.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** usar los roles de color (`var(--tinta)`, `bg-accion`…); los hex solo viven en `:root` de `global.css`.
-- **Do** añadir al test de contraste cualquier par nuevo de texto sobre fondo antes de usarlo.
-- **Do** dar profundidad superponiendo papel: solape, giro de 1,5–2,5° y canto rasgado.
-- **Do** rotular en Marcellus mayúscula con tracking 0,18em y compensar el tracking al centrar.
-- **Do** poner precios, altitudes y horas con cifras tabulares, y unir plato y precio con la línea de puntos.
-- **Do** mantener las esquinas rectas salvo en la tarjeta de producto (0,75rem) y su miniatura (0,5rem).
-- **Do** animar solo `transform` y `opacity`, y dejar todo visible sin JS y con reduced-motion.
+- **Do** usar los roles de color (`var(--frailejon)`), nunca un hex en un componente.
+- **Do** añadir a `tokens.test.ts` cualquier par texto/fondo nuevo antes de usarlo.
+- **Do** dibujar la ilustración plana, con cada relleno tomado de un token.
+- **Do** poner toda la voz display en Sofia Sans Extra Condensed 800 en mayúsculas, alineada a la izquierda.
+- **Do** mantener las esquinas rectas (0) en toda superficie de UI.
+- **Do** ordenar los bloques de color de claro a oscuro, con texto noche hasta el kraft y pergamino desde el tostado.
+- **Do** dar a todo lo que depende de JS un respaldo sin JS (el pie para el panel, la placa oculta sin estado).
 
 ### Don't:
-- **Don't** recortar el papel rasgado con polígonos de `clip-path` ni animar sus cantos.
-- **Don't** poner sombras fuera del hover de la tarjeta de producto, ni animar `box-shadow`.
-- **Don't** poner la mostaza como texto sobre papel ni el filete como color de texto.
-- **Don't** usar la terracota fuera de la acción principal, los estados activos o de hover y la tira del lema.
-- **Don't** poner fibra de papel en las tarjetas.
-- **Don't** usar Marcellus en negrita ni Alegreya Sans en mayúsculas sin tracking.
-- **Don't** volver al hero partido «titular serif + foto de taza».
+- **Don't** usar degradados ni brillos en la ilustración ni en la UI.
+- **Don't** añadir sombras fuera de la elevación de la tarjeta de producto con ratón.
+- **Don't** poner texto en `linea`, `monte`, `muro`, `teja` ni `apagado`.
+- **Don't** añadir un tema claro ni un conmutador de tema.
+- **Don't** usar otra familia o peso display que la condensada 800.

@@ -39,12 +39,12 @@
 
 ## Fase 5 — Rediseño oscuro y despliegue (spec §10, plan §11; 2026-11-17)
 
-- [ ] M11 Dirección nueva con impeccable (context, craft-floor y contrato nuevo), tokens oscuros, tipografía (con aprobación si hay que instalar) y `tokens.test.ts` actualizado
-- [ ] M12 Ilustración SVG de la fachada y hero nuevo: titular, estado de apertura, «Ver la carta» y aviso de concepto
-- [ ] M13 Panel lateral `<dialog>` con los 5 bloques, más la navegación del pie sin JS; e2e de teclado, Esc, foco y sin JS
-- [ ] M14 «Para llevar»: `ticket.ts` (tests unitarios primero), componente y e2e
-- [ ] M15 Carta, cafés de origen, ambiente, visítanos y pie en la estética nueva; retirar lo que ya no se use; movimiento revisado
-- [ ] M16 Cierre visual: polish y critique de impeccable, revisión de Taste a 375, 768 y 1440 px, `DESIGN.md`, axe y Lighthouse móvil
+- [x] M11 Dirección nueva con impeccable (context, craft-floor y contrato nuevo), tokens oscuros, tipografía (con aprobación si hay que instalar) y `tokens.test.ts` actualizado — *dirección fijada por el usuario («La noche andina»), titular «La finca queda aquí arriba»; Sofia Sans y Sofia Sans Extra Condensed 5.3.0 sustituyen a Marcellus y Alegreya Sans*
+- [x] M12 Ilustración SVG de la fachada y hero nuevo: titular, estado de apertura, «Ver la carta» y aviso de concepto — *casona con ventanas que se apagan y placa del portón en vivo (cerrado: dice cuándo abre); los tres cafés van en una pizarra de acera en HTML*
+- [x] M13 Panel lateral `<dialog>` con los 5 bloques, más la navegación del pie sin JS; e2e de teclado, Esc, foco y sin JS — *cajón con scroll-snap (modern-web-guidance «navigation-drawer»)*
+- [x] M14 «Para llevar»: `ticket.ts` (tests unitarios primero), componente y e2e — *suma en céntimos, tope de 20 por producto; barra fija con el total en el móvil*
+- [x] M15 Carta, cafés de origen, ambiente, visítanos y pie en la estética nueva; retirar lo que ya no se use; movimiento revisado — *fuera el sello, el papel rasgado, la fibra y `generar-bordes.mjs`; sin estilos en línea (la CSP solo `self`)*
+- [x] M16 Cierre visual: polish y critique de impeccable, revisión de Taste a 375, 768 y 1440 px, `DESIGN.md`, axe y Lighthouse móvil — *revisión final de impeccable: «fix» (8 correcciones) y después «ship»; Taste: aplicadas las que no chocan con la spec; `DESIGN.md` reescrito; axe en los e2e. Lighthouse queda para M17, sobre la URL publicada*
 - [ ] M17 Despliegue: repo en GitHub (revisar el historial antes), `wrangler.jsonc`, `_headers`, Workers Builds y URL en vivo comprobada
 
 **Al terminar cada fase:** parar y esperar revisión.
