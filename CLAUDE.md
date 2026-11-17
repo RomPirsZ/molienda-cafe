@@ -25,6 +25,7 @@ Textos de interfaz siempre en `src/i18n/es.json`.
 |---|---|
 | Construir UI, crítica, auditoría, pulido, `DESIGN.md` | **impeccable** (la principal) |
 | Accesibilidad, textos de interfaz, UX móvil | **ux-designer** |
+| Escribir HTML, CSS o JS de cliente nuevo (patrones modernos de la plataforma, compatibilidad Baseline, alternativas) | **modern-web-guidance**: `search` y `retrieve` antes de escribir; no `legacy-scan` ni auditorías salvo que se pidan. Si una guía choca con la constitución, el plan o `DESIGN.md`, mandan ellos |
 | Revisión visual con capturas a varios anchos | **design-taste-frontend** (solo su revisión) |
 | Afinar duraciones y curvas existentes | **transitions-polish** |
 | Ilustraciones estáticas en la paleta del sitio | **canvas-design** |
