@@ -2,7 +2,7 @@
 
 > Qué se construye y por qué. Los detalles técnicos están en `plan.md`. Rige `docs/constitution.md`.
 > Proyecto 001 del portafolio [A]nkordev (spec 001 §8 del portafolio, tarea T27).
-> Estado: **aprobada** (2026-11-03)
+> Estado: **aprobada** (2026-11-03). **Rediseño oscuro aprobado el 2026-11-17: ver §10, que manda sobre §4, §5, §7 y §8 donde choquen.**
 
 ---
 
@@ -92,3 +92,46 @@ Inglés, varias páginas, carrito o pedidos, reservas, mapa, blog, CMS, desplieg
 - [ ] Lighthouse móvil ≥ 90 en rendimiento y ≥ 95 en accesibilidad, buenas prácticas y SEO (medido en local).
 - [ ] El aviso de concepto se ve sin hacer scroll, y los precios ficticios están rotulados.
 - [ ] Ninguna petición a terceros: fuentes, fotos y scripts servidos desde el propio sitio.
+
+## 10. Rediseño oscuro (2026-11-17)
+
+Lo pidió el usuario el 2026-11-17, antes de publicar el caso 001 en el portafolio (T30). Sustituye la identidad «Cafetería de pueblo» de §5. Los contenidos se mantienen: carta, origen, ambiente, horario, zona y aviso de concepto.
+
+### 10.1 Referencia (principios, no copia)
+
+| Referencia | Qué tomamos | Qué no tomamos |
+|---|---|---|
+| Captura aportada por el usuario el 2026-11-17: web de un tostador de café con fachada ilustrada de noche | Fondo oscuro con un hero que es una **escena ilustrada plana de la fachada**. **Titular enorme en mayúsculas condensadas y negrita.** El **estado de apertura** abajo a la izquierda, junto a un botón de acción de color. Un **panel lateral derecho de bloques planos a toda la altura**, cada uno de un color, que hacen de navegación. | El nombre, el logo, la ilustración, los textos, la dirección y su paleta gris y lima. |
+
+### 10.2 Decisiones del usuario (2026-11-17)
+
+1. **Dirección nueva, cerca de la referencia.** Se retiran el papel rasgado y la serif espaciada. El sello puede quedar como detalle menor, o desaparecer si impeccable lo justifica.
+2. **Colores oscuros** con los verdes, marrones y beiges de la marca, en buen contraste. **Un solo tema, oscuro.**
+3. **Panel lateral:** un botón lo despliega desde la derecha. Sus bloques son Carta, Cafés de origen, Para llevar, Horario y Visítanos, y **cada bloque lleva a su sección** de la página. El contenido no se abre dentro del panel.
+4. **Hero con ilustración propia en SVG:** la fachada de una casona andina de Mérida (tejas, portón de madera, ventanas con reja, el páramo detrás), en la paleta oscura.
+5. **«Para llevar» como ticket sin envío:** se eligen productos de la carta y se arma un ticket en pantalla para enseñar en la barra. No se envía nada, no se recogen datos y no se guarda nada fuera de la página. Va rotulado como concepto.
+6. **Se despliega** (Cloudflare Workers, como la tienda) para que el caso 001 tenga enlace real.
+
+### 10.3 Página
+
+1. **Cabecera:** logotipo «Molienda» y el botón que abre el panel. Sin JS, el botón es un enlace a una navegación normal al pie de la página.
+2. **Hero:** ilustración de la fachada, titular grande, estado de apertura en vivo con el botón «Ver la carta», y aviso de concepto visible sin scroll.
+3. **Panel lateral** (§10.2, punto 3).
+4. **Carta:** los mismos platos, precios ficticios rotulados.
+5. **Cafés de origen:** antes «Origen».
+6. **Para llevar** (§10.2, punto 5). Sin JS, explica que el pedido se hace en la barra.
+7. **Ambiente:** la galería.
+8. **Visítanos:** horario y zona ficticios, solo texto.
+9. **Pie:** «Concepto de [A]nkordev — Molienda no existe», créditos y año. El crédito puede enlazar al portafolio, porque el hosting ya no es Vercel Hobby.
+
+### 10.4 Cambios en las restricciones (§7 y §8)
+
+- **Pedidos:** se permite solo el ticket de demostración de §10.2, punto 5. Siguen fuera los pedidos reales: envío, pago, WhatsApp, teléfono, formularios que recojan datos y reservas.
+- **Despliegue:** deja de estar fuera de alcance. El dominio propio sigue fuera.
+
+### 10.5 Criterios de aceptación añadidos
+
+- [ ] El panel se abre y se cierra con teclado, se cierra con Esc y devuelve el foco al botón. Sin JS, la navegación del pie está disponible.
+- [ ] Contraste AA en cada bloque del panel y en el texto sobre la ilustración.
+- [ ] El ticket suma bien (con tests unitarios), se puede vaciar y no hace ninguna petición de red.
+- [ ] El sitio responde en su URL pública con las cabeceras de seguridad del portafolio (CSP solo `self`).

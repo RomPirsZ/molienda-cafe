@@ -36,18 +36,19 @@ El grano viene de las fincas de los Andes venezolanos, a pocos kilómetros de la
 ## Capabilities and Constraints
 
 - **Oferta:** café de especialidad (métodos y espresso), panadería y brunch.
-- **Sin funciones comerciales reales:** no hay pedidos, carrito, reservas, pagos, formularios que recojan datos, WhatsApp ni teléfono reales. El portafolio está en Vercel Hobby, que no admite uso comercial.
+- **Sin funciones comerciales reales:** no hay pedidos reales, reservas, pagos, formularios que recojan datos, WhatsApp ni teléfono. La única excepción (2026-11-17) es «Para llevar»: un ticket de demostración que se arma en pantalla, no se envía y va rotulado como concepto (spec §10).
 - **Precios de la carta ficticios** y marcados como tales.
 - **Dirección y horario ficticios:** solo texto, sin mapa embebido ni dirección que pueda coincidir con un local real.
 - **Solo en español.**
-- **Sin despliegue por ahora:** en esta fase se trabaja solo la estética, en local.
+- **Despliegue:** en Cloudflare Workers desde el 2026-11-17 (spec §10), para que el caso 001 tenga enlace real. Sin dominio propio.
 - Rigen `docs/constitution.md` (copia de la del portafolio) y la spec propia en `docs/specs/001-sitio/`.
 
 ## Brand Commitments
 
 - **Nombre:** «Molienda», elegido el 2026-11-03. Es original: no se usa el nombre, el logo ni los textos de la referencia visual.
 - **Aviso de concepto visible:** el sitio dice que es un concepto de portafolio de [A]nkordev y que el café no existe. El footer lleva un crédito discreto, «Concepto de [A]nkordev», sin enlaces a servicios ni precios mientras siga en Vercel Hobby.
-- **Referencias fijadas por el usuario** (principios, no copia): el shot de Dribbble «Noir Bean Specialty Coffee Café Brand Identity» para lo visual y noovolife.com para el movimiento, sobre todo el revelado de imágenes al hacer scroll.
+- **Rediseño oscuro (2026-11-17):** fachada ilustrada, titular condensado y panel lateral de bloques de color, tomados como principios de una captura que aportó el usuario (spec §10.1). Sustituye la dirección «Cafetería de pueblo».
+- **Referencias anteriores** (principios, no copia): el shot de Dribbble «Noir Bean Specialty Coffee Café Brand Identity» para lo visual y noovolife.com para el movimiento, sobre todo el revelado de imágenes al hacer scroll.
 
 ## Evidence on Hand
 

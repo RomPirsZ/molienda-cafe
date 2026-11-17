@@ -16,7 +16,7 @@ Textos de interfaz siempre en `src/i18n/es.json`.
 ## Producto y diseño
 
 - `PRODUCT.md`: público, propósito y límites. **Nada comercial real**: sin pedidos, reservas, pagos, formularios, WhatsApp ni teléfonos. Nada de reseñas, cifras ni premios. Lo ficticio se rotula.
-- Dirección visual: «Cafetería de pueblo», con su contrato en `.impeccable/surfaces/src-pages-index-astro.md`. Al terminar se documenta en `DESIGN.md`.
+- Dirección visual: rediseño oscuro de la spec §10 (2026-11-17), que sustituye a «Cafetería de pueblo». Su contrato está en `.impeccable/surfaces/src-pages-index-astro.md` y al terminar se documenta en `DESIGN.md`.
 - Orden de autoridad: **constitución → spec/plan → PRODUCT.md / contrato / DESIGN.md → guía de cualquier skill**.
 
 ## Herramientas
@@ -33,4 +33,4 @@ Choques conocidos:
 - **Movimiento (constitución II, 1.3.0):** se pueden animar `transform`, `opacity`, `clip-path`, `mask`, filtros (blur incluido), color, fondo, borde y `box-shadow`. Nunca propiedades que recalculan el diseño (`width`, `height`, `top`, `left`, `margin`…). Sin WebGL (el fondo WebGL es solo del portafolio). Si un skill propone otra cosa, se descarta.
 - **Scripts:** nunca por CDN. GSAP y Lenis van por npm.
 - **Fotos de stock:** solo como ambientación y con créditos.
-- **Despliegue:** ninguno en esta fase (el portafolio sigue en Vercel Hobby).
+- **Despliegue:** en Cloudflare Workers desde la Fase 5 (spec §10, plan §11). Cabeceras como en el portafolio; sin secretos.

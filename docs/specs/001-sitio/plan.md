@@ -132,3 +132,15 @@ Dos lecciones:
 - **Fibra del papel.** Como SVG con `feTurbulence` bajaba el rendimiento a 91, porque se dibuja en el hilo principal. Ahora es raster.
 - **Tarjetas sin fibra.** Como imagen de fondo de una tarjeta, convertía el primer café en el LCP, y no contaba como pintado hasta acabar su entrada animada.
 
+
+## 11. Rediseño oscuro (2026-11-17, spec §10)
+
+Manda sobre §4 y §5 donde choquen. Lo demás sigue igual: el stack, el movimiento con GSAP y Lenis, el estado de apertura, los tests y las fotos.
+
+- **Tokens:** se reemplazan por una paleta oscura con roles nuevos. El fondo es espresso, el texto beige y hay un color por bloque del panel (beige, verde oliva claro, kraft, marrón tostado y espresso). `tokens.test.ts` comprueba AA en cada par texto/fondo que se use. Sigue sin haber hex en los componentes.
+- **Tipografía:** una condensada en negrita para los titulares y una sans para el texto. Si hace falta otra `@fontsource`, se pide aprobación antes de instalarla (CLAUDE.md, punto 4); va fijada, con `min-release-age`. Las fuentes que ya no se usen se desinstalan.
+- **Ilustración:** un SVG propio, en línea en el hero para no retrasar el LCP. Usa los tokens con `currentColor` o variables CSS, no hex sueltos.
+- **Panel:** `<dialog>` con `showModal()` que entra desde la derecha con `transform` (constitución II). Se cierra con Esc, con el botón de cerrar y al tocar fuera, y el foco vuelve al botón que lo abrió. Cada bloque es un enlace a su sección y cierra el panel. Sin JS, el botón es `<a href="#navegacion">` y lleva a la navegación del pie.
+- **Ticket:** `src/lib/ticket.ts` con funciones puras (añadir, quitar, cantidad, total y formato de precio), con los tests unitarios escritos antes. El componente `ParaLlevar.astro` lleva un script pequeño que lee los platos de `carta.ts` serializados en el HTML. Nada de `localStorage` ni de red.
+- **Retiro:** `PapelRasgado.astro`, los bordes rasgados y `scripts/generar-bordes.mjs`, si ya no se usan. El sello se queda solo si impeccable lo mantiene.
+- **Despliegue:** Cloudflare Workers con recursos estáticos (`wrangler.jsonc` con `assets.directory: ./dist`), conectado a Workers Builds desde un repo de GitHub. Las cabeceras de seguridad van en `public/_headers`, como en el portafolio. Sin secretos.

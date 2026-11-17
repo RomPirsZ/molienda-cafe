@@ -1,7 +1,7 @@
 # Tareas 001 — Sitio de Molienda
 
 > Una tarea a la vez. Marca `[x]` al terminar, ejecuta `npm test` y haz commit convencional.
-> Es la tarea T27 del portafolio [A]nkordev. Sin despliegue en esta fase.
+> Es la tarea T27 del portafolio [A]nkordev. Fases 0–4 sin despliegue; la Fase 5 (2026-11-17) rediseña y despliega.
 
 ## Fase 0 — Definición
 
@@ -36,5 +36,15 @@
   - Lighthouse 13.5.0 por npx, con el permiso del usuario y sin añadirlo al proyecto.
   - Resultado: rendimiento 99–100, accesibilidad 100, buenas prácticas 100 y SEO 100; LCP 1,4–1,8 s y CLS 0,009.
   - La fibra se quitó de las tarjetas porque convertía una de ellas en el LCP.
+
+## Fase 5 — Rediseño oscuro y despliegue (spec §10, plan §11; 2026-11-17)
+
+- [ ] M11 Dirección nueva con impeccable (context, craft-floor y contrato nuevo), tokens oscuros, tipografía (con aprobación si hay que instalar) y `tokens.test.ts` actualizado
+- [ ] M12 Ilustración SVG de la fachada y hero nuevo: titular, estado de apertura, «Ver la carta» y aviso de concepto
+- [ ] M13 Panel lateral `<dialog>` con los 5 bloques, más la navegación del pie sin JS; e2e de teclado, Esc, foco y sin JS
+- [ ] M14 «Para llevar»: `ticket.ts` (tests unitarios primero), componente y e2e
+- [ ] M15 Carta, cafés de origen, ambiente, visítanos y pie en la estética nueva; retirar lo que ya no se use; movimiento revisado
+- [ ] M16 Cierre visual: polish y critique de impeccable, revisión de Taste a 375, 768 y 1440 px, `DESIGN.md`, axe y Lighthouse móvil
+- [ ] M17 Despliegue: repo en GitHub (revisar el historial antes), `wrangler.jsonc`, `_headers`, Workers Builds y URL en vivo comprobada
 
 **Al terminar cada fase:** parar y esperar revisión.
